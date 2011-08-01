@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  phone_number: MyString
+  adress_number: MyString
+  name: MyString
+  remark: MyString
+  active: false
+  place_type_id: 1
+
+two:
+  phone_number: MyString
+  adress_number: MyString
+  name: MyString
+  remark: MyString
+  active: false
+  place_type_id: 1

@@ -1,0 +1,27 @@
+<h1>Listing person_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @person_types.each do |person_type| %>
+  <tr>
+    <td><%= person_type.name %></td>
+    <td><%= person_type.active %></td>
+    <td><%= person_type.remark %></td>
+    <td><%= link_to 'Show', person_type %></td>
+    <td><%= link_to 'Edit', edit_person_type_path(person_type) %></td>
+    <td><%= link_to 'Destroy', person_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Person type', new_person_type_path %>

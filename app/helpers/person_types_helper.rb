@@ -1,0 +1,2 @@
+module PersonTypesHelper
+end

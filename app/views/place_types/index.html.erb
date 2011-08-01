@@ -1,0 +1,27 @@
+<h1>Listing place_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @place_types.each do |place_type| %>
+  <tr>
+    <td><%= place_type.name %></td>
+    <td><%= place_type.active %></td>
+    <td><%= place_type.remark %></td>
+    <td><%= link_to 'Show', place_type %></td>
+    <td><%= link_to 'Edit', edit_place_type_path(place_type) %></td>
+    <td><%= link_to 'Destroy', place_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Place type', new_place_type_path %>

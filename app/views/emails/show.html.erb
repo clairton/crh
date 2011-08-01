@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Domain:</b>
+  <%= @email.domain %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @email.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @email.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @email.remark %>
+</p>
+
+<p>
+  <b>Email type:</b>
+  <%= @email.email_type_id %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @email.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_email_path(@email) %> |
+<%= link_to 'Back', emails_path %>

@@ -1,0 +1,27 @@
+<h1>Listing email_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @email_types.each do |email_type| %>
+  <tr>
+    <td><%= email_type.name %></td>
+    <td><%= email_type.active %></td>
+    <td><%= email_type.remark %></td>
+    <td><%= link_to 'Show', email_type %></td>
+    <td><%= link_to 'Edit', edit_email_type_path(email_type) %></td>
+    <td><%= link_to 'Destroy', email_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Email type', new_email_type_path %>
