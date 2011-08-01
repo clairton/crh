@@ -1,4 +1,8 @@
 Crh::Application.routes.draw do
+  resources :emails
+
+  resources :people
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

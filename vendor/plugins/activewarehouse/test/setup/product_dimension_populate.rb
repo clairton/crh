@@ -1,1 +1,0 @@
-ETL::Engine.process(File.dirname(__FILE__) + '/product_dimension.ctl')
