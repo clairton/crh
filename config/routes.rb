@@ -1,4 +1,6 @@
 Crh::Application.routes.draw do
+  resources :places
+
   resources :emails
 
   resources :person_types
@@ -6,8 +8,6 @@ Crh::Application.routes.draw do
   resources :people
 
   resources :place_types
-
-  resources :places
 
   resources :email_types
 

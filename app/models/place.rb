@@ -1,3 +1,3 @@
 class Place < ActiveRecord::Base
-  belongs_to :PlaceType
+  has_one :PlaceType
 end

@@ -8,6 +8,7 @@
     <th>Remark</th>
     <th>Active</th>
     <th>Place type</th>
+    <th>Acronym</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,6 +22,7 @@
     <td><%= place.remark %></td>
     <td><%= place.active %></td>
     <td><%= place.place_type_id %></td>
+    <td><%= place.acronym %></td>
     <td><%= link_to 'Show', place %></td>
     <td><%= link_to 'Edit', edit_place_path(place) %></td>
     <td><%= link_to 'Destroy', place, :confirm => 'Are you sure?', :method => :delete %></td>

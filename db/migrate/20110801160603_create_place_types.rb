@@ -6,36 +6,13 @@ class CreatePlaceTypes < ActiveRecord::Migration
       t.text :remark
 
       t.timestamps
-    end
-
-    @place = new PlaceType
-    @place.is = 1
-    @place.name = 'Country'
-    @place.save
-
-
-    @place = new PlaceType
-    @place.is = 2
-    @place.name = 'State'
-    @place.save
-
-    @place = new PlaceType
-    @place.is = 3
-    @place.name = 'City'
-    @place.save
-
-    @place = new PlaceType
-    @place.is = 4
-    @place.name = 'Neighborhood'
-    @place.save
-
-    @place = new PlaceType
-    @place.is = 5
-    @place.name = 'Street'
-    @place.save
-
+    end    
+    PlaceType.create(:id =>1 , :name => "Country")
+    PlaceType.create(:id =>2 , :name => "State")
+    PlaceType.create(:id =>3 , :name => "City")
+    PlaceType.create(:id =>4 , :name => "Neighborhood")
+    PlaceType.create(:id =>5 , :name => "Street")
   end
-
   def self.down
     drop_table :place_types
   end
