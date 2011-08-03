@@ -8,7 +8,6 @@ class CreatePeople < ActiveRecord::Migration
       t.string :code, :limit => 20, :null => false
       t.string :remark
       t.boolean :active, :default => true, :null => false
-      t.integer :person_type_id, :null => false
 
       t.timestamps
     end
