@@ -1,2 +1,0 @@
-module PlaceTypesHelper
-end

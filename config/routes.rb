@@ -7,8 +7,6 @@ Crh::Application.routes.draw do
 
   resources :people
 
-  resources :place_types
-
   resources :email_types
 
   # The priority is based upon order of creation:
