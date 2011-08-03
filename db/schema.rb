@@ -51,14 +51,6 @@ ActiveRecord::Schema.define(:version => 20110802014239) do
     t.datetime "updated_at"
   end
 
-  create_table "place_types", :force => true do |t|
-    t.string   "name",       :limit => 200,                   :null => false
-    t.boolean  "active",                    :default => true, :null => false
-    t.text     "remark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "places", :force => true do |t|
     t.string   "phone_number",  :limit => 15
     t.string   "adress_number", :limit => 15
