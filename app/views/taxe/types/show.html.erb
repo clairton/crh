@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @taxe_type.name %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @taxe_type.remark %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @taxe_type.active %>
+</p>
+
+<p>
+  <b>Taxe group:</b>
+  <%= @taxe_type.taxe_group_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_taxe_type_path(@taxe_type) %> |
+<%= link_to 'Back', taxe_types_path %>

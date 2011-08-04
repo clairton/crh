@@ -1,0 +1,27 @@
+<h1>Listing contact_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remark</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @contact_types.each do |contact_type| %>
+  <tr>
+    <td><%= contact_type.name %></td>
+    <td><%= contact_type.remark %></td>
+    <td><%= contact_type.active %></td>
+    <td><%= link_to 'Show', contact_type %></td>
+    <td><%= link_to 'Edit', edit_contact_type_path(contact_type) %></td>
+    <td><%= link_to 'Destroy', contact_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Contact type', new_contact_type_path %>

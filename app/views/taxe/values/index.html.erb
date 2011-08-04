@@ -1,0 +1,29 @@
+<h1>Listing taxe_values</h1>
+
+<table>
+  <tr>
+    <th>Taxe type</th>
+    <th>Percentage</th>
+    <th>Basis</th>
+    <th>Value</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @taxe_values.each do |taxe_value| %>
+  <tr>
+    <td><%= taxe_value.taxe_type_id %></td>
+    <td><%= taxe_value.percentage %></td>
+    <td><%= taxe_value.basis %></td>
+    <td><%= taxe_value.value %></td>
+    <td><%= link_to 'Show', taxe_value %></td>
+    <td><%= link_to 'Edit', edit_taxe_value_path(taxe_value) %></td>
+    <td><%= link_to 'Destroy', taxe_value, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Value', new_taxe_value_path %>

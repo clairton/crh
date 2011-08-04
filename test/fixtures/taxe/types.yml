@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  remark: MyText
+  active: false
+  taxe_group_id: 1
+
+two:
+  name: MyString
+  remark: MyText
+  active: false
+  taxe_group_id: 1

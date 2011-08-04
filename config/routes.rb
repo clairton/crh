@@ -1,17 +1,23 @@
 Crh::Application.routes.draw do
-  resources :taxes
+  namespace :taxe do resources :values end
 
-  resources :adresses
+  namespace :taxe do resources :types end
+
+  namespace :taxe do resources :groups end
+
+  resources :addresses
 
   resources :phones
 
   resources :emails
 
+  resources :contact_types
+
+  resources :taxes
+
   resources :places
 
   resources :people
-
-  resources :email_types
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

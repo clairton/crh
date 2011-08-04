@@ -6,6 +6,7 @@ one:
   person_id: 1
   extension: 1
   place_id: 1
+  contact_type_id: 1
 
 two:
   number: 1
@@ -13,3 +14,4 @@ two:
   person_id: 1
   extension: 1
   place_id: 1
+  contact_type_id: 1

@@ -4,12 +4,12 @@ one:
   domain: MyString
   name: MyString
   remark: MyText
-  email_type_id: 1
+  contact_type_id: 1
   person_id: 1
 
 two:
   domain: MyString
   name: MyString
   remark: MyText
-  email_type_id: 1
+  contact_type_id: 1
   person_id: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  taxe_type_id: 1
+  percentage: 9.99
+  basis: 9.99
+  value: 9.99
+
+two:
+  taxe_type_id: 1
+  percentage: 9.99
+  basis: 9.99
+  value: 9.99

@@ -7,6 +7,7 @@
     <th>Person</th>
     <th>Extension</th>
     <th>Place</th>
+    <th>Contact type</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +20,7 @@
     <td><%= phone.person_id %></td>
     <td><%= phone.extension %></td>
     <td><%= phone.place_id %></td>
+    <td><%= phone.contact_type_id %></td>
     <td><%= link_to 'Show', phone %></td>
     <td><%= link_to 'Edit', edit_phone_path(phone) %></td>
     <td><%= link_to 'Destroy', phone, :confirm => 'Are you sure?', :method => :delete %></td>

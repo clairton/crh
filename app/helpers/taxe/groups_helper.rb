@@ -1,0 +1,2 @@
+module Taxe::GroupsHelper
+end

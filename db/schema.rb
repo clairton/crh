@@ -10,29 +10,40 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110803231238) do
+ActiveRecord::Schema.define(:version => 20110804031428) do
 
-  create_table "adresses", :force => true do |t|
-    t.integer  "person_id",  :null => false
-    t.integer  "place_id",   :null => false
+  create_table "addresses", :force => true do |t|
+    t.integer  "person_id",                         :null => false
+    t.integer  "place_id",                          :null => false
+    t.integer  "contact_type_id",                   :null => false
+    t.boolean  "active",          :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "email_types", :force => true do |t|
+  create_table "contact_types", :force => true do |t|
     t.string   "name",       :limit => 200,                   :null => false
-    t.boolean  "active",                    :default => true, :null => false
     t.text     "remark"
+    t.boolean  "active",                    :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "emails", :force => true do |t|
-    t.string   "domain",        :limit => 200, :null => false
-    t.string   "name",          :limit => 200, :null => false
+    t.string   "domain",          :limit => 200,                   :null => false
+    t.string   "name",            :limit => 200,                   :null => false
     t.text     "remark"
-    t.integer  "email_type_id",                :null => false
-    t.integer  "person_id",                    :null => false
+    t.integer  "contact_type_id",                                  :null => false
+    t.integer  "person_id",                                        :null => false
+    t.boolean  "active",                         :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participants", :force => true do |t|
+    t.string   "name",       :limit => 200,                   :null => false
+    t.text     "remark"
+    t.boolean  "active",                    :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,11 +61,13 @@ ActiveRecord::Schema.define(:version => 20110803231238) do
   end
 
   create_table "phones", :force => true do |t|
-    t.integer  "number",     :null => false
+    t.integer  "number",          :null => false
     t.text     "remark"
-    t.integer  "person_id",  :null => false
+    t.integer  "person_id",       :null => false
     t.integer  "extension"
-    t.integer  "place_id",   :null => false
+    t.integer  "place_id",        :null => false
+    t.integer  "contact_type_id", :null => false
+    t.boolean  "active",          :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,7 +80,41 @@ ActiveRecord::Schema.define(:version => 20110803231238) do
     t.boolean  "active",                       :default => true, :null => false
     t.string   "type"
     t.integer  "place_id"
-    t.string   "acronym"
+    t.string   "acronym",       :limit => 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taxe_groups", :force => true do |t|
+    t.string   "name"
+    t.text     "remark"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taxe_types", :force => true do |t|
+    t.string   "name"
+    t.text     "remark"
+    t.boolean  "active"
+    t.integer  "taxe_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taxe_values", :force => true do |t|
+    t.integer  "taxe_type_id"
+    t.decimal  "percentage",   :precision => 10, :scale => 0
+    t.decimal  "basis",        :precision => 10, :scale => 0
+    t.decimal  "value",        :precision => 10, :scale => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taxes", :force => true do |t|
+    t.string   "name",       :limit => 200,                    :null => false
+    t.text     "remark"
+    t.boolean  "active",                    :default => false, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

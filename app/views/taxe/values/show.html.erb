@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Taxe type:</b>
+  <%= @taxe_value.taxe_type_id %>
+</p>
+
+<p>
+  <b>Percentage:</b>
+  <%= @taxe_value.percentage %>
+</p>
+
+<p>
+  <b>Basis:</b>
+  <%= @taxe_value.basis %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @taxe_value.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_taxe_value_path(@taxe_value) %> |
+<%= link_to 'Back', taxe_values_path %>
