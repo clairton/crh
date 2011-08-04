@@ -1,9 +1,13 @@
 Crh::Application.routes.draw do
-  resources :places
+  resources :taxes
+
+  resources :adresses
+
+  resources :phones
 
   resources :emails
 
-  resources :person_types
+  resources :places
 
   resources :people
 

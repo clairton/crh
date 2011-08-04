@@ -1,3 +1,4 @@
 class Email < ActiveRecord::Base
-  belongs_to :EmailType
+  validates_presence_of :email_type_id
+  has_one :Person
 end

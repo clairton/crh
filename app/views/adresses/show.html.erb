@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Person:</b>
+  <%= @adress.person_id %>
+</p>
+
+<p>
+  <b>Place:</b>
+  <%= @adress.place_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_adress_path(@adress) %> |
+<%= link_to 'Back', adresses_path %>

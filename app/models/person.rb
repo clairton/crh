@@ -1,3 +1,5 @@
 class Person < ActiveRecord::Base
-  belongs_to :PersonType
+  has_many :Phone
+  #has_many :Adress
+  has_and_belongs_to_many :Adress, :class_name => "Adress"
 end

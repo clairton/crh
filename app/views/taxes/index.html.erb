@@ -1,0 +1,27 @@
+<h1>Listing taxes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remark</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @taxes.each do |taxis| %>
+  <tr>
+    <td><%= taxis.name %></td>
+    <td><%= taxis.remark %></td>
+    <td><%= taxis.active %></td>
+    <td><%= link_to 'Show', taxis %></td>
+    <td><%= link_to 'Edit', edit_taxis_path(taxis) %></td>
+    <td><%= link_to 'Destroy', taxis, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Taxe', new_taxis_path %>

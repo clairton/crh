@@ -1,0 +1,2 @@
+module AdressesHelper
+end
