@@ -1,0 +1,2 @@
+module Financier::NotesHelper
+end

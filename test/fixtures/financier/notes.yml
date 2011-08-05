@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  original_value: 9.99
+  expiration_date: 2011-08-04
+  creation_date: 2011-08-04
+  name: MyString
+  number: 1
+
+two:
+  original_value: 9.99
+  expiration_date: 2011-08-04
+  creation_date: 2011-08-04
+  name: MyString
+  number: 1

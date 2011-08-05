@@ -1,0 +1,21 @@
+<h1>Listing address_places</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @address_places.each do |address_place| %>
+  <tr>
+    <td><%= link_to 'Show', address_place %></td>
+    <td><%= link_to 'Edit', edit_address_place_path(address_place) %></td>
+    <td><%= link_to 'Destroy', address_place, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Place', new_address_place_path %>

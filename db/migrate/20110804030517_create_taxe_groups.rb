@@ -1,9 +1,9 @@
 class CreateTaxeGroups < ActiveRecord::Migration
   def self.up
     create_table :taxe_groups do |t|
-      t.string :name
+      t.string :name, :null => false, :limit => 200
       t.text :remark
-      t.boolean :active
+      t.boolean :active, :null => false, :default => true
 
       t.timestamps
     end
@@ -13,3 +13,4 @@ class CreateTaxeGroups < ActiveRecord::Migration
     drop_table :taxe_groups
   end
 end
+

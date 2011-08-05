@@ -1,6 +1,6 @@
-class Address < ActiveRecord::Base
-  has_one :ContactType
-  has_one :Person
-  has_one :Street
+module Address
+  def self.table_name_prefix
+    'address_'
+  end
 end
 

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110804031428) do
+ActiveRecord::Schema.define(:version => 20110805024527) do
+
+  create_table "address_places", :force => true do |t|
+    t.string   "phone_number",     :limit => 15
+    t.string   "adress_number",    :limit => 15
+    t.string   "name",             :limit => 200
+    t.string   "remark"
+    t.boolean  "active",                          :default => true, :null => false
+    t.string   "type"
+    t.integer  "address_place_id"
+    t.string   "acronym",          :limit => 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "addresses", :force => true do |t|
     t.integer  "person_id",                         :null => false
@@ -36,6 +49,16 @@ ActiveRecord::Schema.define(:version => 20110804031428) do
     t.integer  "contact_type_id",                                  :null => false
     t.integer  "person_id",                                        :null => false
     t.boolean  "active",                         :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "financier_notes", :force => true do |t|
+    t.decimal  "original_value",  :precision => 10, :scale => 0
+    t.date     "expiration_date"
+    t.date     "creation_date"
+    t.string   "name"
+    t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,32 +95,19 @@ ActiveRecord::Schema.define(:version => 20110804031428) do
     t.datetime "updated_at"
   end
 
-  create_table "places", :force => true do |t|
-    t.string   "phone_number",  :limit => 15
-    t.string   "adress_number", :limit => 15
-    t.string   "name",          :limit => 200
-    t.string   "remark"
-    t.boolean  "active",                       :default => true, :null => false
-    t.string   "type"
-    t.integer  "place_id"
-    t.string   "acronym",       :limit => 10
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "taxe_groups", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :limit => 200,                   :null => false
     t.text     "remark"
-    t.boolean  "active"
+    t.boolean  "active",                    :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "taxe_types", :force => true do |t|
-    t.string   "name"
+    t.string   "name",          :limit => 200,                    :null => false
     t.text     "remark"
-    t.boolean  "active"
-    t.integer  "taxe_group_id"
+    t.boolean  "active",                       :default => false, :null => false
+    t.integer  "taxe_group_id",                                   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -112,9 +122,9 @@ ActiveRecord::Schema.define(:version => 20110804031428) do
   end
 
   create_table "taxes", :force => true do |t|
-    t.string   "name",       :limit => 200,                    :null => false
+    t.string   "name",       :limit => 200,                   :null => false
     t.text     "remark"
-    t.boolean  "active",                    :default => false, :null => false
+    t.boolean  "active",                    :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

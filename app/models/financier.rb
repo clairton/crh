@@ -1,6 +1,5 @@
-module Taxe
+module Financier
   def self.table_name_prefix
-    'taxe_'
+    'financier_'
   end
 end
-

@@ -1,0 +1,31 @@
+<h1>Listing financier_notes</h1>
+
+<table>
+  <tr>
+    <th>Original value</th>
+    <th>Expiration date</th>
+    <th>Creation date</th>
+    <th>Name</th>
+    <th>Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @financier_notes.each do |financier_note| %>
+  <tr>
+    <td><%= financier_note.original_value %></td>
+    <td><%= financier_note.expiration_date %></td>
+    <td><%= financier_note.creation_date %></td>
+    <td><%= financier_note.name %></td>
+    <td><%= financier_note.number %></td>
+    <td><%= link_to 'Show', financier_note %></td>
+    <td><%= link_to 'Edit', edit_financier_note_path(financier_note) %></td>
+    <td><%= link_to 'Destroy', financier_note, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Note', new_financier_note_path %>

@@ -1,21 +1,19 @@
 Crh::Application.routes.draw do
+  namespace :financier do resources :notes end
+
+  namespace :address do resources :places end
+
   namespace :taxe do resources :values end
 
   namespace :taxe do resources :types end
 
   namespace :taxe do resources :groups end
 
-  resources :addresses
-
   resources :phones
 
   resources :emails
 
   resources :contact_types
-
-  resources :taxes
-
-  resources :places
 
   resources :people
 

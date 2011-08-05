@@ -3,7 +3,7 @@ class CreateTaxes < ActiveRecord::Migration
     create_table :taxes do |t|
       t.string :name, :null => false, :limit => 200
       t.text :remark
-      t.boolean :active, :null => false, :default => false
+      t.boolean :active, :null => false, :default => true
 
       t.timestamps
     end
@@ -13,3 +13,4 @@ class CreateTaxes < ActiveRecord::Migration
     drop_table :taxes
   end
 end
+

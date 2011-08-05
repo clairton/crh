@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Original value:</b>
+  <%= @financier_note.original_value %>
+</p>
+
+<p>
+  <b>Expiration date:</b>
+  <%= @financier_note.expiration_date %>
+</p>
+
+<p>
+  <b>Creation date:</b>
+  <%= @financier_note.creation_date %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @financier_note.name %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @financier_note.number %>
+</p>
+
+
+<%= link_to 'Edit', edit_financier_note_path(@financier_note) %> |
+<%= link_to 'Back', financier_notes_path %>

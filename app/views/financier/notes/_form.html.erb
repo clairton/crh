@@ -1,0 +1,37 @@
+<%= form_for(@financier_note) do |f| %>
+  <% if @financier_note.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@financier_note.errors.count, "error") %> prohibited this financier_note from being saved:</h2>
+
+      <ul>
+      <% @financier_note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :original_value %><br />
+    <%= f.text_field :original_value %>
+  </div>
+  <div class="field">
+    <%= f.label :expiration_date %><br />
+    <%= f.date_select :expiration_date %>
+  </div>
+  <div class="field">
+    <%= f.label :creation_date %><br />
+    <%= f.date_select :creation_date %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.text_field :number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
