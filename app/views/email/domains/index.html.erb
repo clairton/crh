@@ -1,0 +1,27 @@
+<h1>Listing email_domains</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remark</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @email_domains.each do |email_domain| %>
+  <tr>
+    <td><%= email_domain.name %></td>
+    <td><%= email_domain.remark %></td>
+    <td><%= email_domain.active %></td>
+    <td><%= link_to 'Show', email_domain %></td>
+    <td><%= link_to 'Edit', edit_email_domain_path(email_domain) %></td>
+    <td><%= link_to 'Destroy', email_domain, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Domain', new_email_domain_path %>

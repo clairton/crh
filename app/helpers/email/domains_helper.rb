@@ -1,0 +1,2 @@
+module Email::DomainsHelper
+end

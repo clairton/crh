@@ -1,0 +1,29 @@
+<h1>Listing email_users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Remark</th>
+    <th>Active</th>
+    <th>Password</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @email_users.each do |email_user| %>
+  <tr>
+    <td><%= email_user.name %></td>
+    <td><%= email_user.remark %></td>
+    <td><%= email_user.active %></td>
+    <td><%= email_user.password %></td>
+    <td><%= link_to 'Show', email_user %></td>
+    <td><%= link_to 'Edit', edit_email_user_path(email_user) %></td>
+    <td><%= link_to 'Destroy', email_user, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_email_user_path %>

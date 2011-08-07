@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  person_id: 1
+  place_id: 1
+  type_id: 1
+  remark: MyText
+  active: false
+
+two:
+  person_id: 1
+  place_id: 1
+  type_id: 1
+  remark: MyText
+  active: false

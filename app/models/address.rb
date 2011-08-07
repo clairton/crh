@@ -3,4 +3,3 @@ module Address
     'address_'
   end
 end
-

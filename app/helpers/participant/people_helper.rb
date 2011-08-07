@@ -1,0 +1,2 @@
+module Participant::PeopleHelper
+end
