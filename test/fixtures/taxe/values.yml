@@ -2,12 +2,24 @@
 
 one:
   taxe_type_id: 1
-  percentage: 9.99
-  basis: 9.99
-  value: 9.99
+  percentage: 17
+  basis: 10
+  value: 1.70
 
 two:
   taxe_type_id: 1
-  percentage: 9.99
-  basis: 9.99
-  value: 9.99
+  percentage: 25
+  basis: 250
+  value: 62.5
+three:
+  taxe_type_id: 2
+  percentage: 5
+  basis: 10
+  value: 0.5
+
+four:
+  taxe_type_id: 2
+  percentage: 10
+  basis: 100
+  value: 10
+

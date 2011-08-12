@@ -1,0 +1,25 @@
+<h1>Listing participant_contact_emails</h1>
+
+<table>
+  <tr>
+    <th>Person</th>
+    <th>Email user</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @participant_contact_emails.each do |participant_contact_email| %>
+  <tr>
+    <td><%= participant_contact_email.person_id %></td>
+    <td><%= participant_contact_email.email_user_id %></td>
+    <td><%= link_to 'Show', participant_contact_email %></td>
+    <td><%= link_to 'Edit', edit_participant_contact_email_path(participant_contact_email) %></td>
+    <td><%= link_to 'Destroy', participant_contact_email, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Email', new_participant_contact_email_path %>

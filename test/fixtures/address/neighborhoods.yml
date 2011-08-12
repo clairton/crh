@@ -1,0 +1,19 @@
+one:
+  id: 8
+  #phone_number:
+  adress_number: 898000-000
+  name: Centro
+  #remark:
+  #active:
+  address_place_id: 5
+  #acronym: CCO
+two:
+  id: 9
+  #phone_number:
+  adress_number: 898000-001
+  name: Coab
+  #remark:
+  #active:
+  address_place_id: 5
+  #acronym: NE
+

@@ -1,0 +1,19 @@
+one:
+  id: 8
+  #phone_number:
+  adress_number: 34
+  name: Avenida Manaus
+  remark: Apartamento 401
+  #active:
+  address_place_id: 9
+  #acronym: CCO
+two:
+  id: 9
+  #phone_number:
+  adress_number: 5
+  name: Rua São José
+  #remark:
+  #active:
+  address_place_id: 9
+  #acronym: NE
+

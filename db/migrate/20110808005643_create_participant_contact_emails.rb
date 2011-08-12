@@ -1,8 +1,8 @@
-class CreateParticipantContactAddresses < ActiveRecord::Migration
+class CreateParticipantContactEmails < ActiveRecord::Migration
   def self.up
-    create_table :participant_contact_addresses do |t|
+    create_table :participant_contact_emails do |t|
       t.integer :participant_person_id, :null => false
-      t.integer :address_place_id, :null => false
+      t.integer :email_user_id, :null => false
       t.integer :participant_contact_type_id, :null => false
       t.boolean :active, :default => true, :null => false
       t.text :remark
@@ -12,7 +12,7 @@ class CreateParticipantContactAddresses < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :participant_contact_addresses
+    drop_table :participant_contact_emails
   end
 end
 

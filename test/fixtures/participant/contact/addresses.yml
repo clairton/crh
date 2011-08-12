@@ -2,14 +2,15 @@
 
 one:
   person_id: 1
-  place_id: 1
+  place_id: 8
   type_id: 1
-  remark: MyText
-  active: false
+  remark:
+  active: true
 
 two:
-  person_id: 1
-  place_id: 1
+  person_id: 2
+  place_id: 9
   type_id: 1
-  remark: MyText
-  active: false
+  remark:
+  active: true
+

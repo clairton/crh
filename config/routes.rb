@@ -1,4 +1,8 @@
 Crh::Application.routes.draw do
+  namespace :participant do  namespace :contact do resources :types end end
+
+  namespace :participant do  namespace :contact do resources :emails end end
+
   namespace :participant do  namespace :contact do resources :addresses end end
 
   namespace :participant do resources :people end
@@ -16,10 +20,6 @@ Crh::Application.routes.draw do
   namespace :taxe do resources :types end
 
   namespace :taxe do resources :groups end
-
-  resources :phones
-
-  resources :contact_types
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,14 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  id: 1
-  name: gmail.com
-  remark:
+  name: Cobranças
   active: true
+  remark:
 
 two:
-  id: 1
-  name: yahoo.com.br
-  remark:
+  name: NFe
   active: true
+  remark:
+
+three:
+  name: Entrega
+  active: true
+  remark:
 

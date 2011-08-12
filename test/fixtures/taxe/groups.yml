@@ -1,11 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  remark: MyText
-  active: false
+  id: 1
+  name: ICMS
+  remark:
+  active: true
 
 two:
-  name: MyString
-  remark: MyText
-  active: false
+  id: 2
+  name: IPI
+  remark:
+  active: true
+

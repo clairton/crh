@@ -6,7 +6,7 @@ class CreateAddressPlaces < ActiveRecord::Migration
       t.string :name, :limit => 200
       t.string :remark
       t.boolean :active, :null => false, :default => true
-      t.string :type
+      t.string :type, :null => false
       t.integer :address_place_id
       t.string :acronym, :limit => 10
 

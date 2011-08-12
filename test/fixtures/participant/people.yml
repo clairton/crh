@@ -1,19 +1,20 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  nickname: MyString
+  first_name: Clairton Rodrigo
+  last_name: Heinzen
+  nickname: Gege
   birthday: 2011-08-07
-  code: MyString
-  remark: MyText
-  active: false
+  code: 050.636.469-05
+  remark:
+  active: true
 
 two:
-  first_name: MyString
-  last_name: MyString
-  nickname: MyString
+  first_name: Joao
+  last_name: Silva
+  nickname:
   birthday: 2011-08-07
-  code: MyString
-  remark: MyText
-  active: false
+  code: 000.000.000-01
+  remark:
+  active: true
+

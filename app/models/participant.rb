@@ -3,3 +3,4 @@ module Participant
     'participant_'
   end
 end
+

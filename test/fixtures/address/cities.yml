@@ -1,0 +1,28 @@
+one:
+  id: 5
+  #phone_number:
+  adress_number: 420420
+  name: Chapecó
+  #remark:
+  #active:
+  address_place_id: 3
+  acronym: CCO
+two:
+  id: 6
+  #phone_number:
+  adress_number: 420421
+  name: Nova Erechim
+  #remark:
+  #active:
+  address_place_id: 3
+  acronym: NE
+three:
+  id: 7
+  #phone_number:
+  adress_number: 420423
+  name: Erechim
+  #remark:
+  #active:
+  address_place_id: 4
+  acronym: ER
+

@@ -1,13 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: MyString
-  remark: MyText
-  active: false
+  name: Tributado Integralmente
+  remark:
+  active: true
   taxe_group_id: 1
+  code: 000
 
 two:
-  name: MyString
-  remark: MyText
-  active: false
-  taxe_group_id: 1
+  name: Tributado
+  remark:
+  active: true
+  taxe_group_id: 2
+  code: 50
+

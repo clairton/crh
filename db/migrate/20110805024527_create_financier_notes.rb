@@ -1,11 +1,11 @@
 class CreateFinancierNotes < ActiveRecord::Migration
   def self.up
     create_table :financier_notes do |t|
-      t.decimal :original_value
-      t.date :expiration_date
-      t.date :creation_date
-      t.string :name
-      t.integer :number
+      t.decimal :original_value, :null => false
+      t.date :expiration_date, :null => false
+      t.date :creation_date, :null => false
+      t.string :name, :null => false, :limit => 20
+      t.integer :number, :null => false
 
       t.timestamps
     end
@@ -15,3 +15,4 @@ class CreateFinancierNotes < ActiveRecord::Migration
     drop_table :financier_notes
   end
 end
+

@@ -5,6 +5,7 @@ class CreateTaxeTypes < ActiveRecord::Migration
       t.text :remark
       t.boolean :active, :null => false, :default => false
       t.integer :taxe_group_id, :null => false
+      t.string :code, :limit => 200
 
       t.timestamps
     end
