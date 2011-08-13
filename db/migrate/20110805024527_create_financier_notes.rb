@@ -15,4 +15,3 @@ class CreateFinancierNotes < ActiveRecord::Migration
     drop_table :financier_notes
   end
 end
-

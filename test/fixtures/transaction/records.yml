@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  creation_date: 2011-08-12
+  code: 1
+  remark: MyText
+  active: false
+  name: MyString
+
+two:
+  creation_date: 2011-08-12
+  code: 1
+  remark: MyText
+  active: false
+  name: MyString

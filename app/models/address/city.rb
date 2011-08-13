@@ -3,4 +3,3 @@ class Address::City <  Address::Place
   has_many :Neighborhood
   validates_associated :State
 end
-

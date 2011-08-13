@@ -3,3 +3,4 @@ module Participant::Contact
     'participant_contact_'
   end
 end
+

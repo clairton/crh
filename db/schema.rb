@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110808010409) do
+ActiveRecord::Schema.define(:version => 20110813022628) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(:version => 20110808010409) do
     t.text     "remark"
     t.boolean  "active",                       :default => false, :null => false
     t.integer  "taxe_group_id",                                   :null => false
+    t.string   "code",          :limit => 200
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -115,6 +116,24 @@ ActiveRecord::Schema.define(:version => 20110808010409) do
     t.decimal  "percentage",   :precision => 10, :scale => 0, :default => 0, :null => false
     t.decimal  "basis",        :precision => 10, :scale => 0, :default => 0, :null => false
     t.decimal  "value",        :precision => 10, :scale => 0, :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_participants", :force => true do |t|
+    t.integer  "transaction_record_id", :null => false
+    t.string   "type",                  :null => false
+    t.integer  "participant_person_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_records", :force => true do |t|
+    t.date     "creation_date",                   :null => false
+    t.integer  "code",                            :null => false
+    t.text     "remark"
+    t.boolean  "active",        :default => true, :null => false
+    t.string   "name",                            :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,4 +1,8 @@
 Crh::Application.routes.draw do
+  namespace :transaction do resources :participants end
+
+  namespace :transaction do resources :records end
+
   namespace :participant do  namespace :contact do resources :types end end
 
   namespace :participant do  namespace :contact do resources :emails end end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  transaction_record_id: 1
+  type: MyString
+  participant_person_id: 1
+
+two:
+  transaction_record_id: 1
+  type: MyString
+  participant_person_id: 1
