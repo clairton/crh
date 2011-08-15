@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  taxe_value_note_id: 1
+  transaction_record_id: 1
+  active: false
+  remark: MyText
+
+two:
+  taxe_value_note_id: 1
+  transaction_record_id: 1
+  active: false
+  remark: MyText

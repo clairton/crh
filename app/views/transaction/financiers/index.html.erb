@@ -1,0 +1,25 @@
+<h1>Listing transaction_financiers</h1>
+
+<table>
+  <tr>
+    <th>Financier note</th>
+    <th>Transaction record</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transaction_financiers.each do |transaction_financier| %>
+  <tr>
+    <td><%= transaction_financier.financier_note_id %></td>
+    <td><%= transaction_financier.transaction_record_id %></td>
+    <td><%= link_to 'Show', transaction_financier %></td>
+    <td><%= link_to 'Edit', edit_transaction_financier_path(transaction_financier) %></td>
+    <td><%= link_to 'Destroy', transaction_financier, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Financier', new_transaction_financier_path %>

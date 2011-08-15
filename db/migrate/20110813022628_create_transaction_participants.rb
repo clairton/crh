@@ -4,6 +4,8 @@ class CreateTransactionParticipants < ActiveRecord::Migration
       t.integer :transaction_record_id, :null => false
       t.string :type, :null => false
       t.integer :participant_person_id, :null => false
+      t.boolean :active, :null => false, :default => true
+      t.string :name, :null => false
 
       t.timestamps
     end
