@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816000925) do
+ActiveRecord::Schema.define(:version => 20110816014526) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -166,15 +166,15 @@ ActiveRecord::Schema.define(:version => 20110816000925) do
     t.string   "type",                                    :null => false
     t.integer  "participant_person_id",                   :null => false
     t.boolean  "active",                :default => true, :null => false
-    t.string   "name",                                    :null => false
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "transaction_record_taxes", :force => true do |t|
-    t.integer  "transaction_record_id"
-    t.integer  "taxe_value_id"
-    t.boolean  "active"
+    t.integer  "transaction_record_id",                   :null => false
+    t.integer  "taxe_value_id",                           :null => false
+    t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -186,6 +186,16 @@ ActiveRecord::Schema.define(:version => 20110816000925) do
     t.text     "remark"
     t.boolean  "active",        :default => true, :null => false
     t.string   "name",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_xmls", :force => true do |t|
+    t.integer  "transaction_record_id",                   :null => false
+    t.text     "xml",                                     :null => false
+    t.string   "name",                                    :null => false
+    t.boolean  "active",                :default => true, :null => false
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

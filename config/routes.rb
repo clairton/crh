@@ -1,4 +1,6 @@
 Crh::Application.routes.draw do
+  namespace :transaction do resources :xmls end
+
   namespace :transaction do resources :item_taxes end
 
   namespace :transaction do resources :record_taxes end

@@ -5,7 +5,7 @@ class CreateTransactionParticipants < ActiveRecord::Migration
       t.string :type, :null => false
       t.integer :participant_person_id, :null => false
       t.boolean :active, :null => false, :default => true
-      t.remark :text
+      t.text :remark
 
       t.timestamps
     end

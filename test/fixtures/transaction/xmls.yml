@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  transaction_record_id: 1
+  xml: MyText
+  name: MyString
+  active: false
+  remark: MyText
+
+two:
+  transaction_record_id: 1
+  xml: MyText
+  name: MyString
+  active: false
+  remark: MyText

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Transaction record:</b>
+  <%= @transaction_xml.transaction_record_id %>
+</p>
+
+<p>
+  <b>Xml:</b>
+  <%= @transaction_xml.xml %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @transaction_xml.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_xml.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_xml.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_xml_path(@transaction_xml) %> |
+<%= link_to 'Back', transaction_xmls_path %>
