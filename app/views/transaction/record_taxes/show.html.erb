@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Transaction record:</b>
+  <%= @transaction_record_taxis.transaction_record_id %>
+</p>
+
+<p>
+  <b>Taxe value:</b>
+  <%= @transaction_record_taxis.taxe_value_id %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_record_taxis.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_record_taxis.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_record_taxis_path(@transaction_record_taxis) %> |
+<%= link_to 'Back', transaction_record_taxes_path %>

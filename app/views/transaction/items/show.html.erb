@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Goods item:</b>
+  <%= @transaction_item.goods_item_id %>
+</p>
+
+<p>
+  <b>Transaction record:</b>
+  <%= @transaction_item.transaction_record_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @transaction_item.name %>
+</p>
+
+<p>
+  <b>Measure:</b>
+  <%= @transaction_item.measure %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @transaction_item.quantity %>
+</p>
+
+<p>
+  <b>Unit price:</b>
+  <%= @transaction_item.unit_price %>
+</p>
+
+<p>
+  <b>Full price:</b>
+  <%= @transaction_item.full_price %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_item.remark %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_item.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_item_path(@transaction_item) %> |
+<%= link_to 'Back', transaction_items_path %>

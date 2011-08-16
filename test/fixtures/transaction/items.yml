@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  goods_item_id: 1
+  transaction_record_id: 1
+  name: MyString
+  measure: MyString
+  quantity: 9.99
+  unit_price: 9.99
+  full_price: 9.99
+  remark: MyText
+  active: false
+
+two:
+  goods_item_id: 1
+  transaction_record_id: 1
+  name: MyString
+  measure: MyString
+  quantity: 9.99
+  unit_price: 9.99
+  full_price: 9.99
+  remark: MyText
+  active: false

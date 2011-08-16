@@ -1,10 +1,10 @@
-<%= form_for(@transaction_taxis) do |f| %>
-  <% if @transaction_taxis.errors.any? %>
+<%= form_for(@transaction_record_taxis) do |f| %>
+  <% if @transaction_record_taxis.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@transaction_taxis.errors.count, "error") %> prohibited this transaction_taxis from being saved:</h2>
+      <h2><%= pluralize(@transaction_record_taxis.errors.count, "error") %> prohibited this transaction_record_taxis from being saved:</h2>
 
       <ul>
-      <% @transaction_taxis.errors.full_messages.each do |msg| %>
+      <% @transaction_record_taxis.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :taxe_value_note_id %><br />
-    <%= f.text_field :taxe_value_note_id %>
-  </div>
-  <div class="field">
     <%= f.label :transaction_record_id %><br />
     <%= f.text_field :transaction_record_id %>
+  </div>
+  <div class="field">
+    <%= f.label :taxe_value_id %><br />
+    <%= f.text_field :taxe_value_id %>
   </div>
   <div class="field">
     <%= f.label :active %><br />

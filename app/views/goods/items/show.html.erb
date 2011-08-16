@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @goods_item.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @goods_item.name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @goods_item.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @goods_item.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_goods_item_path(@goods_item) %> |
+<%= link_to 'Back', goods_items_path %>

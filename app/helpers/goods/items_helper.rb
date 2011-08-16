@@ -1,0 +1,2 @@
+module Goods::ItemsHelper
+end

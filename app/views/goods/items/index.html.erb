@@ -1,0 +1,29 @@
+<h1>Listing goods_items</h1>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @goods_items.each do |goods_item| %>
+  <tr>
+    <td><%= goods_item.code %></td>
+    <td><%= goods_item.name %></td>
+    <td><%= goods_item.active %></td>
+    <td><%= goods_item.remark %></td>
+    <td><%= link_to 'Show', goods_item %></td>
+    <td><%= link_to 'Edit', edit_goods_item_path(goods_item) %></td>
+    <td><%= link_to 'Destroy', goods_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item', new_goods_item_path %>

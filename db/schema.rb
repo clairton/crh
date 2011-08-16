@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815014628) do
+ActiveRecord::Schema.define(:version => 20110816000925) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(:version => 20110815014628) do
     t.date     "creation_date",                                                :null => false
     t.string   "name",            :limit => 20,                                :null => false
     t.integer  "number",                                                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "goods_items", :force => true do |t|
+    t.string   "code",       :limit => 20,                    :null => false
+    t.string   "name",       :limit => 200,                   :null => false
+    t.boolean  "active",                    :default => true, :null => false
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -112,10 +121,10 @@ ActiveRecord::Schema.define(:version => 20110815014628) do
   end
 
   create_table "taxe_values", :force => true do |t|
-    t.integer  "taxe_type_id",                                               :null => false
-    t.decimal  "percentage",   :precision => 10, :scale => 0, :default => 0, :null => false
-    t.decimal  "basis",        :precision => 10, :scale => 0, :default => 0, :null => false
-    t.decimal  "value",        :precision => 10, :scale => 0, :default => 0, :null => false
+    t.integer  "taxe_type_id",                                                 :null => false
+    t.decimal  "percentage",   :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "basis",        :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "value",        :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -129,10 +138,44 @@ ActiveRecord::Schema.define(:version => 20110815014628) do
     t.datetime "updated_at"
   end
 
+  create_table "transaction_item_taxes", :force => true do |t|
+    t.integer  "transaction_item_id",                   :null => false
+    t.integer  "taxe_value_id",                         :null => false
+    t.boolean  "active",              :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_items", :force => true do |t|
+    t.integer  "goods_item_id",                                                                         :null => false
+    t.integer  "transaction_record_id",                                                                 :null => false
+    t.string   "name",                  :limit => 200,                                                  :null => false
+    t.string   "measure",               :limit => 6,                                                    :null => false
+    t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
+    t.decimal  "unit_price",                           :precision => 10, :scale => 4,                   :null => false
+    t.decimal  "full_price",                           :precision => 10, :scale => 2,                   :null => false
+    t.text     "remark"
+    t.boolean  "active",                                                              :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "transaction_participants", :force => true do |t|
-    t.integer  "transaction_record_id", :null => false
-    t.string   "type",                  :null => false
-    t.integer  "participant_person_id", :null => false
+    t.integer  "transaction_record_id",                   :null => false
+    t.string   "type",                                    :null => false
+    t.integer  "participant_person_id",                   :null => false
+    t.boolean  "active",                :default => true, :null => false
+    t.string   "name",                                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_record_taxes", :force => true do |t|
+    t.integer  "transaction_record_id"
+    t.integer  "taxe_value_id"
+    t.boolean  "active"
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -143,15 +186,6 @@ ActiveRecord::Schema.define(:version => 20110815014628) do
     t.text     "remark"
     t.boolean  "active",        :default => true, :null => false
     t.string   "name",                            :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_taxes", :force => true do |t|
-    t.integer  "taxe_value_note_id",                      :null => false
-    t.integer  "transaction_record_id",                   :null => false
-    t.boolean  "active",                :default => true, :null => false
-    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
