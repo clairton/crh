@@ -29,5 +29,7 @@ gem 'sqlite3'
 # group :development, :test do
 #   gem 'webrat'
 # end
-
+gem 'paperclip'
+gem 'rghost'
 gem 'railroady'
+gem 'libxml-ruby'

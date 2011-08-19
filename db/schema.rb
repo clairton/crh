@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816014526) do
+ActiveRecord::Schema.define(:version => 20110816161654) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -191,10 +191,14 @@ ActiveRecord::Schema.define(:version => 20110816014526) do
   end
 
   create_table "transaction_xmls", :force => true do |t|
-    t.integer  "transaction_record_id",                   :null => false
-    t.text     "xml",                                     :null => false
-    t.string   "name",                                    :null => false
-    t.boolean  "active",                :default => true, :null => false
+    t.integer  "transaction_record_id",                                  :null => false
+    t.text     "content",                                                :null => false
+    t.string   "name",                  :limit => 200,                   :null => false
+    t.string   "xml_file_name",                                          :null => false
+    t.string   "xml_content_type",                                       :null => false
+    t.integer  "xml_file_size",                                          :null => false
+    t.datetime "xml_updated_at",                                         :null => false
+    t.boolean  "active",                               :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
