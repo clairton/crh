@@ -4,3 +4,4 @@ log/*.log
 tmp/
 Diagrams.juth.bak
 .project
+.buildpath
