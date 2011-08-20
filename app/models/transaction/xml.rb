@@ -77,6 +77,7 @@ class Transaction::Xml < ActiveRecord::Base
         
     end#final da transacao no banco de dados    
 	end
+	
 	private
 	def parse_issuer(xml,record_id)
 	  person_id = parse_person(xml,'enderEmit')
@@ -115,8 +116,8 @@ class Transaction::Xml < ActiveRecord::Base
       address_id = parse_address(xml.elements[tag_address])
       address = Participant::Contact::Address.create(
         :participant_person_id => person.id,
-        :address_place_id => address_id,
-        :participant_contact_type_id =>  
+        :address_place_id => address_id#,
+        #:participant_contact_type_id =>  
       )
       address.save  
     end
@@ -194,11 +195,11 @@ class Transaction::Xml < ActiveRecord::Base
           :full_price => det.elements['prod'].elements['vProd'].text      
         )    
         item.save
-        =begin
-          verificar se existe a tag de iss,
-          se ela exisitir chamar somente ela
-          se nao existir chamar icms e ipi
-        =end
+        #
+          #verificar se existe a tag de iss,
+          #se ela exisitir chamar somente ela
+          #se nao existir chamar icms e ipi
+        #
         Transaction::ItemTaxe.create(
           :taxe_value_id => 
             parse_item_icms(
