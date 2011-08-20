@@ -2,6 +2,8 @@ require 'rexml/document'
 require 'goods/item'
 require 'financier/note'
 require 'taxe/value'
+require 'taxe/type'
+require 'taxe/group'
 require 'address/country'
 require 'address/state'
 require 'address/city'
@@ -75,7 +77,7 @@ class Transaction::Xml < ActiveRecord::Base
         
     end#final da transacao no banco de dados    
 	end
-	
+	private
 	def parse_issuer(xml,record_id)
 	  person_id = parse_person(xml,'enderEmit')
 	  issuer = Transaction::Issuer.create(
@@ -157,7 +159,16 @@ class Transaction::Xml < ActiveRecord::Base
 	end	
 	
   def parse_item(xml,record_id)
+      #cria ou recupera os grupos de impostos
+      group_imcs = Taxe::Group.create(:name => "Icms")
+      group_iss = Taxe::Group.create(:name => "Iss")
+      group_ipi = Taxe::Group.create(:name => "Ipi")
+      group_cofins = Taxe::Group.create(:name => "Cofins")
+      group_pis = Taxe::Group.create(:name => "Pis")
+      
+      #percorre os elementos det que os produtos e serviços
       xml.elements.each('nfeProc/NFe/infNFe/det') do |det|
+        #cria o produtos/serviço
         goods = Goods::Item.create(
           #codigo da mercadoria
           :code => det.elements['prod'].elements['cProd'].text,
@@ -165,6 +176,7 @@ class Transaction::Xml < ActiveRecord::Base
           :name => det.elements['prod'].elements['xProd'].text        
         )
         goods.save  
+        #insere o item no registro
         item = Transaction::Item.create(
           #id do item
           :goods_item_id => goods.id,
@@ -181,8 +193,89 @@ class Transaction::Xml < ActiveRecord::Base
           #valor total
           :full_price => det.elements['prod'].elements['vProd'].text      
         )    
+        item.save
+        =begin
+          verificar se existe a tag de iss,
+          se ela exisitir chamar somente ela
+          se nao existir chamar icms e ipi
+        =end
+        Transaction::ItemTaxe.create(
+          :taxe_value_id => 
+            parse_item_icms(
+              det.elements['prod'].elements['imposto'].elements['ICMS'],
+              group_imcs.id
+            ),
+          :transaction_item_id => item.id
+        )
+        Transaction::ItemTaxe.create(
+          :taxe_value_id => 
+            parse_item_ipi(
+              det.elements['prod'].elements['imposto'].elements['IPI'],
+              group_imcs.id
+            ),
+          :transaction_item_id => item.id
+        )
+        Transaction::ItemTaxe.create(
+          :taxe_value_id => 
+            parse_item_cofins(
+              det.elements['prod'].elements['imposto'].elements['COFINS'],
+              group_imcs.id
+            ),
+          :transaction_item_id => item.id
+        )
+        Transaction::ItemTaxe.create(
+          :taxe_value_id => 
+            parse_item_iss(
+              det.elements['prod'].elements['imposto'].elements['PIS'],
+              group_imcs.id
+            ),
+          :transaction_item_id => item.id
+        )
       end#fim dos itens  
   end#fim parse_item
+  
+  def parse_item_icms(xml,taxe_group_id)
+    type_id = parse_item_taxe_type(code,name,taxe_group_id)
+    parse_item_taxe_value(type_id,percentage,basis,value)
+  end
+  
+  def parse_item_ipi(xml,taxe_group_id)
+    type_id = parse_item_taxe_type(code,name,taxe_group_id)
+    parse_item_taxe_value(type_id,percentage,basis,value)
+  end
+  
+  
+  def parse_item_pis(xml,taxe_group_id)
+    type_id = parse_item_taxe_type(code,name,taxe_group_id)
+    parse_item_taxe_value(type_id,percentage,basis,value)
+  end
+  
+  
+  def parse_item_cofins(xml,taxe_group_id)
+    type_id = parse_item_taxe_type(code,name,taxe_group_id)
+    parse_item_taxe_value(type_id,percentage,basis,value)
+  end
+  
+  def parse_item_taxe_type(code,name,taxe_group_id)
+    type = Taxe::Type.create(
+      :name => name,
+      :code => code, 
+      :taxe_group_id => taxe_group_id
+    )
+    type.save
+    type.id  
+  end
+  
+  def parse_item_taxe_value(taxe_type_id,percentage,basis,value)
+    taxe = Taxe::Value(
+      :taxe_type_id => taxe_type_id,
+      :percentage => percentage,
+      :basis => basis,
+      :value =>  value     
+    )
+    taxe.save
+    taxe.id  
+  end
   
   def parse_financier(xml,record_id)  
     xml.elements.each('nfeProc/NFe/infNFe/cobr/dup') do |dup|
