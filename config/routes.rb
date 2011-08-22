@@ -1,7 +1,11 @@
 Crh::Application.routes.draw do
-  namespace :transaction do  namespace :tot do resources :values end end
+  namespace :transaction do  namespace :goods do resources :taxes end end
 
-  namespace :transaction do  namespace :tot do resources :types end end
+  namespace :transaction do  namespace :goods do resources :items end end
+
+  namespace :goods do  namespace :additional do resources :values end end
+
+  namespace :goods do  namespace :additional do resources :types end end
 
   namespace :transaction do resources :xmls end
 

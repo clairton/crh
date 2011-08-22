@@ -1,0 +1,29 @@
+<h1>Listing transaction_goods_taxes</h1>
+
+<table>
+  <tr>
+    <th>Taxe value</th>
+    <th>Transaction goods item</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transaction_goods_taxes.each do |transaction_goods_taxis| %>
+  <tr>
+    <td><%= transaction_goods_taxis.taxe_value %></td>
+    <td><%= transaction_goods_taxis.transaction_goods_item %></td>
+    <td><%= transaction_goods_taxis.active %></td>
+    <td><%= transaction_goods_taxis.remark %></td>
+    <td><%= link_to 'Show', transaction_goods_taxis %></td>
+    <td><%= link_to 'Edit', edit_transaction_goods_taxis_path(transaction_goods_taxis) %></td>
+    <td><%= link_to 'Destroy', transaction_goods_taxis, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Taxe', new_transaction_goods_taxis_path %>

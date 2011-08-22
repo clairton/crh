@@ -1,0 +1,33 @@
+<%= form_for(@transaction_goods_taxis) do |f| %>
+  <% if @transaction_goods_taxis.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction_goods_taxis.errors.count, "error") %> prohibited this transaction_goods_taxis from being saved:</h2>
+
+      <ul>
+      <% @transaction_goods_taxis.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :taxe_value %><br />
+    <%= f.text_field :taxe_value %>
+  </div>
+  <div class="field">
+    <%= f.label :transaction_goods_item %><br />
+    <%= f.text_field :transaction_goods_item %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :remark %><br />
+    <%= f.text_area :remark %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

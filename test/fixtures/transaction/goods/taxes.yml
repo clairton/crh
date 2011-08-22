@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  taxe_value: 
+  transaction_goods_item: 
+  active: false
+  remark: MyText
+
+two:
+  taxe_value: 
+  transaction_goods_item: 
+  active: false
+  remark: MyText

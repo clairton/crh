@@ -215,7 +215,7 @@ class Transaction::Xml < ActiveRecord::Base
         )
         goods.save  
         #insere o item no registro
-        item = Transaction::Item.create(
+        item = Transaction::Goods::Item.create(
           #id do item
           :goods_item_id => goods.id,
           #id da transação
@@ -237,37 +237,37 @@ class Transaction::Xml < ActiveRecord::Base
           #se ela exisitir chamar somente ela
           #se nao existir chamar icms e ipi
         #
-        Transaction::ItemTaxe.create(
+        Transaction::Goods::Taxe.create(
           :taxe_value_id => 
             parse_item_icms(
               det.elements['prod'].elements['imposto'].elements['ICMS'],
               @group_imcs.id
             ),
-          :transaction_item_id => item.id
+          :transaction_goods_item_id => item.id
         )
-        Transaction::ItemTaxe.create(
+        Transaction::Goods::Taxe.create(
           :taxe_value_id => 
             parse_item_ipi(
               det.elements['prod'].elements['imposto'].elements['IPI'],
               @group_ipi.id
             ),
-          :transaction_item_id => item.id
+          :transaction_goods_item_id => item.id
         )
-        Transaction::ItemTaxe.create(
+        Transaction::Goods::Taxe.create(
           :taxe_value_id => 
             parse_item_cofins(
               det.elements['prod'].elements['imposto'].elements['COFINS'],
               @group_cofins.id
             ),
-          :transaction_item_id => item.id
+          :transaction_goods_item_id => item.id
         )
-        Transaction::ItemTaxe.create(
+        Transaction::Goods::Taxe.create(
           :taxe_value_id => 
             parse_item_iss(
               det.elements['prod'].elements['imposto'].elements['PIS'],
               @group_iss.id
             ),
-          :transaction_item_id => item.id
+          :transaction_goods_item_id => item.id
         )
       end#fim dos itens  
   end#fim parse_item

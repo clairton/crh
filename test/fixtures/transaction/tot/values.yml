@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  transaction_record: 
-  transaction_tot_type: 
-
-two:
-  transaction_record: 
-  transaction_tot_type: 

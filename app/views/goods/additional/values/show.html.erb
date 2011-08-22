@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Value:</b>
+  <%= @goods_additional_value.value %>
+</p>
+
+<p>
+  <b>References:</b>
+  <%= @goods_additional_value.references %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @goods_additional_value.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @goods_additional_value.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_goods_additional_value_path(@goods_additional_value) %> |
+<%= link_to 'Back', goods_additional_values_path %>

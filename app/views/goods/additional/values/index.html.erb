@@ -1,0 +1,29 @@
+<h1>Listing goods_additional_values</h1>
+
+<table>
+  <tr>
+    <th>Value</th>
+    <th>References</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @goods_additional_values.each do |goods_additional_value| %>
+  <tr>
+    <td><%= goods_additional_value.value %></td>
+    <td><%= goods_additional_value.references %></td>
+    <td><%= goods_additional_value.active %></td>
+    <td><%= goods_additional_value.remark %></td>
+    <td><%= link_to 'Show', goods_additional_value %></td>
+    <td><%= link_to 'Edit', edit_goods_additional_value_path(goods_additional_value) %></td>
+    <td><%= link_to 'Destroy', goods_additional_value, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Value', new_goods_additional_value_path %>
