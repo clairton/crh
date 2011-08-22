@@ -66,9 +66,25 @@ class Transaction::Xml < ActiveRecord::Base
       record.save
       @transaction_record_id = record.id
       
-      emit = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit']
-      dest = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest']
-      total = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total']
+      parse_issuer(
+        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
+        record.id
+      )
+      parse_sender(
+        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
+          record.id
+      )
+      #cria ou recupera os grupos de impostos
+      @group_imcs = Taxe::Group.create(:name => "Icms")
+      @group_iss = Taxe::Group.create(:name => "Iss")
+      @group_ipi = Taxe::Group.create(:name => "Ipi")
+      @group_cofins = Taxe::Group.create(:name => "Cofins")
+      @group_pis = Taxe::Group.create(:name => "Pis")
+      
+      parse_total(
+        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'],
+        record.id
+      )
       
       #itens da nota
       parse_item(xml,record.id)
@@ -79,6 +95,34 @@ class Transaction::Xml < ActiveRecord::Base
 	end
 	
 	private
+	def parse_total(xml,record_id)
+    taxe_id = parse_taxe('Total','Total',@group_imcs.id,0.00,basis,value)
+    Transaction::RecordTaxe.create(
+      :taxe_value_id => taxe_id, 
+      :transaction_record_id => record_id
+    )
+    taxe_id = parse_taxe('Total','Total',@group_iss.id,0.00,basis,value)
+    Transaction::RecordTaxe.create(
+      :taxe_value_id => taxe_id, 
+      :transaction_record_id => record_id
+    )
+    taxe_id = parse_taxe('Total','Total',@group_ipi.id,0.00,basis,value)
+    Transaction::RecordTaxe.create(
+      :taxe_value_id => taxe_id, 
+      :transaction_record_id => record_id
+    )
+    taxe_id = parse_taxe('Total','Total',@group_cofins.id,0.00,basis,value)
+    Transaction::RecordTaxe.create(
+      :taxe_value_id => taxe_id, 
+      :transaction_record_id => record_id
+    )
+    taxe_id = parse_taxe('Total','Total',@group_pis.id,0.00,basis,value)
+    Transaction::RecordTaxe.create(
+      :taxe_value_id => taxe_id, 
+      :transaction_record_id => record_id
+    )  
+	end
+	
 	def parse_issuer(xml,record_id)
 	  person_id = parse_person(xml,'enderEmit')
 	  issuer = Transaction::Issuer.create(
@@ -159,14 +203,7 @@ class Transaction::Xml < ActiveRecord::Base
     street.id
 	end	
 	
-  def parse_item(xml,record_id)
-      #cria ou recupera os grupos de impostos
-      group_imcs = Taxe::Group.create(:name => "Icms")
-      group_iss = Taxe::Group.create(:name => "Iss")
-      group_ipi = Taxe::Group.create(:name => "Ipi")
-      group_cofins = Taxe::Group.create(:name => "Cofins")
-      group_pis = Taxe::Group.create(:name => "Pis")
-      
+  def parse_item(xml,record_id)      
       #percorre os elementos det que os produtos e serviços
       xml.elements.each('nfeProc/NFe/infNFe/det') do |det|
         #cria o produtos/serviço
@@ -204,7 +241,7 @@ class Transaction::Xml < ActiveRecord::Base
           :taxe_value_id => 
             parse_item_icms(
               det.elements['prod'].elements['imposto'].elements['ICMS'],
-              group_imcs.id
+              @group_imcs.id
             ),
           :transaction_item_id => item.id
         )
@@ -212,7 +249,7 @@ class Transaction::Xml < ActiveRecord::Base
           :taxe_value_id => 
             parse_item_ipi(
               det.elements['prod'].elements['imposto'].elements['IPI'],
-              group_imcs.id
+              @group_ipi.id
             ),
           :transaction_item_id => item.id
         )
@@ -220,7 +257,7 @@ class Transaction::Xml < ActiveRecord::Base
           :taxe_value_id => 
             parse_item_cofins(
               det.elements['prod'].elements['imposto'].elements['COFINS'],
-              group_imcs.id
+              @group_cofins.id
             ),
           :transaction_item_id => item.id
         )
@@ -228,36 +265,37 @@ class Transaction::Xml < ActiveRecord::Base
           :taxe_value_id => 
             parse_item_iss(
               det.elements['prod'].elements['imposto'].elements['PIS'],
-              group_imcs.id
+              @group_iss.id
             ),
           :transaction_item_id => item.id
         )
       end#fim dos itens  
   end#fim parse_item
   
+  def parse_taxe(code,name,taxe_group_id,percentage,basis,value)
+    type_id = parse_taxe_type(code,name,taxe_group_id)
+    parse_taxe_value(type_id,percentage,basis,value)    
+  end
+  
   def parse_item_icms(xml,taxe_group_id)
-    type_id = parse_item_taxe_type(code,name,taxe_group_id)
-    parse_item_taxe_value(type_id,percentage,basis,value)
+    parse_taxe(code,name,taxe_group_id,percentage,basis,value)
   end
   
   def parse_item_ipi(xml,taxe_group_id)
-    type_id = parse_item_taxe_type(code,name,taxe_group_id)
-    parse_item_taxe_value(type_id,percentage,basis,value)
+    parse_taxe(code,name,taxe_group_id,percentage,basis,value)
   end
   
   
   def parse_item_pis(xml,taxe_group_id)
-    type_id = parse_item_taxe_type(code,name,taxe_group_id)
-    parse_item_taxe_value(type_id,percentage,basis,value)
+    parse_taxe(code,name,taxe_group_id,percentage,basis,value)
   end
   
   
   def parse_item_cofins(xml,taxe_group_id)
-    type_id = parse_item_taxe_type(code,name,taxe_group_id)
-    parse_item_taxe_value(type_id,percentage,basis,value)
+    parse_taxe(code,name,taxe_group_id,percentage,basis,value)
   end
   
-  def parse_item_taxe_type(code,name,taxe_group_id)
+  def parse_taxe_type(code,name,taxe_group_id)
     type = Taxe::Type.create(
       :name => name,
       :code => code, 
@@ -267,7 +305,7 @@ class Transaction::Xml < ActiveRecord::Base
     type.id  
   end
   
-  def parse_item_taxe_value(taxe_type_id,percentage,basis,value)
+  def parse_taxe_value(taxe_type_id,percentage,basis,value)
     taxe = Taxe::Value(
       :taxe_type_id => taxe_type_id,
       :percentage => percentage,
