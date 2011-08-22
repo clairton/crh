@@ -10,11 +10,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816161654) do
+ActiveRecord::Schema.define(:version => 20110822022048) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
-    t.string   "adress_number",    :limit => 15
+    t.string   "code",             :limit => 15
     t.string   "name",             :limit => 200
     t.string   "remark"
     t.boolean  "active",                          :default => true, :null => false
@@ -186,6 +186,22 @@ ActiveRecord::Schema.define(:version => 20110816161654) do
     t.text     "remark"
     t.boolean  "active",        :default => true, :null => false
     t.string   "name",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_tot_types", :force => true do |t|
+    t.string   "name"
+    t.boolean  "active"
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_tot_values", :force => true do |t|
+    t.integer  "transaction_record_id"
+    t.integer  "transaction_tot_type_id"
+    t.decimal  "value",                   :precision => 10, :scale => 0, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

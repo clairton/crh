@@ -1,0 +1,29 @@
+<%= form_for(@transaction_tot_type) do |f| %>
+  <% if @transaction_tot_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction_tot_type.errors.count, "error") %> prohibited this transaction_tot_type from being saved:</h2>
+
+      <ul>
+      <% @transaction_tot_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :remark %><br />
+    <%= f.text_area :remark %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

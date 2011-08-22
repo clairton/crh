@@ -6,4 +6,5 @@ class Transaction::Record < ActiveRecord::Base
   has_many :RecordTaxe, :class_name => "Transaction::RecordTaxe"
   has_many :Item, :class_name => "Transaction::Item"
   has_one :Xml, :class_name => "Transaction::Xml"  
+  has_many :Value, :class_name => "Transaction::Tot::Value"
 end
