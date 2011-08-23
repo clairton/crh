@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110822022048) do
+ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -53,6 +53,23 @@ ActiveRecord::Schema.define(:version => 20110822022048) do
     t.datetime "updated_at"
   end
 
+  create_table "goods_additional_types", :force => true do |t|
+    t.string   "name",       :limit => 200,                   :null => false
+    t.boolean  "active",                    :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "goods_additional_values", :force => true do |t|
+    t.decimal  "value",                     :precision => 10, :scale => 0,                   :null => false
+    t.integer  "goods_addiotional_type_id",                                                  :null => false
+    t.boolean  "active",                                                   :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "goods_items", :force => true do |t|
     t.string   "code",       :limit => 20,                    :null => false
     t.string   "name",       :limit => 200,                   :null => false
@@ -86,6 +103,14 @@ ActiveRecord::Schema.define(:version => 20110822022048) do
     t.string   "name",       :limit => 200,                   :null => false
     t.text     "remark"
     t.boolean  "active",                    :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participant_participants", :force => true do |t|
+    t.string   "type",                         :null => false
+    t.boolean  "active",     :default => true, :null => false
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -138,70 +163,71 @@ ActiveRecord::Schema.define(:version => 20110822022048) do
     t.datetime "updated_at"
   end
 
-  create_table "transaction_item_taxes", :force => true do |t|
-    t.integer  "transaction_item_id",                   :null => false
-    t.integer  "taxe_value_id",                         :null => false
-    t.boolean  "active",              :default => true, :null => false
-    t.text     "remark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_items", :force => true do |t|
-    t.integer  "goods_item_id",                                                                         :null => false
-    t.integer  "transaction_record_id",                                                                 :null => false
-    t.string   "name",                  :limit => 200,                                                  :null => false
-    t.string   "measure",               :limit => 6,                                                    :null => false
-    t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
-    t.decimal  "unit_price",                           :precision => 10, :scale => 4,                   :null => false
-    t.decimal  "full_price",                           :precision => 10, :scale => 2,                   :null => false
-    t.text     "remark"
-    t.boolean  "active",                                                              :default => true, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_participants", :force => true do |t|
-    t.integer  "transaction_record_id",                   :null => false
-    t.string   "type",                                    :null => false
-    t.integer  "participant_person_id",                   :null => false
-    t.boolean  "active",                :default => true, :null => false
-    t.text     "remark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_record_taxes", :force => true do |t|
-    t.integer  "transaction_record_id",                   :null => false
-    t.integer  "taxe_value_id",                           :null => false
-    t.boolean  "active",                :default => true, :null => false
-    t.text     "remark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_records", :force => true do |t|
-    t.date     "creation_date",                   :null => false
-    t.integer  "code",                            :null => false
-    t.text     "remark"
-    t.boolean  "active",        :default => true, :null => false
-    t.string   "name",                            :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "transaction_tot_types", :force => true do |t|
-    t.string   "name"
+  create_table "transaction_goods_additionals", :force => true do |t|
+    t.integer  "transaction_goods_item_id"
+    t.integer  "goods_additional_id"
     t.boolean  "active"
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transaction_tot_values", :force => true do |t|
+  create_table "transaction_goods_items", :force => true do |t|
+    t.integer  "goods_item_id"
     t.integer  "transaction_record_id"
-    t.integer  "transaction_tot_type_id"
-    t.decimal  "value",                   :precision => 10, :scale => 0, :null => false
+    t.string   "name",                  :limit => 200,                                                  :null => false
+    t.string   "measure",               :limit => 6,                                                    :null => false
+    t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
+    t.decimal  "unit_price",                           :precision => 10, :scale => 4,                   :null => false
+    t.decimal  "full_price",                           :precision => 10, :scale => 2,                   :null => false
+    t.boolean  "active",                                                              :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_goods_taxes", :force => true do |t|
+    t.integer  "taxe_value_id",                               :null => false
+    t.integer  "transaction_goods_item_id",                   :null => false
+    t.boolean  "active",                    :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_participants", :force => true do |t|
+    t.integer  "participant_participant_id",                   :null => false
+    t.integer  "transaction_record_id",                        :null => false
+    t.boolean  "active",                     :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_record_records", :force => true do |t|
+    t.date     "creation_date",                   :null => false
+    t.integer  "code",                            :null => false
+    t.string   "name",                            :null => false
+    t.text     "remark"
+    t.boolean  "active",        :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_record_taxes", :force => true do |t|
+    t.integer  "transaction_record_record_id",                   :null => false
+    t.integer  "taxe_value_id",                                  :null => false
+    t.boolean  "active",                       :default => true, :null => false
+    t.text     "remark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_record_tots", :force => true do |t|
+    t.integer  "transaction_record_record_id",                   :null => false
+    t.integer  "goods_additional_value_id",                      :null => false
+    t.text     "remark"
+    t.boolean  "active",                       :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

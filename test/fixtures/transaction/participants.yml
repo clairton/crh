@@ -1,11 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  transaction_record_id: 1
-  type: MyString
-  participant_person_id: 1
+  participant_participant: 
+  transaction_record: 
+  active: false
+  remark: MyText
 
 two:
-  transaction_record_id: 1
-  type: MyString
-  participant_person_id: 1
+  participant_participant: 
+  transaction_record: 
+  active: false
+  remark: MyText

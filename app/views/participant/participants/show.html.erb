@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @participant_participant.type %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @participant_participant.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @participant_participant.remark %>
+</p>
+
+
+<%= link_to 'Edit', edit_participant_participant_path(@participant_participant) %> |
+<%= link_to 'Back', participant_participants_path %>

@@ -2,9 +2,10 @@
 
 <table>
   <tr>
+    <th>Participant participant</th>
     <th>Transaction record</th>
-    <th>Type</th>
-    <th>Participant person</th>
+    <th>Active</th>
+    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +13,10 @@
 
 <% @transaction_participants.each do |transaction_participant| %>
   <tr>
-    <td><%= transaction_participant.transaction_record_id %></td>
-    <td><%= transaction_participant.type %></td>
-    <td><%= transaction_participant.participant_person_id %></td>
+    <td><%= transaction_participant.participant_participant %></td>
+    <td><%= transaction_participant.transaction_record %></td>
+    <td><%= transaction_participant.active %></td>
+    <td><%= transaction_participant.remark %></td>
     <td><%= link_to 'Show', transaction_participant %></td>
     <td><%= link_to 'Edit', edit_transaction_participant_path(transaction_participant) %></td>
     <td><%= link_to 'Destroy', transaction_participant, :confirm => 'Are you sure?', :method => :delete %></td>

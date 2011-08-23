@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  transaction_record_record_id: 1
+  goods_additional_value_id: 1
+  remark: MyText
+  active: false
+
+two:
+  transaction_record_record_id: 1
+  goods_additional_value_id: 1
+  remark: MyText
+  active: false

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Creation date:</b>
+  <%= @transaction_record_record.creation_date %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @transaction_record_record.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @transaction_record_record.name %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_record_record.remark %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_record_record.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_record_record_path(@transaction_record_record) %> |
+<%= link_to 'Back', transaction_record_records_path %>

@@ -1,4 +1,16 @@
 Crh::Application.routes.draw do
+  namespace :transaction do  namespace :goods do resources :additionals end end
+
+  namespace :transaction do  namespace :record do resources :tots end end
+
+  namespace :transaction do  namespace :record do resources :taxes end end
+
+  namespace :transaction do  namespace :record do resources :records end end
+
+  namespace :transaction do resources :participants end
+
+  namespace :participant do resources :participants end
+
   namespace :transaction do  namespace :goods do resources :taxes end end
 
   namespace :transaction do  namespace :goods do resources :items end end
@@ -9,19 +21,11 @@ Crh::Application.routes.draw do
 
   namespace :transaction do resources :xmls end
 
-  namespace :transaction do resources :item_taxes end
-
   namespace :transaction do resources :record_taxes end
-
-  namespace :transaction do resources :items end
 
   namespace :goods do resources :items end
 
   namespace :transaction do resources :financiers end
-
-  namespace :transaction do resources :participants end
-
-  namespace :transaction do resources :records end
 
   namespace :participant do  namespace :contact do resources :types end end
 

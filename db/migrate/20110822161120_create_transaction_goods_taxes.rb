@@ -1,8 +1,8 @@
 class CreateTransactionGoodsTaxes < ActiveRecord::Migration
   def self.up
     create_table :transaction_goods_taxes do |t|
-      t.references :taxe_value
-      t.references :transaction_goods_item
+      t.integer :taxe_value_id, :null => false
+      t.integer :transaction_goods_item_id, :null => false
       t.boolean :active, :null => false, :default => true
       t.text :remark
 

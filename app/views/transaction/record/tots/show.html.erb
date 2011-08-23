@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Transaction record record:</b>
+  <%= @transaction_record_tot.transaction_record_record_id %>
+</p>
+
+<p>
+  <b>Goods additional value:</b>
+  <%= @transaction_record_tot.goods_additional_value_id %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_record_tot.remark %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_record_tot.active %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_record_tot_path(@transaction_record_tot) %> |
+<%= link_to 'Back', transaction_record_tots_path %>

@@ -2,7 +2,7 @@ class CreateGoodsAdditionalValues < ActiveRecord::Migration
   def self.up
     create_table :goods_additional_values do |t|
       t.decimal :value, :null => false
-      t.goods_addiotional_type :references, :null => false
+      t.integer :goods_addiotional_type_id, :null => false
       t.boolean :active, :null => false, :default => true
       t.text :remark
 

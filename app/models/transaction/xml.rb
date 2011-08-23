@@ -15,7 +15,7 @@ require 'participant/contact/address'
 require 'participant/contact/email'
 require 'participant/contact/type'
 class Transaction::Xml < ActiveRecord::Base
-	belongs_to :Record, :class_name => "Transaction::Record"
+	belongs_to :Record, :class_name => "Transaction::Record::Record"
 	validates_presence_of :content, :message => "Deve Informar Um arquivo Xml"
 	has_attached_file :xml
 	
