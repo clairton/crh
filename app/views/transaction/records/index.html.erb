@@ -1,0 +1,21 @@
+<h1>Listing transaction_records</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transaction_records.each do |transaction_record| %>
+  <tr>
+    <td><%= link_to 'Show', transaction_record %></td>
+    <td><%= link_to 'Edit', edit_transaction_record_path(transaction_record) %></td>
+    <td><%= link_to 'Destroy', transaction_record, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Record', new_transaction_record_path %>

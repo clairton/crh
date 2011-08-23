@@ -1,0 +1,21 @@
+<h1>Listing transaction_tots</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transaction_tots.each do |transaction_tot| %>
+  <tr>
+    <td><%= link_to 'Show', transaction_tot %></td>
+    <td><%= link_to 'Edit', edit_transaction_tot_path(transaction_tot) %></td>
+    <td><%= link_to 'Destroy', transaction_tot, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tot', new_transaction_tot_path %>

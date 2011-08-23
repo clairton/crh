@@ -2,8 +2,8 @@
 
 one:
   financier_note_id: 1
-  transaction_record_record_id: 1
+  transaction_record_id: 1
 
 two:
   financier_note_id: 1
-  transaction_record_record_id: 1
+  transaction_record_id: 1

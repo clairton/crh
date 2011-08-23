@@ -1,0 +1,17 @@
+<%= form_for(@transaction_tot) do |f| %>
+  <% if @transaction_tot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction_tot.errors.count, "error") %> prohibited this transaction_tot from being saved:</h2>
+
+      <ul>
+      <% @transaction_tot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

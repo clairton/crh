@@ -1,0 +1,33 @@
+<%= form_for(@participant_type) do |f| %>
+  <% if @participant_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@participant_type.errors.count, "error") %> prohibited this participant_type from being saved:</h2>
+
+      <ul>
+      <% @participant_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :participant_person_id %><br />
+    <%= f.text_field :participant_person_id %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :remark %><br />
+    <%= f.text_area :remark %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

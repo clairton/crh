@@ -1,0 +1,29 @@
+<h1>Listing participant_types</h1>
+
+<table>
+  <tr>
+    <th>Participant person</th>
+    <th>Type</th>
+    <th>Active</th>
+    <th>Remark</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @participant_types.each do |participant_type| %>
+  <tr>
+    <td><%= participant_type.participant_person_id %></td>
+    <td><%= participant_type.type %></td>
+    <td><%= participant_type.active %></td>
+    <td><%= participant_type.remark %></td>
+    <td><%= link_to 'Show', participant_type %></td>
+    <td><%= link_to 'Edit', edit_participant_type_path(participant_type) %></td>
+    <td><%= link_to 'Destroy', participant_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Type', new_participant_type_path %>

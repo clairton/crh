@@ -1,0 +1,2 @@
+module Transaction::TotsHelper
+end

@@ -108,8 +108,9 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "participant_participants", :force => true do |t|
-    t.string   "type",                         :null => false
-    t.boolean  "active",     :default => true, :null => false
+    t.string   "type",                                    :null => false
+    t.boolean  "active",                :default => true, :null => false
+    t.integer  "participant_person_id",                   :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -155,18 +156,18 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "transaction_financiers", :force => true do |t|
-    t.integer  "financier_note_id",                       :null => false
+    t.integer  "financier_note_id",                              :null => false
     t.integer  "transaction_record_record_id",                   :null => false
-    t.boolean  "active",                :default => true, :null => false
+    t.boolean  "active",                       :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "transaction_goods_additionals", :force => true do |t|
-    t.integer  "transaction_goods_item_id"
-    t.integer  "goods_additional_id"
-    t.boolean  "active"
+    t.integer  "transaction_goods_item_id",                   :null => false
+    t.integer  "goods_additional_id",                         :null => false
+    t.boolean  "active",                    :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -174,7 +175,7 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "transaction_goods_items", :force => true do |t|
     t.integer  "goods_item_id"
-    t.integer  "transaction_record_record_id"
+    t.integer  "transaction_record_id"
     t.string   "name",                  :limit => 200,                                                  :null => false
     t.string   "measure",               :limit => 6,                                                    :null => false
     t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
@@ -196,9 +197,9 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "transaction_participants", :force => true do |t|
-    t.integer  "participant_participant_id",                   :null => false
-    t.integer  "transaction_record_record_id",                        :null => false
-    t.boolean  "active",                     :default => true, :null => false
+    t.integer  "participant_participant_id",                     :null => false
+    t.integer  "transaction_record_record_id",                   :null => false
+    t.boolean  "active",                       :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -234,13 +235,13 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "transaction_xmls", :force => true do |t|
     t.integer  "transaction_record_record_id",                                  :null => false
-    t.text     "content",                                                :null => false
-    t.string   "name",                  :limit => 200,                   :null => false
-    t.string   "xml_file_name",                                          :null => false
-    t.string   "xml_content_type",                                       :null => false
-    t.integer  "xml_file_size",                                          :null => false
-    t.datetime "xml_updated_at",                                         :null => false
-    t.boolean  "active",                               :default => true, :null => false
+    t.text     "content",                                                       :null => false
+    t.string   "name",                         :limit => 200,                   :null => false
+    t.string   "xml_file_name",                                                 :null => false
+    t.string   "xml_content_type",                                              :null => false
+    t.integer  "xml_file_size",                                                 :null => false
+    t.datetime "xml_updated_at",                                                :null => false
+    t.boolean  "active",                                      :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
