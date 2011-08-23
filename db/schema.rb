@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "transaction_financiers", :force => true do |t|
     t.integer  "financier_note_id",                       :null => false
-    t.integer  "transaction_record_id",                   :null => false
+    t.integer  "transaction_record_record_id",                   :null => false
     t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
@@ -174,7 +174,7 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "transaction_goods_items", :force => true do |t|
     t.integer  "goods_item_id"
-    t.integer  "transaction_record_id"
+    t.integer  "transaction_record_record_id"
     t.string   "name",                  :limit => 200,                                                  :null => false
     t.string   "measure",               :limit => 6,                                                    :null => false
     t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
 
   create_table "transaction_participants", :force => true do |t|
     t.integer  "participant_participant_id",                   :null => false
-    t.integer  "transaction_record_id",                        :null => false
+    t.integer  "transaction_record_record_id",                        :null => false
     t.boolean  "active",                     :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "transaction_xmls", :force => true do |t|
-    t.integer  "transaction_record_id",                                  :null => false
+    t.integer  "transaction_record_record_id",                                  :null => false
     t.text     "content",                                                :null => false
     t.string   "name",                  :limit => 200,                   :null => false
     t.string   "xml_file_name",                                          :null => false

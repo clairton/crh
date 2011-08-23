@@ -10,13 +10,17 @@ require 'address/city'
 require 'address/neighborhood'
 require 'address/street'
 require 'participant/person'
+require 'participant/participant'
+require 'participant/issuer'
+require 'participant/sender'
+require 'participant/delivery'
 require 'participant/contact'
 require 'participant/contact/address'
 require 'participant/contact/email'
 require 'participant/contact/type'
 class Transaction::Xml < ActiveRecord::Base
-	belongs_to :Record, :class_name => "Transaction::Record::Record"
-	validates_presence_of :content, :message => "Deve Informar Um arquivo Xml"
+	belongs_to :Record, :class_name => 'Transaction::Record::Record'
+	validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
 	has_attached_file :xml
 	
 	public
@@ -55,7 +59,7 @@ class Transaction::Xml < ActiveRecord::Base
                                 MJ3I</X509Certificate></X509Data></KeyInfo></Signature></NFe><protNFe versao="2.00"><infProt Id="ID342110000783631"><tpAmb>2</tpAmb><verAplic>SVRS20110505174728</verAplic><chNFe>42110609363232000189550020000020121000012180</chNFe><dhRecbto>2011-06-29T08:26:17</dhRecbto><nProt>342110000783631</nProt><digVal>h4iJX3gfbx15fA4RzDTEoZ/0VDY=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso da NF-e</xMotivo></infProt></protNFe></nfeProc>'
       ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
       #corpo da nota
-      record = Transaction::Record.create(
+      record = Transaction::Record::Record.create(
         #data de emissão
         :creation_date => ide.elements['dEmi'].text,
         #número da nota fiscal
@@ -64,7 +68,9 @@ class Transaction::Xml < ActiveRecord::Base
         :name => ide.elements['natOp'].text
       )
       record.save
-      @transaction_record_id = record.id
+      @transaction_record_record_id = record.id
+      @address_type = Participant::Contact::Type.create(:name => 'NFe')
+      @address_type.save
       
       parse_issuer(
         xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
@@ -75,11 +81,11 @@ class Transaction::Xml < ActiveRecord::Base
           record.id
       )
       #cria ou recupera os grupos de impostos
-      @group_imcs = Taxe::Group.create(:name => "Icms")
-      @group_iss = Taxe::Group.create(:name => "Iss")
-      @group_ipi = Taxe::Group.create(:name => "Ipi")
-      @group_cofins = Taxe::Group.create(:name => "Cofins")
-      @group_pis = Taxe::Group.create(:name => "Pis")
+      @group_imcs = Taxe::Group.create(:name => 'Icms')
+      @group_iss = Taxe::Group.create(:name => 'Iss')
+      @group_ipi = Taxe::Group.create(:name => 'Ipi')
+      @group_cofins = Taxe::Group.create(:name => 'Cofins')
+      @group_pis = Taxe::Group.create(:name => 'Pis')
       
       parse_total(
         xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'],
@@ -99,55 +105,64 @@ class Transaction::Xml < ActiveRecord::Base
     taxe_id = parse_taxe('Total','Total',@group_imcs.id,0.00,basis,value)
     Transaction::RecordTaxe.create(
       :taxe_value_id => taxe_id, 
-      :transaction_record_id => record_id
+      :transaction_record_record_id => record_id
     )
     taxe_id = parse_taxe('Total','Total',@group_iss.id,0.00,basis,value)
     Transaction::RecordTaxe.create(
       :taxe_value_id => taxe_id, 
-      :transaction_record_id => record_id
+      :transaction_record_record_id => record_id
     )
     taxe_id = parse_taxe('Total','Total',@group_ipi.id,0.00,basis,value)
     Transaction::RecordTaxe.create(
       :taxe_value_id => taxe_id, 
-      :transaction_record_id => record_id
+      :transaction_record_record_id => record_id
     )
     taxe_id = parse_taxe('Total','Total',@group_cofins.id,0.00,basis,value)
     Transaction::RecordTaxe.create(
       :taxe_value_id => taxe_id, 
-      :transaction_record_id => record_id
+      :transaction_record_record_id => record_id
     )
     taxe_id = parse_taxe('Total','Total',@group_pis.id,0.00,basis,value)
     Transaction::RecordTaxe.create(
       :taxe_value_id => taxe_id, 
-      :transaction_record_id => record_id
+      :transaction_record_record_id => record_id
     )  
 	end
 	
 	def parse_issuer(xml,record_id)
 	  person_id = parse_person(xml,'enderEmit')
-	  issuer = Transaction::Issuer.create(
-      :transaction_record_id => record_id,
+	  issuer = Participant::Issuer.create(
       :participant_person_id => person_id
     )
-	  issuer.save	
+    issuer.save
+    Transaction::Participant.create(
+      :transaction_record_record_id => record_id,
+      :participant_participant_id => issuer.id
+    )
 	end
 	
 	def parse_delivery(xml,record_id)
 	  person_id = parse_person(xml)
-	  delivery = Transaction::Delivery.create(
-      :transaction_record_id => record_id,
+	  delivery = Participant::Delivery.create(
       :participant_person_id => person_id
     )
 	  delivery.save	
+    Transaction::Participant.create(
+      :transaction_record_record_id => record_id,
+      :participant_participant_id => delivery.id
+    )
 	end
 	
 	def parse_sender(xml,record_id)
 	  person_id = parse_person(xml,'enderDest')
-	  sender = Transaction::Sender.create(
-      :transaction_record_id => record_id,
+	  sender = Participant::Sender.create(
       :participant_person_id => person_id
     )
-	  sender.save
+	  sender.save  
+    Transaction::Participant.create(
+      :transaction_record_record_id => record_id,
+      :participant_participant_id => sender.id
+    )
 	end
 	
 	def parse_person(xml,tag_address = nil)
@@ -160,8 +175,8 @@ class Transaction::Xml < ActiveRecord::Base
       address_id = parse_address(xml.elements[tag_address])
       address = Participant::Contact::Address.create(
         :participant_person_id => person.id,
-        :address_place_id => address_id#,
-        #:participant_contact_type_id =>  
+        :address_place_id => address_id,
+        :participant_contact_type_id => @address_type.id
       )
       address.save  
     end
@@ -219,7 +234,7 @@ class Transaction::Xml < ActiveRecord::Base
           #id do item
           :goods_item_id => goods.id,
           #id da transação
-          :transaction_record_id => record_id,
+          :transaction_record_record_id => record_id,
           #nome do item
           :name => det.elements['prod'].elements['xProd'].text,
           #unidade de medida
@@ -333,7 +348,7 @@ class Transaction::Xml < ActiveRecord::Base
       note.save
       financier = Transaction::Financier.create(
         #id do registro
-        :transaction_record_id => record_id,
+        :transaction_record_record_id => record_id,
         #id da parcela
         :financier_note_id => note.id
       )
