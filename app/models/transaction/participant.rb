@@ -1,6 +1,9 @@
 class Transaction::Participant < ActiveRecord::Base
-  has_one :Delivery, :class_name => "Participant::Delivery"
-  has_one :Sender, :class_name => "Participant::Sender"
-  has_one :Issuer, :class_name => "Participant::Issuer"
-  belongs_to :Record, :class_name => "Transaction::Record::Record"
+  belongs_to :Delivery, :class_name => "Participant::Delivery"
+  belongs_to :Sender, :class_name => "Participant::Sender"
+  belongs_to :Issuer, :class_name => "Participant::Issuer"
+  has_one :Record, :class_name => "Transaction::Record"
+  validates_presence_of :transaction_record_id,:participant_type_id
+  validates_associated :Record, :class_name => "Transaction::Record"
+  validates_associated :Type, :class_name => "Participant::Type"
 end

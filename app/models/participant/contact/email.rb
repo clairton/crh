@@ -1,5 +1,5 @@
 class Participant::Contact::Email < ActiveRecord::Base
-  has_one :User, :class_name => "Email::User"
+  belongs_to :User, :class_name => "Email::User"
   belongs_to :Type, :class_name => "Participant::Contact::Type"
   belongs_to :Person, :class_name => "Participant::Person"
   validates_presence_of :participant_person_id
