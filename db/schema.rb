@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823002613) do
+ActiveRecord::Schema.define(:version => 20110823161326) do
 
   create_table "address_places", :force => true do |t|
     t.string   "phone_number",     :limit => 15
@@ -107,15 +107,6 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
     t.datetime "updated_at"
   end
 
-  create_table "participant_participants", :force => true do |t|
-    t.string   "type",                                    :null => false
-    t.boolean  "active",                :default => true, :null => false
-    t.integer  "participant_person_id",                   :null => false
-    t.text     "remark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "participant_people", :force => true do |t|
     t.string   "first_name", :limit => 200,                   :null => false
     t.string   "last_name",  :limit => 200
@@ -124,6 +115,15 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
     t.string   "code",       :limit => 20,                    :null => false
     t.string   "remark"
     t.boolean  "active",                    :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participant_types", :force => true do |t|
+    t.integer  "participant_person_id",                   :null => false
+    t.string   "type",                                    :null => false
+    t.boolean  "active",                :default => true, :null => false
+    t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "transaction_financiers", :force => true do |t|
-    t.integer  "financier_note_id",                              :null => false
-    t.integer  "transaction_record_record_id",                   :null => false
-    t.boolean  "active",                       :default => true, :null => false
+    t.integer  "financier_note_id",                       :null => false
+    t.integer  "transaction_record_id",                   :null => false
+    t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -197,15 +197,15 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
   end
 
   create_table "transaction_participants", :force => true do |t|
-    t.integer  "participant_participant_id",                     :null => false
-    t.integer  "transaction_record_record_id",                   :null => false
-    t.boolean  "active",                       :default => true, :null => false
+    t.integer  "participant_type_id",                     :null => false
+    t.integer  "transaction_record_id",                   :null => false
+    t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transaction_record_records", :force => true do |t|
+  create_table "transaction_records", :force => true do |t|
     t.date     "creation_date",                   :null => false
     t.integer  "code",                            :null => false
     t.string   "name",                            :null => false
@@ -215,33 +215,33 @@ ActiveRecord::Schema.define(:version => 20110823002613) do
     t.datetime "updated_at"
   end
 
-  create_table "transaction_record_taxes", :force => true do |t|
-    t.integer  "transaction_record_record_id",                   :null => false
-    t.integer  "taxe_value_id",                                  :null => false
-    t.boolean  "active",                       :default => true, :null => false
+  create_table "transaction_taxes", :force => true do |t|
+    t.integer  "transaction_record_id",                   :null => false
+    t.integer  "taxe_value_id",                           :null => false
+    t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "transaction_record_tots", :force => true do |t|
-    t.integer  "transaction_record_record_id",                   :null => false
-    t.integer  "goods_additional_value_id",                      :null => false
+  create_table "transaction_tots", :force => true do |t|
+    t.integer  "transaction_record_id",                       :null => false
+    t.integer  "goods_additional_value_id",                   :null => false
     t.text     "remark"
-    t.boolean  "active",                       :default => true, :null => false
+    t.boolean  "active",                    :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "transaction_xmls", :force => true do |t|
-    t.integer  "transaction_record_record_id",                                  :null => false
-    t.text     "content",                                                       :null => false
-    t.string   "name",                         :limit => 200,                   :null => false
-    t.string   "xml_file_name",                                                 :null => false
-    t.string   "xml_content_type",                                              :null => false
-    t.integer  "xml_file_size",                                                 :null => false
-    t.datetime "xml_updated_at",                                                :null => false
-    t.boolean  "active",                                      :default => true, :null => false
+    t.integer  "transaction_record_id",                                  :null => false
+    t.text     "content",                                                :null => false
+    t.string   "name",                  :limit => 200,                   :null => false
+    t.string   "xml_file_name",                                          :null => false
+    t.string   "xml_content_type",                                       :null => false
+    t.integer  "xml_file_size",                                          :null => false
+    t.datetime "xml_updated_at",                                         :null => false
+    t.boolean  "active",                               :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
