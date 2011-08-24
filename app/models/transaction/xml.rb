@@ -69,9 +69,8 @@ class Transaction::Xml < ActiveRecord::Base
       )
       record.save
       @transaction_record_id = record.id
-      @address_type = Participant::Contact::Type.create(:name => 'NFe')
-      @address_type.save
-      
+      #cria ou recupera as instancias necessárias
+      parse_create_instances
       parse_issuer(
         xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
         record.id
@@ -80,12 +79,6 @@ class Transaction::Xml < ActiveRecord::Base
         xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
           record.id
       )
-      #cria ou recupera os grupos de impostos
-      @group_imcs = Taxe::Group.create(:name => 'Icms')
-      @group_iss = Taxe::Group.create(:name => 'Iss')
-      @group_ipi = Taxe::Group.create(:name => 'Ipi')
-      @group_cofins = Taxe::Group.create(:name => 'Cofins')
-      @group_pis = Taxe::Group.create(:name => 'Pis')
       
       parse_total(
         xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'],
@@ -101,6 +94,61 @@ class Transaction::Xml < ActiveRecord::Base
 	end
 	
 	private
+	def parse_create_instances
+    @address_type = Participant::Contact::Type.find_by_name('NFe')
+    if @address_type.nil?
+      @address_type = Participant::Contact::Type.create(:name => 'NFe')
+      if !@address_type.save
+        puts @address_type.errors
+        exit(1)
+      end
+    end
+    #cria ou recupera os grupos de impostos
+    @group_imcs = Taxe::Group.find_by_name('Icms')
+    if @group_imcs.nil?
+      @group_imcs = Taxe::Group.create(:name => 'Icms')
+      if !@group_imcs.save
+        puts @group_imcs.errors
+        exit(1)
+      end
+    end	  
+    @group_iss = Taxe::Group.find_by_name('Iss')
+    if @group_iss.nil?
+      @group_iss = Taxe::Group.create(:name => 'Iss')
+      if !@group_iss.save
+        puts @group_iss.errors
+        exit(1)
+      end
+    end 
+    
+    @group_ipi = Taxe::Group.find_by_name('Ipi')
+    if @group_ipi.nil?
+      @group_ipi = Taxe::Group.create(:name => 'Ipi')
+      if !@group_ipi.save
+        puts @group_ipi.errors
+        exit(1)
+      end
+    end 
+    
+    @group_cofins = Taxe::Group.find_by_name('Cofins')
+    if @group_cofins.nil?
+      @group_cofins = Taxe::Group.create(:name => 'Cofins')
+      if !@group_cofins.save
+        puts @group_cofins.errors
+        exit(1)
+      end
+    end 
+    
+    @group_pis = Taxe::Group.find_by_name('Pis')
+    if @group_pis.nil?
+      @group_pis = Taxe::Group.create(:name => 'Pis')  
+      if !@group_pis.save
+        puts @group_pis.errors
+        exit(1)
+      end
+    end     
+	end
+	
 	def parse_total(xml,record_id)
     taxe_id = parse_taxe('Total','Total',@group_imcs.id,0.00,basis,value)
     Transaction::Taxe.create(
@@ -184,37 +232,94 @@ class Transaction::Xml < ActiveRecord::Base
 	end
 	
 	def parse_address(xml)
-    country = Address::Country.create(
-      :code => xml.elements['cPais'],
-      :name => xml.elements['xPais']
+    country = Address::Country.find(
+      :first,
+      :conditions => { 
+        :code => xml.elements['cPais'].text.upcase,
+        :type => "Address::Country"
+      }
     )
-    country.save
-    state = Address::State.create(
-      :code => xml.elements['cPais'],
-      :name => xml.elements['UF'],
-      :acronym => xml.elements['UF'],
-      :address_place_id => country.id   
+	  if country.nil?
+      country = Address::Country.create(
+        :code => xml.elements['cPais'].text.upcase,
+        :name => xml.elements['xPais'].text.upcase
+      )
+      if !country.save
+        puts country.errors
+        exit(1)
+      end
+	  end
+    state = Address::State.find(
+      :first,
+      :conditions => {
+        :code => xml.elements['cMun'].text[0,2],
+        :address_place_id => country.id
+      }
+    ) 
+	  if state.nil?
+      state = Address::State.create(
+        #dois primeiros digitos do municipio é o codigo do estado
+        :code => xml.elements['cMun'].text[0,2],
+        :name => xml.elements['UF'].text.upcase,
+        :acronym => xml.elements['UF'].text.upcase,
+        :address_place_id => country.id   
+      )
+      if !state.save
+        puts state.errors
+        exit(1)
+      end
+	  end
+	  
+	  city = Address::City.find(
+	     :first,
+       :conditions => {
+         :code => xml.elements['cMun'].text.upcase,   
+         :address_place_id => state.id
+       }
+	  )
+	  
+	  if city.nil?
+      city = Address::City.create(
+        :code => xml.elements['cMun'].text.upcase,
+        :name => xml.elements['xMun'].text.upcase,   
+        :address_place_id => state.id 
+      )
+      if !city.save
+        puts city.errors
+        exit(1)
+      end
+	  end
+    
+    neighborhood = Address::Neighborhood.find(
+	     :first,
+	     :conditions =>{
+        :code => xml.elements['CEP'].text.upcase,
+        :name => xml.elements['xBairro'].text.upcase,   
+        :address_place_id => city.id 	     
+	     }
     )
-    state.save
-    city = Address::City.create(
-      :code => xml.elements['cMun'],
-      :name => xml.elements['xMun'],   
-      :address_place_id => state.id 
-    )
-    city.save
-    neighborhood = Address::City.create(
-      :code => xml.elements['CEP'],
-      :name => xml.elements['xBairro'],   
-      :address_place_id => city.id 
-    )
-    neighborhood.save
-    street = Address::City.create(
-      :code => xml.elements['nro'],
-      :name => xml.elements['xLgr'],  
-      :remark => xml.elements['xCpl'],  
+    
+    if neighborhood.nil?
+      neighborhood = Address::Neighborhood.create(
+        :code => xml.elements['CEP'].text.upcase,
+        :name => xml.elements['xBairro'].text.upcase,   
+        :address_place_id => city.id 
+      )
+      if !neighborhood.save
+        puts neighborhood.errors
+        exit(1)
+      end
+    end
+        
+    street = Address::Street.create(
+      :code => xml.elements['nro'].text.upcase,
+      :name => xml.elements['xLgr'].text.upcase, 
       :address_place_id => neighborhood.id 
-    )
-    street.save
+    )    
+    if !street.save
+      puts street.errors
+      exit(1)
+    end
     street.id
 	end	
 	
