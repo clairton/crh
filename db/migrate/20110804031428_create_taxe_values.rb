@@ -4,7 +4,7 @@ class CreateTaxeValues < ActiveRecord::Migration
       t.integer :taxe_type_id, :null => false
       t.decimal :percentage, :null => false, :default => 0.00, :precision => 10, :scale => 2
       t.decimal :basis, :null => false, :default => 0.00, :precision => 10, :scale => 2
-      t.decimal :value, :null => false, :default => 0.00, :precision => 10, :scale => 2
+      t.decimal :value, :null => false, :precision => 10, :scale => 2
 
       t.timestamps
     end
