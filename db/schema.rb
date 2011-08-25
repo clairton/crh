@@ -62,9 +62,9 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   end
 
   create_table "goods_additional_values", :force => true do |t|
-    t.decimal  "value",                     :precision => 10, :scale => 0,                   :null => false
-    t.integer  "goods_addiotional_type_id",                                                  :null => false
-    t.boolean  "active",                                                   :default => true, :null => false
+    t.decimal  "value",                    :precision => 10, :scale => 0,                   :null => false
+    t.integer  "goods_additional_type_id",                                                  :null => false
+    t.boolean  "active",                                                  :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
     t.integer  "taxe_type_id",                                                 :null => false
     t.decimal  "percentage",   :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.decimal  "basis",        :precision => 10, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "value",        :precision => 10, :scale => 2, :default => 0.0, :null => false
+    t.decimal  "value",        :precision => 10, :scale => 2,                  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
 
   create_table "transaction_goods_additionals", :force => true do |t|
     t.integer  "transaction_goods_item_id",                   :null => false
-    t.integer  "goods_additional_id",                         :null => false
+    t.integer  "goods_additional_value_id",                   :null => false
     t.boolean  "active",                    :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
@@ -206,11 +206,13 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   end
 
   create_table "transaction_records", :force => true do |t|
-    t.date     "creation_date",                   :null => false
-    t.integer  "code",                            :null => false
-    t.string   "name",                            :null => false
+    t.date     "creation_date",                                                  :null => false
+    t.integer  "code",                                                           :null => false
+    t.string   "name",                                                           :null => false
+    t.decimal  "tot",           :precision => 10, :scale => 4,                   :null => false
+    t.decimal  "goods",         :precision => 10, :scale => 4,                   :null => false
     t.text     "remark"
-    t.boolean  "active",        :default => true, :null => false
+    t.boolean  "active",                                       :default => true, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
