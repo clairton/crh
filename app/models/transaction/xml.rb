@@ -61,15 +61,15 @@ class Transaction::Xml < ActiveRecord::Base
       #corpo da nota
       record = Transaction::Record.create(
           #data de emissão
-          :creation_date => ide.elements['dEmi'].text,
+          :creation_date => ide.elements['dEmi'].text(),
           #número da nota fiscal
-          :code => ide.elements['nNF'].text,
+          :code => ide.elements['nNF'].text(),
           #natureza da operação
-          :name => ide.elements['natOp'].text,
+          :name => ide.elements['natOp'].text(),
           #total dos produtos
-          :goods => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text,
+          :goods => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text(),
           #valor do financeiro, total da operação
-          :tot => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text
+          :tot => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text()
       )
       #cria ou recupera as instancias necessárias
       parse_create_instances()
@@ -219,89 +219,103 @@ class Transaction::Xml < ActiveRecord::Base
   end
 
   def parse_tot(xml, record_id)
-#<vBCST>0.00</vBCST>
-#<vST>0.00</vST>
 #<vII>0.00</vII>
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_desconto.id,
-      :value => xml.elements['vDesc'].text
+      :value => xml.elements['vDesc'].text()
     )
+    additional.save()
     Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
-    )
+    ).save()
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_despesa.id,
-      :value => xml.elements['vOutro'].text
+      :value => xml.elements['vOutro'].text()
     )
+    additional.save()
     Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
-    )
+    ).save()
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_seguro.id,
-      :value => xml.elements['vSeg'].text
+      :value => xml.elements['vSeg'].text()
     )
+    additional.save()
     Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
-    )
+    ).save()
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_frete.id,
-      :value => xml.elements['vFrete'].text
+      :value => xml.elements['vFrete'].text()
     )
+    additional.save()
     Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
-    )
+    ).save()
     taxe_id = parse_taxe(
-      'Total',
-      'Total',
+      'PROPRIO',
+      'Total Icms Próprio',
       @group_imcs.id,
       0.00,
-      xml.elements['vBC'].text,
-      xml.elements['vICMS'].text
+      xml.elements['vBC'].text(),
+      xml.elements['vICMS'].text()
     )
     Transaction::Taxe.create(
         :taxe_value_id => taxe_id,
         :transaction_record_id => record_id
+    ).save()
+    taxe_id = parse_taxe(
+      'ST',
+      'Total Icms Substituição Tributaria',
+      @group_imcs.id,
+      0.00,
+      xml.elements['vBCST'].text(),
+      xml.elements['vST'].text()
     )
+    Transaction::Taxe.create(
+        :taxe_value_id => taxe_id,
+        :transaction_record_id => record_id
+    ).save()
     taxe_id = parse_taxe(
         'TOTAL',
-        'TOTAL',
+        'Total Ipi',
         @group_ipi.id,
         0.00,
         0.00,
-        xml.elements['vIPI'].text
+        xml.elements['vIPI'].text()
     )
     Transaction::Taxe.create(
         :taxe_value_id => taxe_id,
         :transaction_record_id => record_id
-    )
+    ).save()
     taxe_id = parse_taxe(
-        'TOTAL',
-        'TOTAL',
+        'TOTAL_PRODUTOS',
+        'Total Cofins Produtos',
         @group_cofins.id,
         0.00,
         0.00,
-        xml.elements['vCOFINS'].text
+        xml.elements['vCOFINS'].text()
     )
     Transaction::Taxe.create(
         :taxe_value_id => taxe_id,
         :transaction_record_id => record_id
-    )
+    ).save()
     taxe_id = parse_taxe(
-        'TOTAL',
-        'TOTAL',
+        'TOTAL_PRODUTOS',
+        'Total Pis Produtos',
         @group_pis.id,
         0.00,
         0.00,
-        xml.elements['vPIS'].text
+        xml.elements['vPIS'].text()
     )
     Transaction::Taxe.create(
         :taxe_value_id => taxe_id,
         :transaction_record_id => record_id
-    )
+    ).save()
   end
 
   def parse_issuer(xml, record_id)
@@ -362,14 +376,14 @@ class Transaction::Xml < ActiveRecord::Base
     country = Address::Country.find(
         :first,
         :conditions => {
-            :code => xml.elements['cPais'].text.upcase,
+            :code => xml.elements['cPais'].text().upcase,
             :type => "Address::Country"
         }
     )
     if country.nil?
       country = Address::Country.create(
-          :code => xml.elements['cPais'].text.upcase,
-          :name => xml.elements['xPais'].text.upcase
+          :code => xml.elements['cPais'].text().upcase,
+          :name => xml.elements['xPais'].text().upcase
       )
       if !country.save
         puts country.errors
@@ -379,16 +393,16 @@ class Transaction::Xml < ActiveRecord::Base
     state = Address::State.find(
         :first,
         :conditions => {
-            :code => xml.elements['cMun'].text[0, 2],
+            :code => xml.elements['cMun'].text()[0, 2],
             :address_place_id => country.id
         }
     )
     if state.nil?
       state = Address::State.create(
           #dois primeiros digitos do municipio é o codigo do estado
-          :code => xml.elements['cMun'].text[0, 2],
-          :name => xml.elements['UF'].text.upcase,
-          :acronym => xml.elements['UF'].text.upcase,
+          :code => xml.elements['cMun'].text()[0, 2],
+          :name => xml.elements['UF'].text().upcase,
+          :acronym => xml.elements['UF'].text().upcase,
           :address_place_id => country.id
       )
       if !state.save
@@ -400,15 +414,15 @@ class Transaction::Xml < ActiveRecord::Base
     city = Address::City.find(
         :first,
         :conditions => {
-            :code => xml.elements['cMun'].text.upcase,
+            :code => xml.elements['cMun'].text().upcase,
             :address_place_id => state.id
         }
     )
 
     if city.nil?
       city = Address::City.create(
-          :code => xml.elements['cMun'].text.upcase,
-          :name => xml.elements['xMun'].text.upcase,
+          :code => xml.elements['cMun'].text().upcase,
+          :name => xml.elements['xMun'].text().upcase,
           :address_place_id => state.id
       )
       if !city.save
@@ -420,16 +434,16 @@ class Transaction::Xml < ActiveRecord::Base
     neighborhood = Address::Neighborhood.find(
         :first,
         :conditions =>{
-            :code => xml.elements['CEP'].text.upcase,
-            :name => xml.elements['xBairro'].text.upcase,
+            :code => xml.elements['CEP'].text().upcase,
+            :name => xml.elements['xBairro'].text().upcase,
             :address_place_id => city.id
         }
     )
 
     if neighborhood.nil?
       neighborhood = Address::Neighborhood.create(
-          :code => xml.elements['CEP'].text.upcase,
-          :name => xml.elements['xBairro'].text.upcase,
+          :code => xml.elements['CEP'].text().upcase,
+          :name => xml.elements['xBairro'].text().upcase,
           :address_place_id => city.id
       )
       if !neighborhood.save
@@ -439,8 +453,8 @@ class Transaction::Xml < ActiveRecord::Base
     end
 
     street = Address::Street.create(
-        :code => xml.elements['nro'].text.upcase,
-        :name => xml.elements['xLgr'].text.upcase,
+        :code => xml.elements['nro'].text().upcase,
+        :name => xml.elements['xLgr'].text().upcase,
         :address_place_id => neighborhood.id
     )
     if !street.save
@@ -452,34 +466,34 @@ class Transaction::Xml < ActiveRecord::Base
 
   def parse_item(xml, record_id)
     additional_unitario_tributado = Goods::Additional::Type.find_by_name('UNITARIO_TRIBUTADO')
-    if additional_unitario_tributado.nil?
+    if additional_unitario_tributado.nil?()
       additional_unitario_tributado = Goods::Additional::Type.create(
         :name => 'UNITARIO_TRIBUTADO',
         :remark => 'Valor Unitário Tributado'
       )
-      if !additional_unitario_tributado.save
+      if !additional_unitario_tributado.save()
         puts additional_unitario_tributado.errors
         exit(1)
       end
     end
     additional_unitario_comercializado = Goods::Additional::Type.find_by_name('UNITARIO_COMERCIALIZADO')
-    if additional_unitario_comercializado.nil?
+    if additional_unitario_comercializado.nil?()
       additional_unitario_comercializado = Goods::Additional::Type.create(
         :name => 'UNITARIO_COMERCIALIZADO',
         :remark => 'Valor Unitário Tributado'
       )
-      if !additional_unitario_comercializado.save
+      if !additional_unitario_comercializado.save()
         puts additional_unitario_comercializado.errors
         exit(1)
       end
     end
     additional_quantidade_tributada = Goods::Additional::Type.find_by_name('QUANTIDADE_TRIBUTADA')
-    if additional_quantidade_tributada.nil?
+    if additional_quantidade_tributada.nil?()
       additional_quantidade_tributada = Goods::Additional::Type.create(
         :name => 'QUANTIDADE_TRIBUTADA',
         :remark => 'Valor Unitário Tributado'
       )
-      if !additional_quantidade_tributada.save
+      if !additional_quantidade_tributada.save()
         puts additional_quantidade_tributada.errors
         exit(1)
       end
@@ -489,11 +503,11 @@ class Transaction::Xml < ActiveRecord::Base
       #cria o produtos/serviço
       goods = Goods::Item.create(
           #codigo da mercadoria
-          :code => det.elements['prod'].elements['cProd'].text,
+          :code => det.elements['prod'].elements['cProd'].text(),
           #nome da mercadoria
-          :name => det.elements['prod'].elements['xProd'].text
+          :name => det.elements['prod'].elements['xProd'].text()
       )
-      goods.save
+      goods.save()
       #insere o item no registro
       item = Transaction::Goods::Item.create(
           #id do item
@@ -501,89 +515,88 @@ class Transaction::Xml < ActiveRecord::Base
           #id da transação
           :transaction_record_id => record_id,
           #nome do item
-          :name => det.elements['prod'].elements['xProd'].text,
+          :name => det.elements['prod'].elements['xProd'].text(),
           #unidade de medida
-          :measure => det.elements['prod'].elements['uCom'].text,
+          :measure => det.elements['prod'].elements['uCom'].text(),
           #quantidade
-          :quantity => det.elements['prod'].elements['qCom'].text,
+          :quantity => det.elements['prod'].elements['qCom'].text(),
           #valor unitario
-          :unit_price => det.elements['prod'].elements['vProd'].text.to_f/det.elements['prod'].elements['qCom'].text.to_f,
+          :unit_price => det.elements['prod'].elements['vProd'].text().to_f/det.elements['prod'].elements['qCom'].text().to_f,
           #valor total
-          :full_price => det.elements['prod'].elements['vProd'].text
+          :full_price => det.elements['prod'].elements['vProd'].text()
       )
+      item.save()
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_quantidade_tributada.id,
-        :value => det.elements['prod'].elements['qTrib'].text
+        :value => det.elements['prod'].elements['qTrib'].text()
       )
-      additional.save
+      additional.save()
       Transaction::Goods::Additional.create(
         :goods_additional_value_id =>additional.id,
         :transaction_goods_item_id => item.id
       )
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_tributado.id,
-        :value => det.elements['prod'].elements['vUnTrib'].text
+        :value => det.elements['prod'].elements['vUnTrib'].text()
       )
-      additional.save
+      additional.save()
       Transaction::Goods::Additional.create(
         :goods_additional_value_id =>additional.id,
         :transaction_goods_item_id => item.id
       )
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_comercializado.id,
-        :value => det.elements['prod'].elements['vUnCom'].text
+        :value => det.elements['prod'].elements['vUnCom'].text()
       )
-      additional.save
+      additional.save()
       Transaction::Goods::Additional.create(
         :goods_additional_value_id =>additional.id,
         :transaction_goods_item_id => item.id
       )
-      additional = Goods::Additional::Value.create(
-        :goods_additional_type_id => @additional_desconto.id,
-        :value => det.elements['prod'].elements['vDesc'].text
-      )
-      additional.save
-      Transaction::Goods::Additional.create(
-        :goods_additional_value_id =>additional.id,
-        :transaction_goods_item_id => item.id
-      )
-      additional = Goods::Additional::Value.create(
-        :goods_additional_type_id => @additional_despesa.id,
-        :value => det.elements['prod'].elements['vOutro'].text
-      )
-      additional.save
-      Transaction::Goods::Additional.create(
-        :goods_additional_value_id =>additional.id,
-        :transaction_goods_item_id => item.id
-      )
-      additional = Goods::Additional::Value.create(
-        :goods_additional_type_id => @additional_seguro.id,
-        :value => det.elements['prod'].elements['vSeg'].text
-      )
-      additional.save
-      Transaction::Goods::Additional.create(
-        :goods_additional_value_id =>additional.id,
-        :transaction_goods_item_id => item.id
-      )
-      additional = Goods::Additional::Value.create(
-        :goods_additional_type_id => @additional_frete.id,
-        :value => det.elements['prod'].elements['vFrete'].text
-      )
-      additional.save
-      Transaction::Goods::Additional.create(
-        :goods_additional_value_id =>additional.id,
-        :transaction_goods_item_id => item.id
-      )
-      additional = Goods::Additional::Value.create(
-        :goods_additional_type_id => @additional_total.id,
-        :value => det.elements['prod'].elements['vProd'].text
-      )
-      additional.save
-      Transaction::Goods::Additional.create(
-        :goods_additional_value_id =>additional.id,
-        :transaction_goods_item_id => item.id
-      )
-
+      if !det.elements['prod'].elements['vDesc'].nil?()
+        additional = Goods::Additional::Value.create(
+          :goods_additional_type_id => @additional_desconto.id,
+          :value => det.elements['prod'].elements['vDesc'].text()
+        )
+        additional.save()
+        Transaction::Goods::Additional.create(
+          :goods_additional_value_id =>additional.id,
+          :transaction_goods_item_id => item.id
+        )
+      end
+      if !det.elements['prod'].elements['vOutro'].nil?()
+        additional = Goods::Additional::Value.create(
+          :goods_additional_type_id => @additional_despesa.id,
+          :value => det.elements['prod'].elements['vOutro'].text()
+        )
+        additional.save()
+        Transaction::Goods::Additional.create(
+          :goods_additional_value_id =>additional.id,
+          :transaction_goods_item_id => item.id
+        )
+      end
+      if !det.elements['prod'].elements['vSeg'].nil?()
+        additional = Goods::Additional::Value.create(
+          :goods_additional_type_id => @additional_seguro.id,
+          :value => det.elements['prod'].elements['vSeg'].text()
+        )
+        additional.save()
+        Transaction::Goods::Additional.create(
+          :goods_additional_value_id =>additional.id,
+          :transaction_goods_item_id => item.id
+        )
+      end
+      if !det.elements['prod'].elements['vFrete'].nil?()
+        additional = Goods::Additional::Value.create(
+          :goods_additional_type_id => @additional_frete.id,
+          :value => det.elements['prod'].elements['vFrete'].text()
+        )
+        additional.save()
+        Transaction::Goods::Additional.create(
+          :goods_additional_value_id =>additional.id,
+          :transaction_goods_item_id => item.id
+        )
+      end
       #
       #verificar se existe a tag de iss,
       #se ela exisitir chamar somente ela
@@ -592,7 +605,7 @@ class Transaction::Xml < ActiveRecord::Base
       Transaction::Goods::Taxe.create(
           :taxe_value_id =>
               parse_item_icms(
-                  det.elements['prod'].elements['imposto'].elements['ICMS'],
+                  det.elements['imposto'].elements['ICMS'],
                   @group_imcs.id
               ),
           :transaction_goods_item_id => item.id
@@ -600,7 +613,7 @@ class Transaction::Xml < ActiveRecord::Base
       Transaction::Goods::Taxe.create(
           :taxe_value_id =>
               parse_item_ipi(
-                  det.elements['prod'].elements['imposto'].elements['IPI'],
+                  det.elements['imposto'].elements['IPI'],
                   @group_ipi.id
               ),
           :transaction_goods_item_id => item.id
@@ -608,7 +621,7 @@ class Transaction::Xml < ActiveRecord::Base
       Transaction::Goods::Taxe.create(
           :taxe_value_id =>
               parse_item_cofins(
-                  det.elements['prod'].elements['imposto'].elements['COFINS'],
+                  det.elements['imposto'].elements['COFINS'],
                  @group_cofins.id
               ),
           :transaction_goods_item_id => item.id
@@ -616,15 +629,13 @@ class Transaction::Xml < ActiveRecord::Base
       Transaction::Goods::Taxe.create(
           :taxe_value_id =>
               parse_item_iss(
-                  det.elements['prod'].elements['imposto'].elements['PIS'],
+                  det.elements['imposto'].elements['PIS'],
                   @group_iss.id
               ),
           :transaction_goods_item_id => item.id
       )
     end #fim dos itens
-  end
-
-  #fim parse_item
+  end#fim parse_item
 
   def parse_taxe(code, name, taxe_group_id, percentage, basis, value)
     type_id = parse_taxe_type(code, name, taxe_group_id)
@@ -632,6 +643,25 @@ class Transaction::Xml < ActiveRecord::Base
   end
 
   def parse_item_icms(xml, taxe_group_id)
+    basis = 0.00
+    value = 0.00
+    percentage = 0.00
+    if !xml.elements['ICMS00'].nil?()
+      code = xml.elements['ICMS00'].elements['CST'].text()
+      name = 'Tributada integralmente' 
+      basis = xml.elements['ICMS00'].elements['vBC'].text()
+      value = xml.elements['ICMS00'].elements['vICMS'].text()
+      percentage = xml.elements['ICMS00'].elements['pICMS'].text()
+    elsif !xml.elements['ICMS10'].nil?()
+      code = xml.elements['ICMS10'].elements['CST'].text()
+      name = 'Tributada e com cobrança do ICMS por substituição tributária' 
+      basis = xml.elements['ICMS10'].elements['vBC'].text()
+      value = xml.elements['ICMS10'].elements['vICMS'].text()
+      percentage = xml.elements['ICMS10'].elements['pICMS'].text()    
+    elsif !xml.elements['ICMSSN102'].nil?()
+      code = xml.elements['ICMSSN102'].elements['CSOSN'].text()
+      name = 'Tributada pelo Simples Nacional sem permissão de crédito'
+    end
     parse_taxe(code, name, taxe_group_id, percentage, basis, value)
   end
 
@@ -658,7 +688,7 @@ class Transaction::Xml < ActiveRecord::Base
   end
 
   def parse_taxe_value(taxe_type_id, percentage, basis, value)
-    taxe = Taxe::Value(
+    taxe = Taxe::Value.create(
         :taxe_type_id => taxe_type_id,
         :percentage => percentage,
         :basis => basis,
@@ -672,15 +702,15 @@ class Transaction::Xml < ActiveRecord::Base
     xml.elements.each('nfeProc/NFe/infNFe/cobr/dup') do |dup|
       note = Financier::Note.create(
           #valor
-          :original_value => dup.elements['vDup'].text,
+          :original_value => dup.elements['vDup'].text(),
           #name
           :name => record.code,
           #data de vencimento
-          :expiration_date => dup.elements['dVenc'].text,
+          :expiration_date => dup.elements['dVenc'].text(),
           #data de emissão
           :creation_date => record.creation_date,
           #numero da parcela
-          :number => dup.elements['nDup'].text
+          :number => dup.elements['nDup'].text()
       )
       note.save
       financier = Transaction::Financier.create(
