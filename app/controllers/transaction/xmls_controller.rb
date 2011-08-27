@@ -25,6 +25,7 @@ class Transaction::XmlsController < ApplicationController
   # GET /transaction/xmls/new.xml
   def new
     @transaction_xml = Transaction::Xml.new
+    @transaction_xml.parse()
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @transaction_xml }
