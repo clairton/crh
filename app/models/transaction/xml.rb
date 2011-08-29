@@ -1015,7 +1015,68 @@ class Transaction::Xml < ActiveRecord::Base
   end
 
   def parse_item_ipi(xml, taxe_group_id)
-    parse_taxe(code, name, taxe_group_id, percentage, basis, value)
+    obj.percentage = 0.00 
+    obj.basis = 0.00 
+    obj.value = 0.00
+    obj.reduction = 0.00
+    if !xml.elements['IPITrib'].nil?()
+      tag = xml.elements['IPITrib']
+      code = tag.elements['CST'].text()
+      case code
+      when 00
+        name = '00-Entrada com recuperação de crédito'
+      when 49
+        name = '49-Outras entradas'
+      when 50
+        name = '50-Saída tributada'
+      when 99
+        name = '99-Outras saídas'
+      end
+      obj = parse_icms_proprio_object(tag)
+    elsif !xml.elements['IPINT'].nil?()
+      tag = xml.elements['IPINT']
+      code = tag.elements['CST'].text()
+      if !tag.elements['pIPI'].nil?()
+        obj.percentage = tag.elements['pIPI'].text()
+        obj.basis =  tag.elements['vBC'].text() 
+      end
+      case code
+      when 01
+        name = '01-Entrada tributada com  alíquota zero'
+      when 02
+        name = '02-Entrada isenta'
+      when 03
+        name = '03-Entrada não-tributada'
+      when 04
+      name = '04-Entrada imune'
+      when 05
+        name = '05-Entrada com suspensão'
+      when 51
+        name = '51-Saída tributada com alíquota zero'
+      when 52
+      name = '52-Saída isenta'
+      when 53
+        name = '53-Saída não-tributada'
+      when 54
+        name = '54-Saída imune'
+      when 55
+        name = '55-Saída com suspensão'
+      end 
+    end
+    if !taxe_value_id = parse_taxe(
+        code, 
+        name, 
+        taxe_group_id, 
+        obj.percentage, 
+        obj.basis, 
+        obj.value, 
+        obj.reduction)
+      return false
+    end
+    if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
+      return false
+    end
+    return true
     return true
   end
 
