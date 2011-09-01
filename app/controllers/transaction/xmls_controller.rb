@@ -25,7 +25,6 @@ class Transaction::XmlsController < ApplicationController
   # GET /transaction/xmls/new.xml
   def new
     @transaction_xml = Transaction::Xml.new
-    @transaction_xml.parse()
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @transaction_xml }
@@ -42,15 +41,14 @@ class Transaction::XmlsController < ApplicationController
   def create
     Transaction::Xml.transaction do
       @transaction_xml = Transaction::Xml.new(params[:transaction_xml])
-      file = @transaction_xml.xml.url.split('?')
       respond_to do |format|
-        if @transaction_xml.save() and @transaction_xml.parse(file[0])
+        #if @transaction_xml.save() and @transaction_xml.parse(@tempfilefile[7..-2])
+        if @transaction_xml.parse('/home/clairton/crh/public/system/xmls/5/original/42110709363232000189550020000020221000012318-nfe.xml') and @transaction_xml.save()
           format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully created.') }
           format.xml  { render :xml => @transaction_xml, :status => :created, :location => @transaction_xml }
         else
           format.html { render :action => "new" }
-          format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }
-          #raise ActiveRecord::Rollback
+          format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }          
         end
       end
     end
@@ -61,15 +59,14 @@ class Transaction::XmlsController < ApplicationController
   def update
     Transaction::Xml.transaction do
       @transaction_xml = Transaction::Xml.find(params[:id])
-      file = @transaction_xml.xml.url.split('?')  
       respond_to do |format|
-        if @transaction_xml.parse(file[0]) and @transaction_xml.update_attributes(params[:transaction_xml])
+        #if @transaction_xml.update_attributes(params[:transaction_xml]) and @transaction_xml.parse(@tempfilefile[7..-2]) 
+        if @transaction_xml.parse('/home/clairton/crh/public/system/xmls/5/original/42110709363232000189550020000020221000012318-nfe.xml') and @transaction_xml.update_attributes(params[:transaction_xml])
           format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully updated.') }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }
-          format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }
-          #raise ActiveRecord::Rollback
+          format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }        
         end
       end
     end
