@@ -5,4 +5,5 @@ class Transaction::Taxe < ActiveRecord::Base
   validates_presence_of :taxe_value_id
   validates_associated :Value, :class_name => "Taxe::Value"
   validates_associated :Record, :class_name => "Transaction::Record"
+  validates_uniqueness_of :taxe_value_id
 end
