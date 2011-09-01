@@ -456,8 +456,8 @@ class Transaction::Xml < ActiveRecord::Base
 
   def parse_person(xml, tag_address = nil)
     person = Participant::Person.create(
-        :code => xml.elements['CNPJ'],
-        :first_name => xml.elements['xNome']
+        :code => xml.elements['CNPJ'].text(),
+        :first_name => xml.elements['xNome'].text()
     )
     if !person.save()
       @@errors = person.errors
