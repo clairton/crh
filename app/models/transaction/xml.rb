@@ -26,76 +26,87 @@ class Transaction::Xml < ActiveRecord::Base
 
   public
   def parse(file)
-    puts 'begin'
-    if !File.exist?(file)
-      @errors = 'Não Foi Possível Encontrar o Arquivo '+file
-      return false
-    end
-    @content = File.open(file)
-    xml = REXML::Document.new @content
-    ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
-      
-    if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
-      puts 'já existe uma nota ' + ide.elements['nNF'].text()
-      return false
-    end
-    #corpo da nota
-    record = Transaction::Record.create(
-        #data de emissão
-        :creation_date => ide.elements['dEmi'].text(),
-        #número da nota fiscal
-        :code => ide.elements['nNF'].text(),
-        #natureza da operação
-        :name => ide.elements['natOp'].text(),
-        #total dos produtos
-        :goods => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text(),
-        #valor do financeiro, total da operação
-        :tot => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text()
-    )
-    if !record.save()
-      @errors = record.errors
-      puts 'erro ao salvar records '
-      return false
-    end
-    #cria ou recupera as instancias necessárias
-    if !parse_create_instances()
-      puts 'erro ao criar as instancias '
-      return false
-    end
-    if !parse_issuer(
-        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
-        record.id
-    )
-      puts 'erro ao salvar emitente '
-      return false
-    end
-    puts 'issuer'
-    if !parse_sender(
-        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
-        record.id
-    )
-      puts 'erro ao salvar destinatario '
-      return false
-    end
-
-    #itens da nota
-    if !parse_item(xml, record.id)
-      puts 'erro ao salvar itens '
-      return false
-    end
-    puts 'item'
-    #parcelas
-    if !parse_financier(xml, record.id)
-      return false
-    end
-
-    if !parse_tot(
-        xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'],
-        record.id
+    Transaction::Xml.transaction do
+      puts 'begin'
+      if !File.exist?(file)
+        @errors = 'Não Foi Possível Encontrar o Arquivo '+file
+        raise ActiveRecord::Rollback
+        return false
+      end
+      @content = File.open(file)
+      xml = REXML::Document.new @content
+      ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
+        
+      if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
+        puts 'já existe uma nota ' + ide.elements['nNF'].text()
+        raise ActiveRecord::Rollback
+        return false
+      end
+      #corpo da nota
+      record = Transaction::Record.create(
+          #data de emissão
+          :creation_date => ide.elements['dEmi'].text(),
+          #número da nota fiscal
+          :code => ide.elements['nNF'].text(),
+          #natureza da operação
+          :name => ide.elements['natOp'].text(),
+          #total dos produtos
+          :goods => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text(),
+          #valor do financeiro, total da operação
+          :tot => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text()
       )
-      return false
+      if !record.save()
+        @errors = record.errors
+        puts 'erro ao salvar records '
+        raise ActiveRecord::Rollback
+        return false
+      end
+      #cria ou recupera as instancias necessárias
+      if !parse_create_instances()
+        puts 'erro ao criar as instancias '
+        raise ActiveRecord::Rollback
+        return false
+      end
+      if !parse_issuer(
+          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
+          record.id
+      )
+        puts 'erro ao salvar emitente '
+        raise ActiveRecord::Rollback
+        return false
+      end
+      puts 'issuer'
+      #if !parse_sender(
+          #xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
+          #record.id
+      #)
+        #puts 'erro ao salvar destinatario '
+        #return false
+      #end
+  
+      #itens da nota
+      if !parse_item(xml, record.id)
+        puts 'erro ao salvar itens '
+        raise ActiveRecord::Rollback
+        return false
+      end
+      puts 'item'
+      #parcelas
+      if !parse_financier(xml, record.id)
+        raise ActiveRecord::Rollback
+        return false
+      end
+  
+      if !parse_tot(
+          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'],
+          record.id
+        )
+        return false
+        raise ActiveRecord::Rollback
+      end
+      puts 'tot'
     end
-    puts 'tot'
+    return true
   end#parse
 
   private  
@@ -626,17 +637,19 @@ class Transaction::Xml < ActiveRecord::Base
     end
     #percorre os elementos det que os produtos e serviços
     xml.elements.each('nfeProc/NFe/infNFe/det') do |det|
-      #cria o produtos/serviço
-      goods = Goods::Item.create(
-          #codigo da mercadoria
-          :code => det.elements['prod'].elements['cProd'].text(),
-          #nome da mercadoria
-          :name => det.elements['prod'].elements['xProd'].text()
-      )
-      if !goods.save()
-        puts 'cadastrar um novo produto'
-        @errors = goods.errors
-        return false
+      if !goods = Goods::Item.find_by_code(det.elements['prod'].elements['cProd'].text())
+        #cria o produtos/serviço
+        goods = Goods::Item.create(
+            #codigo da mercadoria
+            :code => det.elements['prod'].elements['cProd'].text(),
+            #nome da mercadoria
+            :name => det.elements['prod'].elements['xProd'].text()
+        )
+        if !goods.save()
+          puts 'cadastrar um novo produto'
+          @errors = goods.errors
+          return false
+        end
       end
       #insere o item no registro
       item = Transaction::Goods::Item.create(
@@ -950,13 +963,13 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['ICMSSN102']
       code = tag.elements['CSOSN'].text()
       case code
-      when 102
+      when '102'
         name = 'Tributada pelo Simples Nacional sem permissão de crédito'
-      when 103
+      when '103'
         name = 'Isenção do ICMS no Simples Nacional para faixa de receita bruta.'
-      when 300
+      when '300'
         name = 'Imune'
-      when 400
+      when '400'
         name = 'Não tributada pelo Simples Nacional'
       end
     elsif !xml.elements['ICMSSN201'].nil?()
@@ -1056,13 +1069,13 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['IPITrib']
       code = tag.elements['CST'].text()
       case code
-      when 00
+      when '00'
         name = '00-Entrada com recuperação de crédito'
-      when 49
+      when '49'
         name = '49-Outras entradas'
-      when 50
+      when '50'
         name = '50-Saída tributada'
-      when 99
+      when '99'
         name = '99-Outras saídas'
       end
       obj = parse_icms_proprio_object(tag)
@@ -1074,25 +1087,25 @@ class Transaction::Xml < ActiveRecord::Base
         taxe.basis =  tag.elements['vBC'].text() 
       end
       case code
-      when 01
+      when '01'
         name = '01-Entrada tributada com  alíquota zero'
-      when 02
+      when '02'
         name = '02-Entrada isenta'
-      when 03
+      when '03'
         name = '03-Entrada não-tributada'
-      when 04
+      when '04'
       name = '04-Entrada imune'
-      when 05
+      when '05'
         name = '05-Entrada com suspensão'
-      when 51
+      when '51'
         name = '51-Saída tributada com alíquota zero'
-      when 52
+      when '52'
         name = '52-Saída isenta'
-      when 53
+      when '53'
         name = '53-Saída não-tributada'
-      when 54
+      when '54'
         name = '54-Saída imune'
-      when 55
+      when '55'
         name = '55-Saída com suspensão'
       end 
     end
@@ -1123,9 +1136,9 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['PISAliq']
       code = tag.elements['CST'].text()
       case code
-      when 01
+      when '01'
         name = '01 – Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))'
-      when 02
+      when '02'
         name = '02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))'
       end
       taxe.percentage = tag.elements['pPIS'].text()
@@ -1193,9 +1206,9 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['COFINSAliq']
       code = tag.elements['CST'].text()
       case code
-      when 01
+      when '01'
         name = '01 – Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))'
-      when 02
+      when '02'
         name = '02 - Operação Tributável (base de cálculo = valor da operação (alíquota diferenciada))'
       end
       taxe.percentage = tag.elements['pCOFINS'].text()
@@ -1212,7 +1225,7 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['COFINSNT']
       code = tag.elements['CST'].text()
       case code   
-      when 01
+      when '01'
         name = '01 - Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))'
       when '06'
         name = '06 - Operação Tributável (alíquota zero)'
@@ -1253,10 +1266,10 @@ class Transaction::Xml < ActiveRecord::Base
     return true
   end#parse_item_cofins
 
-  def parse_item_cofins(xml, taxe_group_id)
-    parse_taxe(code, name, taxe_group_id, percentage, basis, value)
-    return true
-  end#parse_item_cofins
+  #def parse_item_cofins(xml, taxe_group_id)
+    #parse_taxe(code, name, taxe_group_id, percentage, basis, value)
+    #return true
+  #end#parse_item_cofins
 
   def parse_taxe_type(code, name, taxe_group_id)
     type = Taxe::Type.create(
