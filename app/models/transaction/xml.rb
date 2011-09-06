@@ -1312,13 +1312,6 @@ class Transaction::Xml < ActiveRecord::Base
     if !taxe.save()
       @errors = taxe.errors
       puts 'não foi possível salvar o imposto'
-      puts 'Taxe::Value.create('
-      puts ':taxe_type_id => ',taxe_type_id,','
-      puts ':percentage => ',percentage,','
-      puts ':basis => ',basis,','
-      puts ':value => ',value,','
-      puts ':reduction => ',reduction
-      puts ')'
       return false
     end
     return taxe.id
