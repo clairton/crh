@@ -816,26 +816,29 @@ class Transaction::Xml < ActiveRecord::Base
           @group_imcs.id,
           item.id
       )
+        puts 'icms do item'
         return false
       end
       if !parse_item_ipi(
         det.elements['imposto'].elements['IPI'],
         @group_ipi.id,
         item.id)
+        puts 'ipi do item'
         return false
       end
       if !parse_item_cofins(
           det.elements['imposto'].elements['COFINS'],
           @group_cofins.id,
           item.id)
+        puts 'cofins do item'
         return false
       end
-      if !parse_item_iss(
-          det.elements['imposto'].elements['PIS'],
-          @group_iss.id,
-          item.id)
-        return false
-      end
+      #if !parse_item_iss(
+          #det.elements['imposto'].elements['PIS'],
+          #@group_iss.id,
+          #item.id)
+        #return false
+      #end
     end #fim dos itens
     return true
   end#fim parse_item
@@ -853,7 +856,10 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_create_taxe
   
   def parse_taxe(code, name, taxe_group_id, percentage, basis, value, reduction = 0.00)
-    type_id = parse_taxe_type(code, name, taxe_group_id)
+    if !type_id = parse_taxe_type(code, name, taxe_group_id)
+      puts 'não foi possível recuperar o tipo de imposto'
+      return false
+    end
     return parse_taxe_value(type_id, percentage, basis, value, reduction)
   end#parse_taxe
 
@@ -867,12 +873,12 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['ICMS00']
       code = tag.elements['CST'].text()
       name = 'Tributada integralmente'
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS10'].nil?()
       tag = xml.elements['ICMS10']
       code = tag.elements['CST'].text()
       name = 'Tributada e com cobrança do ICMS por substituição tributária' 
-      obj = parse_icms_st_object(tag)
+      taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -886,17 +892,17 @@ class Transaction::Xml < ActiveRecord::Base
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
         return false
       end
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS20'].nil?()
       tag = xml.elements['ICMS20']
       code = tag.elements['CST'].text()
       name = 'Com redução de base de cálculo' 
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS30'].nil?()
       tag = xml.elements['ICMS30']
       code = tag.elements['CST'].text()
       name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária' 
-      obj = parse_icms_st_object(tag)
+      taxe = parse_icms_st_object(tag)
     elsif !xml.elements['ICMS40'].nil?()
       tag = xml.elements['ICMS40']
       code = tag.elements['CST'].text()
@@ -915,17 +921,17 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['ICMS51']
       code = tag.elements['CST'].text()
       name = 'Diferimento' 
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS60'].nil?()
       tag = xml.elements['ICMS60']
       code = tag.elements['CST'].text()
       name = 'ICMS cobrado anteriormente por substituição tributária'    
-      obj = parse_icms_retido_object(tag) 
+      taxe = parse_icms_retido_object(tag) 
     elsif !xml.elements['ICMS70'].nil?()
       tag = xml.elements['ICMS70']
       code = tag.elements['CST'].text()
       name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária' 
-      obj = parse_icms_st_object(tag) 
+      taxe = parse_icms_st_object(tag) 
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -939,12 +945,12 @@ class Transaction::Xml < ActiveRecord::Base
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
         return false
       end
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS90'].nil?()
       tag = xml.elements['ICMS90']
       code = tag.elements['CST'].text()
       name = 'Outros' 
-      obj = parse_icms_st_object(tag) 
+      taxe = parse_icms_st_object(tag) 
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -958,7 +964,7 @@ class Transaction::Xml < ActiveRecord::Base
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
         return false
       end
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMSSN102'].nil?()
       tag = xml.elements['ICMSSN102']
       code = tag.elements['CSOSN'].text()
@@ -976,7 +982,7 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['ICMSSN202']
       code = tag.elements['CSOSN'].text()
       name = 'Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por Substituição Tributária'
-      obj = parse_icms_st_object(tag)  
+      taxe = parse_icms_st_object(tag)  
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -985,12 +991,14 @@ class Transaction::Xml < ActiveRecord::Base
           taxe.basis, 
           taxe.value, 
           taxe.reduction)
+          puts 'icms 202'
         return false
       end
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
+        puts 'não foi possível relacionar o 202 ao item'
         return false
       end
-      obj = parse_icms_credito_object(tag)
+      taxe = parse_icms_credito_object(tag)
     elsif !xml.elements['ICMSSN202'].nil?()
       tag = xml.elements['ICMSSN202']
       code = tag.elements['CSOSN'].text()
@@ -1000,17 +1008,17 @@ class Transaction::Xml < ActiveRecord::Base
       when 203
         name = 'Isenção do ICMS nos Simples Nacional para faixa de  receita bruta e com cobrança do  ICMS por Substituição Tributária'
       end
-      obj = parse_icms_st_object(tag) 
+      taxe = parse_icms_st_object(tag) 
     elsif !xml.elements['ICMSSN500'].nil?()
       tag = xml.elements['ICMSSN500']
       code = tag.elements['CSOSN'].text()    
       name = 'ICMS cobrado anteriormente por substituição tributária (substituído) ou por antecipação'  
-      obj = parse_icms_retido_object(tag)  
+      taxe = parse_icms_retido_object(tag)  
     elsif !xml.elements['ICMSSN900'].nil?()
       tag = xml.elements['ICMSSN900']
       code = tag.elements['CSOSN'].text()   
       name = 'Tributação pelo ICMS'   
-      obj = parse_icms_st_object(tag)   
+      taxe = parse_icms_st_object(tag)   
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -1019,12 +1027,14 @@ class Transaction::Xml < ActiveRecord::Base
           taxe.basis, 
           taxe.value, 
           taxe.reduction)
+        puts 'icms 900 st'
         return false
       end
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
+        puts 'relacionar 900 st ao item'
         return false
       end
-      obj = parse_icms_proprio_object(tag)   
+      taxe = parse_icms_proprio_object(tag)   
       if !taxe_value_id = parse_taxe(
           code, 
           name, 
@@ -1033,12 +1043,14 @@ class Transaction::Xml < ActiveRecord::Base
           taxe.basis, 
           taxe.value, 
           taxe.reduction)
+        puts '900 icms proprio'
         return false
       end
       if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
+        puts 'relacionar 900 ao iten'
         return false
       end
-      obj = parse_icms_credito_object(tag)
+      taxe = parse_icms_credito_object(tag)
     else
       puts 'não foi possível determinar o tipo de tributação do item'
       return false 
@@ -1051,9 +1063,11 @@ class Transaction::Xml < ActiveRecord::Base
         taxe.basis, 
         taxe.value, 
         taxe.reduction)
+        puts 'criar o imposto selecionado'
       return false
     end
     if !parse_create_taxe(taxe_value_id, transaction_goods_item_id)
+      puts 'relacionar o impostos ao item'
       return false
     end
     return true
@@ -1078,7 +1092,7 @@ class Transaction::Xml < ActiveRecord::Base
       when '99'
         name = '99-Outras saídas'
       end
-      obj = parse_icms_proprio_object(tag)
+      taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['IPINT'].nil?()
       tag = xml.elements['IPINT']
       code = tag.elements['CST'].text()
@@ -1272,14 +1286,17 @@ class Transaction::Xml < ActiveRecord::Base
   #end#parse_item_cofins
 
   def parse_taxe_type(code, name, taxe_group_id)
-    type = Taxe::Type.create(
-        :name => name,
-        :code => code,
-        :taxe_group_id => taxe_group_id
-    )
-    if !type.save()
-      @errors = type.errors
-      return false
+    if !type = Taxe::Type.find_by_code(code)
+      type = Taxe::Type.create(
+          :name => name,
+          :code => code,
+          :taxe_group_id => taxe_group_id
+      )
+      if !type.save()
+        @errors = type.errors
+        puts 'não foi possível salvar um novo tipo de imposto'
+        return false
+      end
     end
     return type.id
   end#parse_taxe_type
@@ -1294,6 +1311,14 @@ class Transaction::Xml < ActiveRecord::Base
     )
     if !taxe.save()
       @errors = taxe.errors
+      puts 'não foi possível salvar o imposto'
+      puts 'Taxe::Value.create('
+      puts ':taxe_type_id => ',taxe_type_id,','
+      puts ':percentage => ',percentage,','
+      puts ':basis => ',basis,','
+      puts ':value => ',value,','
+      puts ':reduction => ',reduction
+      puts ')'
       return false
     end
     return taxe.id
@@ -1337,7 +1362,7 @@ class Transaction::Xml < ActiveRecord::Base
     if !tag.elements['pRedBC'].nil?
       taxe.reduction = tag.elements['pRedBCST'].text()
     end
-    return obj
+    return taxe
   end#parse_icms_proprio_object
   
   def parse_icms_retido_object(tag)
@@ -1346,7 +1371,7 @@ class Transaction::Xml < ActiveRecord::Base
     taxe.value = tag.elements['vICMSSTRet'].text()
     taxe.percentage = 0.00 
     taxe.reduction = 0.00
-    return obj
+    return taxe
   end#parse_icms_retido_object
 
   def parse_icms_st_object(tag)
@@ -1357,7 +1382,7 @@ class Transaction::Xml < ActiveRecord::Base
     if !tag.elements['pRedBCST'].nil?
       taxe.reduction = tag.elements['pRedBCST'].text()
     end  
-    return obj
+    return taxe
   end#parse_icms_st_object
   
   def parse_icms_credito_object(tag)
@@ -1366,7 +1391,7 @@ class Transaction::Xml < ActiveRecord::Base
     taxe.value = tag.elements['vCredICMSSN'].text()
     taxe.percentage = tag.elements['pCredSN'].text()
     taxe.reduction = 0.00
-    return obj
+    return taxe
   end#parse_icms_credito_object
   
   def message=(message)
