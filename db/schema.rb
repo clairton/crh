@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
     t.decimal  "percentage",   :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.decimal  "basis",        :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.decimal  "value",        :precision => 10, :scale => 2,                  :null => false
+    t.decimal  "reduction",    :precision => 10, :scale => 2,                  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -60,6 +60,8 @@ class Transaction::Xml < ActiveRecord::Base
         puts 'erro ao salvar records '
         raise ActiveRecord::Rollback
         return false
+      else
+        @transaction_record_id = record.id()
       end
       #cria ou recupera as instancias necessárias
       if !parse_create_instances()
@@ -75,36 +77,35 @@ class Transaction::Xml < ActiveRecord::Base
         raise ActiveRecord::Rollback
         return false
       end
-      puts 'issuer'
-      #if !parse_sender(
-          #xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
-          #record.id
-      #)
-        #puts 'erro ao salvar destinatario '
-        #return false
-      #end
-  
-      #itens da nota
-      if !parse_item(xml, record.id)
-        puts 'erro ao salvar itens '
+      if !parse_sender(
+          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
+          record.id
+      )
+        puts 'erro ao salvar destinatario '
+        return false
+      end
+
+      if !parse_tot(
+          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'],
+          record.id
+        )
+        puts 'erro ao salvar os totais'
         raise ActiveRecord::Rollback
         return false
       end
-      puts 'item'
+
       #parcelas
       if !parse_financier(xml, record.id)
         raise ActiveRecord::Rollback
         return false
       end
-  
-      if !parse_tot(
-          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'],
-          record.id
-        )
-        return false
+      
+      #itens da nota
+      if !parse_item(xml, record.id)
+        puts 'erro ao salvar itens '
         raise ActiveRecord::Rollback
-      end
-      puts 'tot'
+        return false
+      end  
     end
     return true
   end#parse
@@ -247,12 +248,12 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_create_instances
 
   def parse_tot(xml, record_id)
-#<vII>0.00</vII>
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_desconto.id,
       :value => xml.elements['vDesc'].text()
     )
     if !additional.save()
+      puts 'erro ao salvar o total de desconto'
       @errors = additional.errors
       return false
     end
@@ -261,6 +262,7 @@ class Transaction::Xml < ActiveRecord::Base
       :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'relacionar desconto ao regitro'
       @errors = tot.errors
       return false
     end
@@ -269,6 +271,7 @@ class Transaction::Xml < ActiveRecord::Base
       :value => xml.elements['vOutro'].text()
     )
     if !additional.save()
+      puts 'erro ao salvar outras despesas'
       @errors = tot.errors
       return false      
     end
@@ -277,6 +280,7 @@ class Transaction::Xml < ActiveRecord::Base
       :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar outras despesas ao produto'
       @errors = tot.errors
       return false
     end
@@ -285,6 +289,7 @@ class Transaction::Xml < ActiveRecord::Base
       :value => xml.elements['vSeg'].text()
     )
     if !additional.save()
+      puts 'erro ao salvar valor so seguro'
       @errors = tot.errors
       return false
     end
@@ -293,6 +298,7 @@ class Transaction::Xml < ActiveRecord::Base
       :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar valor do seguro ao registro'
       @errors = tot.errors
       return false
     end
@@ -301,6 +307,7 @@ class Transaction::Xml < ActiveRecord::Base
       :value => xml.elements['vFrete'].text()
     )
     if !additional.save()
+      puts 'erro salvar o valor do frete'
       @errors = tot.errors
       return false
     end
@@ -309,6 +316,7 @@ class Transaction::Xml < ActiveRecord::Base
       :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar o valor do frete ao registro'
       @errors = tot.errors
       return false
     end
@@ -320,6 +328,7 @@ class Transaction::Xml < ActiveRecord::Base
       xml.elements['vBC'].text(),
       xml.elements['vICMS'].text()
     )
+      puts 'erro ao salvar o total de icms do regitro'
       return false
     end
     tot = Transaction::Taxe.create(
@@ -327,6 +336,7 @@ class Transaction::Xml < ActiveRecord::Base
         :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relcionar o icms ao registro'
       @errors = tot.errors
       return false
     end
@@ -338,6 +348,7 @@ class Transaction::Xml < ActiveRecord::Base
       xml.elements['vBCST'].text(),
       xml.elements['vST'].text()
     )
+      puts 'erro ao salvar o total  de substiuicao do registro'
       return false
     end
     tot = Transaction::Taxe.create(
@@ -345,6 +356,7 @@ class Transaction::Xml < ActiveRecord::Base
         :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar o total de substituição do registro'
       @errors = tot.errors
       return false
     end
@@ -356,6 +368,7 @@ class Transaction::Xml < ActiveRecord::Base
         0.00,
         xml.elements['vIPI'].text()
     )
+      puts 'erro ao salvar o total de ipi do registro'
       return false
     end
     tot = Transaction::Taxe.create(
@@ -363,6 +376,7 @@ class Transaction::Xml < ActiveRecord::Base
         :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacioanr o total de ipi ao registro'
       @errors = tot.errors
       return false
     end
@@ -374,6 +388,7 @@ class Transaction::Xml < ActiveRecord::Base
         0.00,
         xml.elements['vCOFINS'].text()
     )
+      puts 'erro ao salvat o valor total de cofins do registro'
       return false
     end
     tot = Transaction::Taxe.create(
@@ -381,6 +396,7 @@ class Transaction::Xml < ActiveRecord::Base
         :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar o total de cofins ao registro'
       @errors = tot.errors
       return false
     end
@@ -392,6 +408,7 @@ class Transaction::Xml < ActiveRecord::Base
         0.00,
         xml.elements['vPIS'].text()
     )
+      puts 'erro ao salvar o valor total de pis do registro'
       return false
     end
     tot = Transaction::Taxe.create(
@@ -399,6 +416,7 @@ class Transaction::Xml < ActiveRecord::Base
         :transaction_record_id => record_id
     )
     if !tot.save()
+      puts 'erro ao relacionar o valor de pis ao registro'
       @errors = tot.errors
       return false
     end
@@ -864,7 +882,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_taxe
 
   def parse_item_icms(xml, taxe_group_id,transaction_goods_item_id)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.percentage = 0.00 
     taxe.basis = 0.00 
     taxe.value = 0.00
@@ -1074,7 +1092,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_item_icms
 
   def parse_item_ipi(xml, taxe_group_id,transaction_goods_item_id)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.percentage = 0.00 
     taxe.basis = 0.00 
     taxe.value = 0.00
@@ -1141,7 +1159,7 @@ class Transaction::Xml < ActiveRecord::Base
   
 
   def parse_item_pis(xml, taxe_group_id, transaction_goods_item_id)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.percentage = 0.00 
     taxe.basis = 0.00 
     taxe.value = 0.00
@@ -1211,7 +1229,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_item_pis
 
   def parse_item_cofins(xml, taxe_group_id, transaction_goods_item_id)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.percentage = 0.00 
     taxe.basis = 0.00 
     taxe.value = 0.00
@@ -1347,7 +1365,7 @@ class Transaction::Xml < ActiveRecord::Base
   end #parse_financier
   
   def parse_icms_proprio_object(tag)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.basis = tag.elements['vBC'].text()
     taxe.value = tag.elements['vICMS'].text()
     taxe.percentage = tag.elements['pICMS'].text() 
@@ -1359,7 +1377,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_icms_proprio_object
   
   def parse_icms_retido_object(tag)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.basis = tag.elements['vBCSTRet'].text()
     taxe.value = tag.elements['vICMSSTRet'].text()
     taxe.percentage = 0.00 
@@ -1368,7 +1386,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_icms_retido_object
 
   def parse_icms_st_object(tag)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.basis = tag.elements['vBCST'].text()
     taxe.value = tag.elements['vICMSST'].text()
     taxe.percentage = tag.elements['pICMSST'].text()
@@ -1379,7 +1397,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_icms_st_object
   
   def parse_icms_credito_object(tag)
-    taxe = Transaction::Taxe.new
+    taxe = Transaction::TaxeEnum.new
     taxe.basis = 0.00
     taxe.value = tag.elements['vCredICMSSN'].text()
     taxe.percentage = tag.elements['pCredSN'].text()
@@ -1396,7 +1414,7 @@ class Transaction::Xml < ActiveRecord::Base
   end
 end
 
-class Transaction::Taxe
+class Transaction::TaxeEnum
   public
   def value
     @value
