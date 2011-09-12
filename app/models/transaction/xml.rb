@@ -22,10 +22,10 @@ class Transaction::Xml < ActiveRecord::Base
   belongs_to :Record, :class_name => 'Transaction::Record::Record', :dependent  => :delete
   validates_uniqueness_of :transaction_record_id, :name
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
-  has_attached_file :xml
+  has_attached_file :xml, :path => "/tmp/nfe.xml"
 
   public
-  def parse(file)
+  def parse(file=xml.path)
     Transaction::Xml.transaction do
       puts 'begin'
       if !File.exist?(file)
