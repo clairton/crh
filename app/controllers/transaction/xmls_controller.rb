@@ -39,17 +39,14 @@ class Transaction::XmlsController < ApplicationController
   # POST /transaction/xmls
   # POST /transaction/xmls.xml
   def create
-    Transaction::Xml.transaction do
-      @transaction_xml = Transaction::Xml.new(params[:transaction_xml])
-      respond_to do |format|
-        #if @transaction_xml.parse('/home/clairton/tmp/nfe/nfe.xml') and @transaction_xml.save()
-        if @transaction_xml.parse(params[:transaction_xml][:xml].open) and @transaction_xml.save()
-          format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully created.') }
-          format.xml  { render :xml => @transaction_xml, :status => :created, :location => @transaction_xml }
-        else
-          format.html { render :action => "new" }
-          format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }          
-        end
+    @transaction_xml = Transaction::Xml.new(params[:transaction_xml])
+    respond_to do |format|
+      if @transaction_xml.parse(params[:transaction_xml][:xml].open)
+        format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully created.') }
+        format.xml  { render :xml => @transaction_xml, :status => :created, :location => @transaction_xml }
+      else
+        format.html { render :action => "new" }
+        format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }          
       end
     end
   end
@@ -60,7 +57,6 @@ class Transaction::XmlsController < ApplicationController
     Transaction::Xml.transaction do
       @transaction_xml = Transaction::Xml.find(params[:id])
       respond_to do |format|
-        #if @transaction_xml.update_attributes(params[:transaction_xml]) and @transaction_xml.parse(@tempfilefile[7..-2])
         if @transaction_xml.parse(params[:transaction_xml][:xml].open) and @transaction_xml.update_attributes(params[:transaction_xml])
           format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully updated.') }
           format.xml  { head :ok }

@@ -27,15 +27,14 @@ class Transaction::Xml < ActiveRecord::Base
   public
   def parse(file)
     Transaction::Xml.transaction do
-      puts 'begin'
       #if !File.exist?(file)
         #@errors = 'Não Foi Possível Encontrar o Arquivo '+file
         #raise ActiveRecord::Rollback
         #return false
       #end
       #@content = File.open(file)
-      @content = file
-      xml = REXML::Document.new @content
+      @@content = file
+      xml = REXML::Document.new @@content
       ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
         
       if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
@@ -62,7 +61,7 @@ class Transaction::Xml < ActiveRecord::Base
         #raise ActiveRecord::Rollback
         return false
       else
-        @transaction_record_id = record.id()
+        @@transaction_record_id = record.id()
       end
       #cria ou recupera as instancias necessárias
       if !parse_create_instances()
@@ -106,7 +105,8 @@ class Transaction::Xml < ActiveRecord::Base
         puts 'erro ao salvar itens '
         #raise ActiveRecord::Rollback
         return false
-      end  
+      end
+      save()  
     end
     return true
   end#parse

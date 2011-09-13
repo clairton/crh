@@ -237,14 +237,13 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   end
 
   create_table "transaction_xmls", :force => true do |t|
-    t.integer  "transaction_record_id",                                  :null => false
-    t.text     "content",                                                :null => false
-    t.string   "name",                  :limit => 200,                   :null => false
-    t.string   "xml_file_name",                                          :null => false
-    t.string   "xml_content_type",                                       :null => false
-    t.integer  "xml_file_size",                                          :null => false
-    t.datetime "xml_updated_at",                                         :null => false
-    t.boolean  "active",                               :default => true, :null => false
+    t.integer  "transaction_record_id",                   :null => false
+    t.text     "content",                                 :null => false
+    t.string   "xml_file_name",                           :null => false
+    t.string   "xml_content_type",                        :null => false
+    t.integer  "xml_file_size",                           :null => false
+    t.datetime "xml_updated_at",                          :null => false
+    t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
