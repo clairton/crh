@@ -22,24 +22,25 @@ class Transaction::Xml < ActiveRecord::Base
   belongs_to :Record, :class_name => 'Transaction::Record::Record', :dependent  => :delete
   validates_uniqueness_of :transaction_record_id, :name
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
-  has_attached_file :xml, :path => "/tmp/nfe.xml"
+  has_attached_file :xml
 
   public
-  def parse(file=xml.path)
+  def parse(file)
     Transaction::Xml.transaction do
       puts 'begin'
-      if !File.exist?(file)
-        @errors = 'Não Foi Possível Encontrar o Arquivo '+file
-        raise ActiveRecord::Rollback
-        return false
-      end
-      @content = File.open(file)
+      #if !File.exist?(file)
+        #@errors = 'Não Foi Possível Encontrar o Arquivo '+file
+        #raise ActiveRecord::Rollback
+        #return false
+      #end
+      #@content = File.open(file)
+      @content = file
       xml = REXML::Document.new @content
       ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
         
       if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
         puts 'já existe uma nota ' + ide.elements['nNF'].text()
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end
       #corpo da nota
@@ -58,7 +59,7 @@ class Transaction::Xml < ActiveRecord::Base
       if !record.save()
         @errors = record.errors
         puts 'erro ao salvar records '
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       else
         @transaction_record_id = record.id()
@@ -66,7 +67,7 @@ class Transaction::Xml < ActiveRecord::Base
       #cria ou recupera as instancias necessárias
       if !parse_create_instances()
         puts 'erro ao criar as instancias '
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end
       if !parse_issuer(
@@ -74,7 +75,7 @@ class Transaction::Xml < ActiveRecord::Base
           record.id
       )
         puts 'erro ao salvar emitente '
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end
       if !parse_sender(
@@ -90,20 +91,20 @@ class Transaction::Xml < ActiveRecord::Base
           record.id
         )
         puts 'erro ao salvar os totais'
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end
 
       #parcelas
       if !parse_financier(xml, record)
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end
       
       #itens da nota
       if !parse_item(xml, record.id)
         puts 'erro ao salvar itens '
-        raise ActiveRecord::Rollback
+        #raise ActiveRecord::Rollback
         return false
       end  
     end
@@ -1123,7 +1124,7 @@ class Transaction::Xml < ActiveRecord::Base
       when '99'
         name = '99-Outras saídas'
       end
-      taxe = parse_icms_proprio_object(tag)
+      #taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['IPINT'].nil?()
       tag = xml.elements['IPINT']
       code = tag.elements['CST'].text()
