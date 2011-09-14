@@ -27,19 +27,12 @@ class Transaction::Xml < ActiveRecord::Base
   public
   def parse(file)
     Transaction::Xml.transaction do
-      #if !File.exist?(file)
-        #@errors = 'Não Foi Possível Encontrar o Arquivo '+file
-        #raise ActiveRecord::Rollback
-        #return false
-      #end
-      #@content = File.open(file)
       @@content = file
       xml = REXML::Document.new @@content
       ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
         
       if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
         puts 'já existe uma nota ' + ide.elements['nNF'].text()
-        #raise ActiveRecord::Rollback
         return false
       end
       #corpo da nota
@@ -58,15 +51,18 @@ class Transaction::Xml < ActiveRecord::Base
       if !record.save()
         @errors = record.errors
         puts 'erro ao salvar records '
-        #raise ActiveRecord::Rollback
         return false
       else
         @@transaction_record_id = record.id()
       end
+#      if !save()
+#        puts 'erro ao salvar o xml'
+#        puts @@transaction_record_id
+#        return false        
+#      end
       #cria ou recupera as instancias necessárias
       if !parse_create_instances()
         puts 'erro ao criar as instancias '
-        #raise ActiveRecord::Rollback
         return false
       end
       if !parse_issuer(
@@ -74,7 +70,6 @@ class Transaction::Xml < ActiveRecord::Base
           record.id
       )
         puts 'erro ao salvar emitente '
-        #raise ActiveRecord::Rollback
         return false
       end
       if !parse_sender(
@@ -90,23 +85,19 @@ class Transaction::Xml < ActiveRecord::Base
           record.id
         )
         puts 'erro ao salvar os totais'
-        #raise ActiveRecord::Rollback
         return false
       end
 
       #parcelas
       if !parse_financier(xml, record)
-        #raise ActiveRecord::Rollback
         return false
       end
       
       #itens da nota
       if !parse_item(xml, record.id)
         puts 'erro ao salvar itens '
-        #raise ActiveRecord::Rollback
         return false
-      end
-      save()  
+      end 
     end
     return true
   end#parse
@@ -484,12 +475,12 @@ class Transaction::Xml < ActiveRecord::Base
     if !person_id = parse_person(xml, 'enderDest')
       return false
     end
-    if !sender = Participant::Issuer.find_by_participant_person_id(person_id)
+    if !sender = Participant::Sender.find_by_participant_person_id(person_id)
       sender = Participant::Sender.create(
           :participant_person_id => person_id
       )
       if !sender.save()
-        puts 'erro ao relacionar o destinario'
+        puts 'erro ao salvar o destinario'
         @errors = sender.errors
         return false
       end
