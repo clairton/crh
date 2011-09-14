@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   create_table "transaction_xmls", :force => true do |t|
     t.integer  "transaction_record_id",                   :null => false
     t.text     "content",                                 :null => false
+    t.text     "name",                                    :null => false
     t.string   "xml_file_name",                           :null => false
     t.string   "xml_content_type",                        :null => false
     t.integer  "xml_file_size",                           :null => false

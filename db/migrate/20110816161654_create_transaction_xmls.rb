@@ -3,6 +3,7 @@ class CreateTransactionXmls < ActiveRecord::Migration
     create_table :transaction_xmls do |t|
       t.integer :transaction_record_id, :null => false
       t.text :content, :null => false
+      t.text :name, :limit =>  200#, :null => false
       t.string	:xml_file_name, :null => false
       t.string :xml_content_type, :null => false
       t.integer	:xml_file_size, :null => false
