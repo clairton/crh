@@ -1,2 +1,0 @@
-module Report::TransactionsHelper
-end
