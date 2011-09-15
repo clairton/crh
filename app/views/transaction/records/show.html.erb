@@ -1,5 +1,38 @@
 <p id="notice"><%= notice %></p>
+<p>
+  <b>Identificador:</b>
+  <%= @transaction_record.id %>
+</p>
 
+<p>
+  <b>Nota:</b>
+  <%= @transaction_record.code %>
+</p>
+
+<p>
+  <b>Natureza Operação:</b>
+  <%= @transaction_record.name %>
+</p>
+
+<p>
+  <b>Total Nota:</b>
+  <%= @transaction_record.tot %>
+</p>
+
+<p>
+  <b>Total Produtos:</b>
+  <%= @transaction_record.goods %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @transaction_record.active %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%= @transaction_record.remark %>
+</p>
 
 <%= link_to 'Edit', edit_transaction_record_path(@transaction_record) %> |
 <%= link_to 'Back', transaction_records_path %>

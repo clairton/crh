@@ -1,19 +1,65 @@
 <h1>Listing transaction_records</h1>
 
-<table>
+<table width="100%">
   <tr>
+  <td>Id:</td>
+  <td>Nota:</td>
+  <td>Natureza Operação:</td>
+  <td>Emissão:</td>
+  <td>Total Nota:</td>
+  <td>Total Produto:</td>
+  <td>Total Frete:</td>
+  <td>Total Despesas:</td>
+  <td>Total Icms:</td>
+  <td>Total Pis:</td>
+  <td>Total Cofins:</td>
+  <td>Total Ipi:</td>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
+	<%
+    	tot = 0
+    	goods = 0
+    %>
 <% @transaction_records.each do |transaction_record| %>
   <tr>
+  	<td><%= transaction_record.id %></td>
+	<td><%= transaction_record.code %></td>
+	<td><%= transaction_record.name %></td>
+  	<td><%= transaction_record.creation_date %></td>
+	<td align="right"><%= transaction_record.tot %></td>
+	<td align="right"><%= transaction_record.goods %></td>
+  <td>Total Frete:</td>
+  <td>Total Despesas:</td>
+  <td>Total Icms:</td>
+  <td>Total Pis:</td>
+  <td>Total Cofins:</td>
+  <td>Total Ipi:</td>
+    <th></th>
+    <th></th>
+    <th></th>
     <td><%= link_to 'Show', transaction_record %></td>
     <td><%= link_to 'Edit', edit_transaction_record_path(transaction_record) %></td>
     <td><%= link_to 'Destroy', transaction_record, :confirm => 'Are you sure?', :method => :delete %></td>
+    <%
+    	tot = tot + transaction_record.tot
+    	goods = goods + transaction_record.goods
+    %>
+    
   </tr>
 <% end %>
+<tr>
+  	<td></td>
+	<td></td>
+	<td></td>
+	<td align="right"><b><%=tot %></b></td>
+	<td align="right"><b><%=goods %></b></td>
+	<td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
 
 <br />
