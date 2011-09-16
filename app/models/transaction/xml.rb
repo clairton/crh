@@ -19,7 +19,7 @@ require 'participant/contact/address'
 require 'participant/contact/email'
 require 'participant/contact/type'
 class Transaction::Xml < ActiveRecord::Base
-  belongs_to :Record, :class_name => 'Transaction::Record::Record', :dependent  => :delete
+  belongs_to :transaction_record, :class_name => 'Transaction::Record::Record', :dependent  => :delete
   validates_uniqueness_of :transaction_record_id, :name
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
   has_attached_file :xml

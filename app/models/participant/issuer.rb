@@ -1,4 +1,4 @@
 class Participant::Issuer < Participant::Type
-  has_many :Record, :class_name => "Transaction::Participant"
-  has_one :Person, :class_name => "Participant::Person"
+  has_many :transaction_participant, :class_name => "Transaction::Participant"
+  has_one :participant_person, :class_name => "Participant::Person"
 end
