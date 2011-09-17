@@ -2,12 +2,7 @@ class Transaction::RecordsController < ApplicationController
   # GET /transaction/records
   # GET /transaction/records.xml
   def index
-    @transaction_records = Transaction::Record.all 
-	#:joins => 
-	#'LEFT JOIN transaction_tots ON transaction_tots.transaction_record_id = transaction_records.id
-	#LEFT JOIN transaction_tots ON transaction_taxes.transaction_record_id = transaction_records.id'
-	@additionals = Goods::Additional::Value.all(:joins => :goods_additional_type ,:conditions => )
-	@taxes = Taxe::
+    @transaction_records = Transaction::Record.all
     #@transaction_records.tot
     respond_to do |format|
       format.html # index.html.erb

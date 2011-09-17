@@ -4,19 +4,18 @@
   <tr>
   <td>Id:</td>
   <td>Nota:</td>
-  <td>Natureza Operaçãoo:</td>
+  <td>Natureza Operação:</td>
   <td>Emissão:</td>
   <td>$ Nota:</td>
   <td>$ Produto:</td>
-  <td>$ Frete:</td>
-  <td>$ Despesas:</td>
-  <td>$ Icms:</td>
-  <td>$ Pis:</td>
-  <td>$ Cofins:</td>
-  <td>$ Ipi:</td>
-    <th></th>
-    <th></th>
-    <th></th>
+<%
+@additionalTot = Array.new
+@additional = Goods::Additional::Type.all(:order => :name)
+@additional.each do |additional| 
+%><td><%= additional.remark %></td><%
+	@additionalTot[additional.id] = 0
+end 
+%>
   </tr>
 	<%
     	tot = 0
@@ -29,38 +28,49 @@
   	<td><%= transaction_record.creation_date %></td>
 	<td align="right"><%= transaction_record.tot %></td>
 	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
-	<td align="right"><%= transaction_record.goods %></td>
+<%
+@additionalValue = Goods::Additional::Value.find_by_sql(
+	'SELECT
+		goods_additional_types.id,
+		goods_additional_values.value
+	FROM 
+		goods_additional_types
+		LEFT JOIN goods_additional_values on goods_additional_types.id = goods_additional_values.goods_additional_type_id
+		LEFT JOIN transaction_tots on transaction_tots.goods_additional_value_id=goods_additional_values.id
+	WHERE 
+		transaction_tots.transaction_record_id = ?
+	ORDER BY 
+		goods_additional_types.name', transaction_record.id 
+)
+@additionalValue.each do |additionalValue| 
+	%><td align="right"><%= additionalValue.value %></td><%
+	@additionalTot[additionalValue.id] =  @additionalTot[additionalValue.id] + additionalValue.value
+end 
+%>
     <th></th>
     <th></th>
     <th></th>
-    <td><%= link_to 'Show', transaction_record %></td>
-    <td><%= link_to 'Edit', edit_transaction_record_path(transaction_record) %></td>
-    <td><%= link_to 'Destroy', transaction_record, :confirm => 'Are you sure?', :method => :delete %></td>
-    <%
+	<%
     	tot = tot + transaction_record.tot
     	goods = goods + transaction_record.goods
     %>
     
   </tr>
 <% end %>
-<tr>
-  	<td></td>
+<tr style="border-left: 1px solid black;">
+  	<td>Totais</td>
 	<td></td>
 	<td></td>
 	<td align="right"><b><%=tot %></b></td>
 	<td align="right"><b><%=goods %></b></td>
+<%
+@additionalTot.each do |additionalTot| 
+	%><td align="right"><%= additionalTot %></td><%
+end 
+%>
 	<td></td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
 </table>
-
-<br />
-
-<%= link_to 'New Record', new_transaction_record_path %>
