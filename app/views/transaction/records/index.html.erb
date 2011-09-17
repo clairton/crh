@@ -4,7 +4,7 @@
   <tr>
   <td>Id:</td>
   <td>Nota:</td>
-  <td>Natureza Operação:</td>
+  <td>Natureza Operaçãoo:</td>
   <td>Emissão:</td>
   <td>$ Nota:</td>
   <td>$ Produto:</td>
@@ -21,8 +21,7 @@
 	<%
     	tot = 0
     	goods = 0
-    %>
-<% @transaction_records.each do |transaction_record| %>
+	@transaction_records.each do |transaction_record| %>
   <tr>
   	<td><%= transaction_record.id %></td>
 	<td><%= transaction_record.code %></td>
