@@ -14,7 +14,7 @@
 <% @goods_additional_values.each do |goods_additional_value| %>
   <tr>
     <td><%= goods_additional_value.value %></td>
-    <td><%= goods_additional_value.references %></td>
+    <td><%= goods_additional_value.goods_additional_type_id %></td>
     <td><%= goods_additional_value.active %></td>
     <td><%= goods_additional_value.remark %></td>
     <td><%= link_to 'Show', goods_additional_value %></td>
