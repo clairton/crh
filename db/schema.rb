@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   end
 
   create_table "financier_notes", :force => true do |t|
-    t.decimal  "original_value",                :precision => 10, :scale => 0, :null => false
+    t.decimal  "original_value",                :precision => 10, :scale => 2, :null => false
     t.date     "expiration_date",                                              :null => false
     t.date     "creation_date",                                                :null => false
     t.string   "name",            :limit => 20,                                :null => false
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
   create_table "transaction_xmls", :force => true do |t|
     t.integer  "transaction_record_id",                   :null => false
     t.text     "content",                                 :null => false
-    t.text     "name",                                    :null => false
+    t.text     "name"
     t.string   "xml_file_name",                           :null => false
     t.string   "xml_content_type",                        :null => false
     t.integer  "xml_file_size",                           :null => false
