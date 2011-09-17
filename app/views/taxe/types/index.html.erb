@@ -3,8 +3,6 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Remark</th>
-    <th>Active</th>
     <th>Taxe group</th>
     <th></th>
     <th></th>
@@ -14,8 +12,6 @@
 <% @taxe_types.each do |taxe_type| %>
   <tr>
     <td><%= taxe_type.name %></td>
-    <td><%= taxe_type.remark %></td>
-    <td><%= taxe_type.active %></td>
     <td><%= taxe_type.taxe_group_id %></td>
     <td><%= link_to 'Show', taxe_type %></td>
     <td><%= link_to 'Edit', edit_taxe_type_path(taxe_type) %></td>

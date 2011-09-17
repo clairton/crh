@@ -3,8 +3,6 @@ class CreateParticipantTypes < ActiveRecord::Migration
     create_table :participant_types do |t| 
       t.integer :participant_person_id, :null => false
       t.string :type, :null => false
-      t.boolean :active, :null => false, :default => true
-      t.text :remark
 
       t.timestamps
     end

@@ -4,8 +4,6 @@
   <tr>
     <th>Transaction goods item</th>
     <th>Goods additional</th>
-    <th>Active</th>
-    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +13,6 @@
   <tr>
     <td><%= transaction_goods_additional.transaction_goods_item_id %></td>
     <td><%= transaction_goods_additional.goods_additional_id %></td>
-    <td><%= transaction_goods_additional.active %></td>
-    <td><%= transaction_goods_additional.remark %></td>
     <td><%= link_to 'Show', transaction_goods_additional %></td>
     <td><%= link_to 'Edit', edit_transaction_goods_additional_path(transaction_goods_additional) %></td>
     <td><%= link_to 'Destroy', transaction_goods_additional, :confirm => 'Are you sure?', :method => :delete %></td>

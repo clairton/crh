@@ -8,8 +8,6 @@ class CreateTransactionXmls < ActiveRecord::Migration
       t.string :xml_content_type, :null => false
       t.integer	:xml_file_size, :null => false
       t.datetime	:xml_updated_at, :null => false
-      t.boolean :active, :null => false, :default => true
-      t.text :remark
 
       t.timestamps
     end

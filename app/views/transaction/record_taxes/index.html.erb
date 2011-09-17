@@ -4,8 +4,6 @@
   <tr>
     <th>Transaction record</th>
     <th>Taxe value</th>
-    <th>Active</th>
-    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +13,6 @@
   <tr>
     <td><%= transaction_record_taxis.transaction_record_id %></td>
     <td><%= transaction_record_taxis.taxe_value_id %></td>
-    <td><%= transaction_record_taxis.active %></td>
-    <td><%= transaction_record_taxis.remark %></td>
     <td><%= link_to 'Show', transaction_record_taxis %></td>
     <td><%= link_to 'Edit', edit_transaction_record_taxis_path(transaction_record_taxis) %></td>
     <td><%= link_to 'Destroy', transaction_record_taxis, :confirm => 'Are you sure?', :method => :delete %></td>

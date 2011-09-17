@@ -3,8 +3,6 @@ class CreateTransactionGoodsTaxes < ActiveRecord::Migration
     create_table :transaction_goods_taxes do |t|
       t.integer :taxe_value_id, :null => false
       t.integer :transaction_goods_item_id, :null => false
-      t.boolean :active, :null => false, :default => true
-      t.text :remark
 
       t.timestamps
     end

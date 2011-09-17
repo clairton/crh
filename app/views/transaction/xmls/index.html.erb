@@ -5,8 +5,6 @@
     <th>Transaction record</th>
     <th>Xml</th>
     <th>Name</th>
-    <th>Active</th>
-    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,8 +15,6 @@
     <td><%= transaction_xml.transaction_record_id %></td>
     <td><%= transaction_xml.xml %></td>
     <td><%= transaction_xml.name %></td>
-    <td><%= transaction_xml.active %></td>
-    <td><%= transaction_xml.remark %></td>
     <td><%= link_to 'Show', transaction_xml %></td>
     <td><%= link_to 'Edit', edit_transaction_xml_path(transaction_xml) %></td>
     <td><%= link_to 'Destroy', transaction_xml, :confirm => 'Are you sure?', :method => :delete %></td>

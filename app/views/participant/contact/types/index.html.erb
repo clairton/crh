@@ -3,8 +3,6 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Active</th>
-    <th>Remark</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +11,6 @@
 <% @participant_contact_types.each do |participant_contact_type| %>
   <tr>
     <td><%= participant_contact_type.name %></td>
-    <td><%= participant_contact_type.active %></td>
-    <td><%= participant_contact_type.remark %></td>
     <td><%= link_to 'Show', participant_contact_type %></td>
     <td><%= link_to 'Edit', edit_participant_contact_type_path(participant_contact_type) %></td>
     <td><%= link_to 'Destroy', participant_contact_type, :confirm => 'Are you sure?', :method => :delete %></td>

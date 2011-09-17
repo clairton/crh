@@ -8,8 +8,6 @@ class CreateTransactionGoodsItems < ActiveRecord::Migration
       t.decimal :quantity, :null => false, :limit => 200
       t.decimal :unit_price, :null => false, :precision => 10, :scale => 4
       t.decimal :full_price, :null => false, :precision => 10, :scale => 2
-      t.boolean :active, :null => false, :default => true
-      t.text :remark
 
       t.timestamps
     end

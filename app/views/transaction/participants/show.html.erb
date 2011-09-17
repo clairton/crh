@@ -10,16 +10,6 @@
   <%= @transaction_participant.transaction_record %>
 </p>
 
-<p>
-  <b>Active:</b>
-  <%= @transaction_participant.active %>
-</p>
-
-<p>
-  <b>Remark:</b>
-  <%= @transaction_participant.remark %>
-</p>
-
 
 <%= link_to 'Edit', edit_transaction_participant_path(@transaction_participant) %> |
 <%= link_to 'Back', transaction_participants_path %>

@@ -6,8 +6,6 @@ class CreateParticipantPeople < ActiveRecord::Migration
       t.string :nickname, :limit => 200
       t.date :birthday
       t.string :code, :limit => 20, :null => false
-      t.string :remark
-      t.boolean :active, :default => true, :null => false
       t.timestamps
     end
   end

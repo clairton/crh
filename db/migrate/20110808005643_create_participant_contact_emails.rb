@@ -4,8 +4,6 @@ class CreateParticipantContactEmails < ActiveRecord::Migration
       t.integer :participant_person_id, :null => false
       t.integer :email_user_id, :null => false
       t.integer :participant_contact_type_id, :null => false
-      t.boolean :active, :default => true, :null => false
-      t.text :remark
 
       t.timestamps
     end

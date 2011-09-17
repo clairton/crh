@@ -5,9 +5,7 @@ class CreateTransactionRecords < ActiveRecord::Migration
       t.integer :code, :null => false
       t.string :name, :null => false
       t.decimal :tot, :null => false, :precision => 10, :scale => 4
-      t.decimal :goods, :null => false, :precision => 10, :scale => 4      
-      t.text :remark
-      t.boolean :active, :null => false, :default => true
+      t.decimal :goods, :null => false, :precision => 10, :scale => 4
 
       t.timestamps
     end
