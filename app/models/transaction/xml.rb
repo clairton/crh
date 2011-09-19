@@ -190,7 +190,9 @@ class Transaction::Xml < ActiveRecord::Base
     #cria ou recupera os grupos de impostos
     @group_imcs = Taxe::Group.find_by_name('ICMS')
     if @group_imcs.nil?()
-      @group_imcs = Taxe::Group.create(:name => 'ICMS')
+      @group_imcs = Taxe::Group.create(
+		:name => 'ICMS',
+		:remark => 'Icms')
       if !@group_imcs.save()
         puts 'erro ao criar a instancia Icms'
         @errors = @group_imcs.errors
@@ -199,7 +201,9 @@ class Transaction::Xml < ActiveRecord::Base
     end
     @group_iss = Taxe::Group.find_by_name('ISS')
     if @group_iss.nil?()
-      @group_iss = Taxe::Group.create(:name => 'ISS')
+      @group_iss = Taxe::Group.create(
+		:name => 'ISS',
+		:remark => 'Issqn')
       if !@group_iss.save()
         puts 'erro ao criar a instancia Iss'
         @errors = @group_iss.errors
@@ -209,7 +213,9 @@ class Transaction::Xml < ActiveRecord::Base
 
     @group_ipi = Taxe::Group.find_by_name('IPI')
     if @group_ipi.nil?()
-      @group_ipi = Taxe::Group.create(:name => 'IPI')
+      @group_ipi = Taxe::Group.create(
+		:name => 'IPI',
+		:remark => 'Ipi')
       if !@group_ipi.save()
         puts 'erro ao criar a instancia Ipi'
         @errors = @group_ipi.errors
@@ -219,7 +225,9 @@ class Transaction::Xml < ActiveRecord::Base
 
     @group_cofins = Taxe::Group.find_by_name('COFINS')
     if @group_cofins.nil?()
-      @group_cofins = Taxe::Group.create(:name => 'COFINS')
+      @group_cofins = Taxe::Group.create(
+		:name => 'COFINS',
+		:remark => 'Cofins')
       if !@group_cofins.save()
         puts 'erro ao criar a instancia Cofins'
         @errors = @group_cofins.errors
@@ -229,7 +237,9 @@ class Transaction::Xml < ActiveRecord::Base
 
     @group_pis = Taxe::Group.find_by_name('PIS')
     if @group_pis.nil?()
-      @group_pis = Taxe::Group.create(:name => 'PIS')
+      @group_pis = Taxe::Group.create(
+		:name => 'PIS',
+		:remark => 'Pis')
       if !@group_pis.save()
         puts 'erro ao criar a instancia Pis'
         @errors = @group_pis.errors
