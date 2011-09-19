@@ -634,7 +634,7 @@ class Transaction::Xml < ActiveRecord::Base
     if additional_unitario_comercializado.nil?()
       additional_unitario_comercializado = Goods::Additional::Type.create(
         :name => 'UNITARIO_COMERCIALIZADO',
-        :remark => 'Valor Unitário Tributado'
+        :remark => 'Valor Unitário Comercializado'
       )
       if !additional_unitario_comercializado.save()
         puts 'cria tipo adicional do item Valor Unitário Tributado'
@@ -646,7 +646,7 @@ class Transaction::Xml < ActiveRecord::Base
     if additional_quantidade_tributada.nil?()
       additional_quantidade_tributada = Goods::Additional::Type.create(
         :name => 'QUANTIDADE_TRIBUTADA',
-        :remark => 'Valor Unitário Tributado'
+        :remark => 'Quantidade Tributada'
       )
       if !additional_quantidade_tributada.save()
         puts 'cria tipo adicional do item Valor Unitário Tributado'

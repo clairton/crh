@@ -15,6 +15,12 @@
 %><td style="white-space: nowrap;border: 1px solid black;"><%= additional.remark %></td><%
 	@additionalTot[additional.id] = 0
 end 
+@taxeTot = Array.new
+@taxe = Taxe::Group.all(:order => :id)
+@taxe.each do |taxe| 
+%><td style="white-space: nowrap;border: 1px solid black;"><%= taxe.name %></td><%
+	@taxeTot[taxe.id] = 0
+end 
 %>
   </tr>
 	<%
@@ -47,6 +53,28 @@ end
 		%><td style="border: 1px solid black; text-align: right;"><%= additionalValue.value %></td><%
 		@additionalTot[additionalValue.id] =  @additionalTot[additionalValue.id] + additionalValue.value
 	end 
+
+	@taxeValue = Taxe::Value.find_by_sql(
+		"SELECT
+			taxe_groups.id,
+			SUM(taxe_values.value) AS value
+		FROM
+			taxe_groups
+			LEFT JOIN taxe_types ON taxe_types.taxe_group_id=taxe_groups.id 
+			LEFT JOIN taxe_values on taxe_types.id = taxe_values.taxe_type_id
+			LEFT JOIN transaction_taxes on transaction_taxes.taxe_value_id=taxe_values.id
+		WHERE 
+			transaction_taxes.transaction_record_id = #{ transaction_record.id }
+		ORDER BY 
+			taxe_groups.id" 
+	)
+	@taxeValue.each do |taxeValue| 
+		taxeValue.value = taxeValue.value.to_f
+		%><td style="border: 1px solid black; text-align: right;"><%= taxeValue.value %></td><%
+		@taxeTot[taxeValue.id] =  @taxeTot[taxeValue.id] + taxeValue.value
+	end
+
+
 	tot = tot + transaction_record.tot
 	goods = goods + transaction_record.goods
     %>
@@ -61,6 +89,11 @@ end
 	@additionalTot.each do |additionalTot| 
 		if additionalTot
 			%><td style="border: 1px solid black; text-align: right;"><b><%= additionalTot %></b></td><%
+		end
+	end 
+	@taxeTot.each do |taxeTot| 
+		if taxeTot
+			%><td style="border: 1px solid black; text-align: right;"><b><%= taxeTot %></b></td><%
 		end
 	end 
 %>
