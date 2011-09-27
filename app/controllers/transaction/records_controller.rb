@@ -34,8 +34,8 @@ class Transaction::RecordsController < ApplicationController
     end_date = Date.civil(params[:end_date][:year].to_i, params[:end_date][:month].to_i, params[:end_date][:day].to_i)
     @transaction_records = Transaction::Record.all(
       :conditions => {
-        'transaction_records.creation_date' => start_date,
-        'transaction_records.creation_date' <= end_date
+        "transaction_records.creation_date >= #{start_date}",
+        "transaction_records.creation_date <= #{end_date}"
       }
     )
     respond_to do |format|
