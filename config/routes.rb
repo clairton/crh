@@ -1,4 +1,5 @@
 Crh::Application.routes.draw do
+  root :to => "transaction/xmls#new"
   namespace :participant do resources :types end
 
   namespace :transaction do resources :taxes end
