@@ -42,10 +42,10 @@ class Transaction::XmlsController < ApplicationController
     @transaction_xml = Transaction::Xml.new(params[:transaction_xml])
     respond_to do |format|
       if @transaction_xml.parse(params[:transaction_xml][:xml].open)
-        format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully created.') }
+        format.html { redirect_to(@transaction_xml, :notice => 'Importado com Sucesso!!!') }
         format.xml  { render :xml => @transaction_xml, :status => :created, :location => @transaction_xml }
       else
-        format.html { render :action => "new" }
+        format.html { redirect_to(@transaction_xml, :notice => 'Houve um erro ao importar o arquivo!!') }
         format.xml  { render :xml => @transaction_xml.errors, :status => :unprocessable_entity }          
       end
     end
