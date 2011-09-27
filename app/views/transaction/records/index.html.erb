@@ -1,21 +1,32 @@
 <h1>Listando Registros de Transações</h1>
-
 <table width="100%">
   <tr>
-  <td style="white-space: nowrap;border: 1px solid black;">Id:</td>
-  <td style="white-space: nowrap;border: 1px solid black;">Nota:</td>
-  <td style="white-space: nowrap;border: 1px solid black;">Natureza Operação:</td>
-  <td style="white-space: nowrap;border: 1px solid black;">Emissão:</td>
-  <td style="white-space: nowrap;border: 1px solid black;">$ Nota:</td>
-  <td style="white-space: nowrap;border: 1px solid black;">$ Produto:</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Id</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Nota</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Natureza Operação</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Emissão</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Nota</td>
+  <td style="white-space: nowrap;border: 1px solid black;">Produto</td>
 <%
 @taxeTot = Array.new
+@taxeDet = Array.new
+@taxeCab = Array.new
 @taxe = Taxe::Group.all(:order => :id)
 @taxe.each do |taxe|
-%><td style="white-space: nowrap;border: 1px solid black;"><%= taxe.remark %></td><%
 	@taxeTot[taxe.id] = 0.00
+	@taxeDet[taxe.id] = 0.00
+	@taxeCab[taxe.id] = taxe.remark
 end
+%>
+<%@taxeCab.each_index do |i|%>
+	<%if !@taxeCab[i].nil?%>
+		<td style="white-space: nowrap;border: 1px solid black; width:20px;"><%= @taxeCab[i] %></td>
+	<%end%>
+<%end%>
+<%
 @additionalTot = Array.new
+@additionalDet = Array.new
+@additionalCab = Array.new
 @additional = Goods::Additional::Type.find_by_sql(
 	"SELECT
 		goods_additional_types.id,
@@ -33,12 +44,19 @@ end
 		goods_additional_types.id"
 )
 @additional.each do |additional|
-%><td style="white-space: nowrap;border: 1px solid black;"><%= additional.remark %></td><%
-	@additionalTot[additional.id] = 0
+	@additionalTot[additional.id] = 0.00
+	@additionalDet[additional.id] = 0.00
+	@additionalCab[additional.id] = additional.remark
 end
+
 %>
+<%@additionalCab.each_index do |i|%>
+	<%if !@additionalCab[i].nil?%>
+		<td style="white-space: nowrap;border: 1px solid black; width:20px;"><%= @additionalCab[i] %></td>
+	<%end%>
+<%end%>
   </tr>
-	<%
+<%
 	tot = 0
 	goods = 0
 	@transaction_records.each do |transaction_record| %>
@@ -49,7 +67,7 @@ end
 	  	<td style="white-space: nowrap;border: 1px solid black;"><%= transaction_record.creation_date %></td>
 		<td style="border: 1px solid black; text-align: right"><%= transaction_record.tot %></td>
 		<td style="border: 1px solid black; text-align: right"><%= transaction_record.goods %></td>
-		<%
+<%
 
 		@taxeValue = Taxe::Value.find_by_sql(
 			"SELECT
@@ -65,11 +83,18 @@ end
 			ORDER BY
 				taxe_groups.id"
 		)
-		@taxeValue.each do |taxeValue|%>
-		<td style="border: 1px solid black; text-align: right;"><%= taxeValue.value %></td>
-			<%@taxeTot[taxeValue.id] = taxeValue.value
+		@taxeValue.each do |taxeValue|
+			@taxeDet[taxeValue.id] = taxeValue.value
 		end
 
+		@taxeCab.each_index do |i|%>
+			<%if !@taxeCab[i].nil?%>
+				<td style="white-space: nowrap;border: 1px solid black;"><%= @taxeDet[i] %></td>
+				<%@taxeTot[i] = @taxeTot[i] + @taxeDet[i]%>
+				<%@taxeDet[i]  = 0.00%>
+			<%end%>
+		<%end%>
+<%
 		@additionalValue = Goods::Additional::Value.find_by_sql(
 			"SELECT
 				goods_additional_types.id,
@@ -84,8 +109,14 @@ end
 				goods_additional_types.id"
 		)
 		@additionalValue.each do |additionalValue|%>
-		<td style="border: 1px solid black; text-align: right;"><%= additionalValue.value %></td>
 			<%@additionalTot[additionalValue.id] =  @additionalTot[additionalValue.id] + additionalValue.value%>
+		<%end%>
+		<%@additionalTot.each_index do |i|%>
+			<%if !@additionalCab[i].nil?%>
+				<td style="border: 1px solid black; text-align: right;"><%= @additionalDet[i] %></td>
+				<%@additionalTot[i] = @additionalTot[i] + @additionalDet[i]%>
+				<%@additionalDet[i]  = 0.00%>
+			<%end%>
 		<%end%>
 <%tot = tot + transaction_record.tot%>
 <%goods = goods + transaction_record.goods%>
