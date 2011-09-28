@@ -24,7 +24,7 @@ class Transaction::RecordsController < ApplicationController
 
   def filter
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # filter.html.erb
       format.xml  { render :xml => @transaction_records }
     end
   end
@@ -39,7 +39,7 @@ class Transaction::RecordsController < ApplicationController
       }
     )
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # report.html.erb
       format.xml  { render :xml => @transaction_record }
     end
   end
