@@ -1,0 +1,3 @@
+*fazer looping itens e parcelas
+*falar sobre os metodos herdados do active record que não estão no diagrma de classes(new, save, update, delete)
+*verificar objetivos com o  conteúdo
