@@ -4,10 +4,6 @@ class CreateTransactionXmls < ActiveRecord::Migration
       t.integer :transaction_record_id, :null => false
       t.text :content, :null => false
       t.text :name, :limit =>  200#, :null => false
-      t.string	:xml_file_name, :null => false
-      t.string :xml_content_type, :null => false
-      t.integer	:xml_file_size, :null => false
-      t.datetime	:xml_updated_at, :null => false
       t.boolean :active, :null => false, :default => true
       t.text :remark
 
