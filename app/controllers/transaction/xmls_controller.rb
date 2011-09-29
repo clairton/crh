@@ -39,7 +39,7 @@ class Transaction::XmlsController < ApplicationController
   # POST /transaction/xmls
   # POST /transaction/xmls.xml
   def create
-    @transaction_xml = Transaction::Xml.new(params[:transaction_xml])
+    @transaction_xml = Transaction::Xml.new
     respond_to do |format|
       if @transaction_xml.parse(params[:transaction_xml][:xml].open)
         format.html { redirect_to(@transaction_xml, :notice => 'Importado com Sucesso!!!') }
