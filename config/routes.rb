@@ -8,6 +8,8 @@ Crh::Application.routes.draw do
 
   namespace :transaction do resources :tots end
 
+  match '/transaction/records/:filter' => Transaction::RecordsController.action(:filter)
+  
   namespace :transaction do resources :records end
 
   namespace :transaction do  namespace :goods do resources :additionals end end
