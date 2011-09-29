@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -240,10 +241,6 @@ ActiveRecord::Schema.define(:version => 20110823161326) do
     t.integer  "transaction_record_id",                   :null => false
     t.text     "content",                                 :null => false
     t.text     "name"
-    t.string   "xml_file_name",                           :null => false
-    t.string   "xml_content_type",                        :null => false
-    t.integer  "xml_file_size",                           :null => false
-    t.datetime "xml_updated_at",                          :null => false
     t.boolean  "active",                :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
