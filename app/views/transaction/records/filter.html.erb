@@ -1,5 +1,5 @@
 <h3>Filtro Relatório de Notas</h3>
-<%= form_tag("/transaction/records/show", :method => "get") do %>
+<%= form_tag("/transaction/records/report", :method => "get") do %>
   	<div class="field">
 	  Emitidas Entre
 	  <%= select_date Date.today, :prefix => :start_date%>
