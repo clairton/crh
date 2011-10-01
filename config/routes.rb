@@ -1,6 +1,6 @@
 Crh::Application.routes.draw do
   #tag root
-  root :to => "transaction/xmls#new"
+  root :controller => 'home', :action => 'index'
   
   namespace :participant do resources :types end
 
