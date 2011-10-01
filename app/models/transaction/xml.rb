@@ -28,10 +28,9 @@ class Transaction::Xml < ActiveRecord::Base
   public
   def parse(file)
     Transaction::Xml.transaction do
-      @@content = file
-      xml = REXML::Document.new @@content
+      xml = REXML::Document.new file
       ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
-        
+
       if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
         puts 'já existe uma nota ' + ide.elements['nNF'].text()
         return false
@@ -56,12 +55,14 @@ class Transaction::Xml < ActiveRecord::Base
       else
         @@transaction_record_id = record.id()
       end
-#      if !save()
-#        puts 'erro ao salvar o xml'
-#        puts @@transaction_record_id
-#        return false        
-#      end
-      #cria ou recupera as instancias necessárias
+
+
+      Transaction::Xml.create(
+        :transaction_record_id => record.id(),
+        :content => file.read,
+        :name => ide.elements['nNF'].text()
+      ).save
+
       if !parse_create_instances()
         puts 'erro ao criar as instancias '
         return false
@@ -93,17 +94,17 @@ class Transaction::Xml < ActiveRecord::Base
       if !parse_financier(xml, record)
         return false
       end
-      
+
       #itens da nota
       if !parse_item(xml, record.id)
         puts 'erro ao salvar itens '
         return false
-      end 
+      end
     end
     return true
   end#parse
 
-  private  
+  private
   def parse_create_instances
     @additional_total = Goods::Additional::Type.find_by_name('TOTAL')
     if @additional_total.nil?()
@@ -269,7 +270,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_despesa.id,
       :value => xml.elements['vOutro'].text()
@@ -277,7 +278,7 @@ class Transaction::Xml < ActiveRecord::Base
     if !additional.save()
       puts 'erro ao salvar outras despesas'
       @errors = tot.errors
-      return false      
+      return false
     end
     tot = Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
@@ -288,7 +289,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_seguro.id,
       :value => xml.elements['vSeg'].text()
@@ -307,7 +308,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_frete.id,
       :value => xml.elements['vFrete'].text()
@@ -326,7 +327,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     if !taxe_id = parse_taxe(
       'PROPRIO',
       'Total Icms Próprio',
@@ -347,7 +348,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     if !taxe_id = parse_taxe(
       'ST',
       'Total Icms Substituição Tributaria',
@@ -368,7 +369,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     if !taxe_id = parse_taxe(
         'TOTAL',
         'Total Ipi',
@@ -389,7 +390,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     if !taxe_id = parse_taxe(
         'TOTAL_PRODUTOS',
         'Total Cofins Produtos',
@@ -410,7 +411,7 @@ class Transaction::Xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    
+
     if !taxe_id = parse_taxe(
         'TOTAL_PRODUTOS',
         'Total Pis Produtos',
@@ -433,7 +434,7 @@ class Transaction::Xml < ActiveRecord::Base
     end
     return true
   end#parse_tot
-  
+
   def parse_issuer(xml, record_id)
     if !person_id = parse_person(xml, 'enderEmit')
       return false
@@ -469,7 +470,7 @@ class Transaction::Xml < ActiveRecord::Base
     end
     if !delivery.save
       @errors = delivery.errors
-      return false 
+      return false
     end
     participant = Transaction::Participant.create(
         :transaction_record_id => record_id,
@@ -884,7 +885,7 @@ class Transaction::Xml < ActiveRecord::Base
     end
     return true
   end#parse_create_taxe
-  
+
   def parse_taxe(code, name, taxe_group_id, percentage, basis, value, reduction = 0.00)
     if !type_id = parse_taxe_type(code, name, taxe_group_id)
       puts 'não foi possível recuperar o tipo de imposto'
@@ -908,15 +909,15 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['ICMS10'].nil?()
       tag = xml.elements['ICMS10']
       code = tag.elements['CST'].text()
-      name = 'Tributada e com cobrança do ICMS por substituição tributária' 
+      name = 'Tributada e com cobrança do ICMS por substituição tributária'
       taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         return false
       end
@@ -927,12 +928,12 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['ICMS20'].nil?()
       tag = xml.elements['ICMS20']
       code = tag.elements['CST'].text()
-      name = 'Com redução de base de cálculo' 
+      name = 'Com redução de base de cálculo'
       taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS30'].nil?()
       tag = xml.elements['ICMS30']
       code = tag.elements['CST'].text()
-      name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária' 
+      name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária'
       taxe = parse_icms_st_object(tag)
     elsif !xml.elements['ICMS40'].nil?()
       tag = xml.elements['ICMS40']
@@ -951,25 +952,25 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['ICMS51'].nil?()
       tag = xml.elements['ICMS51']
       code = tag.elements['CST'].text()
-      name = 'Diferimento' 
+      name = 'Diferimento'
       taxe = parse_icms_proprio_object(tag)
     elsif !xml.elements['ICMS60'].nil?()
       tag = xml.elements['ICMS60']
       code = tag.elements['CST'].text()
-      name = 'ICMS cobrado anteriormente por substituição tributária'    
-      taxe = parse_icms_retido_object(tag) 
+      name = 'ICMS cobrado anteriormente por substituição tributária'
+      taxe = parse_icms_retido_object(tag)
     elsif !xml.elements['ICMS70'].nil?()
       tag = xml.elements['ICMS70']
       code = tag.elements['CST'].text()
-      name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária' 
-      taxe = parse_icms_st_object(tag) 
+      name = 'Isenta ou não tributada e com cobrança do ICMS por substituição tributária'
+      taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         return false
       end
@@ -980,15 +981,15 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['ICMS90'].nil?()
       tag = xml.elements['ICMS90']
       code = tag.elements['CST'].text()
-      name = 'Outros' 
-      taxe = parse_icms_st_object(tag) 
+      name = 'Outros'
+      taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         return false
       end
@@ -1015,14 +1016,14 @@ class Transaction::Xml < ActiveRecord::Base
       tag = xml.elements['ICMSSN202']
       code = tag.elements['CSOSN'].text()
       name = 'Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por Substituição Tributária'
-      taxe = parse_icms_st_object(tag)  
+      taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         return false
       end
@@ -1041,24 +1042,24 @@ class Transaction::Xml < ActiveRecord::Base
         else
           puts 'não foi possivel determinar o nome para p codigo ' + code
       end
-      taxe = parse_icms_st_object(tag) 
+      taxe = parse_icms_st_object(tag)
     elsif !xml.elements['ICMSSN500'].nil?()
       tag = xml.elements['ICMSSN500']
-      code = tag.elements['CSOSN'].text()    
-      name = 'ICMS cobrado anteriormente por substituição tributária (substituído) ou por antecipação'  
-      taxe = parse_icms_retido_object(tag)  
+      code = tag.elements['CSOSN'].text()
+      name = 'ICMS cobrado anteriormente por substituição tributária (substituído) ou por antecipação'
+      taxe = parse_icms_retido_object(tag)
     elsif !xml.elements['ICMSSN900'].nil?()
       tag = xml.elements['ICMSSN900']
-      code = tag.elements['CSOSN'].text()   
-      name = 'Outros'   
-      taxe = parse_icms_st_object(tag)   
+      code = tag.elements['CSOSN'].text()
+      name = 'Outros'
+      taxe = parse_icms_st_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         puts 'icms 900 st'
         return false
@@ -1067,14 +1068,14 @@ class Transaction::Xml < ActiveRecord::Base
         puts 'relacionar 900 st ao item'
         return false
       end
-      taxe = parse_icms_proprio_object(tag)   
+      taxe = parse_icms_proprio_object(tag)
       if !taxe_value_id = parse_taxe(
-          code, 
-          name, 
-          taxe_group_id, 
-          taxe.percentage, 
-          taxe.basis, 
-          taxe.value, 
+          code,
+          name,
+          taxe_group_id,
+          taxe.percentage,
+          taxe.basis,
+          taxe.value,
           taxe.reduction)
         puts '900 icms proprio'
         return false
@@ -1086,16 +1087,16 @@ class Transaction::Xml < ActiveRecord::Base
       taxe = parse_icms_credito_object(tag)
     else
       puts 'não foi possível determinar o tipo de tributação do item'
-      return false 
+      return false
     end
 
     if !taxe_value_id = parse_taxe(
-        code, 
-        name, 
-        taxe_group_id, 
-        taxe.percentage, 
-        taxe.basis, 
-        taxe.value, 
+        code,
+        name,
+        taxe_group_id,
+        taxe.percentage,
+        taxe.basis,
+        taxe.value,
         taxe.reduction)
         puts 'criar o imposto selecionado'
       return false
@@ -1109,8 +1110,8 @@ class Transaction::Xml < ActiveRecord::Base
 
   def parse_item_ipi(xml, taxe_group_id,transaction_goods_item_id)
     taxe = Transaction::TaxeEnum.new
-    taxe.percentage = 0.00 
-    taxe.basis = 0.00 
+    taxe.percentage = 0.00
+    taxe.basis = 0.00
     taxe.value = 0.00
     taxe.reduction = 0.00
     if !xml.elements['IPITrib'].nil?()
@@ -1132,7 +1133,7 @@ class Transaction::Xml < ActiveRecord::Base
       code = tag.elements['CST'].text()
       if !tag.elements['pIPI'].nil?()
         taxe.percentage = tag.elements['pIPI'].text()
-        taxe.basis =  tag.elements['vBC'].text() 
+        taxe.basis =  tag.elements['vBC'].text()
       end
       case code
       when '01'
@@ -1155,15 +1156,15 @@ class Transaction::Xml < ActiveRecord::Base
         name = '54-Saída imune'
       when '55'
         name = '55-Saída com suspensão'
-      end 
+      end
     end
     if !taxe_value_id = parse_taxe(
-        code, 
-        name, 
-        taxe_group_id, 
-        taxe.percentage, 
-        taxe.basis, 
-        taxe.value, 
+        code,
+        name,
+        taxe_group_id,
+        taxe.percentage,
+        taxe.basis,
+        taxe.value,
         taxe.reduction)
       return false
     end
@@ -1172,12 +1173,12 @@ class Transaction::Xml < ActiveRecord::Base
     end
     return true
   end#parse_item_ipi
-  
+
 
   def parse_item_pis(xml, taxe_group_id, transaction_goods_item_id)
     taxe = Transaction::TaxeEnum.new
-    taxe.percentage = 0.00 
-    taxe.basis = 0.00 
+    taxe.percentage = 0.00
+    taxe.basis = 0.00
     taxe.value = 0.00
     taxe.reduction = 0.00
     if !xml.elements['PISAliq'].nil?()
@@ -1202,7 +1203,7 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['PISNT'].nil?()
       tag = xml.elements['PISNT']
       code = tag.elements['CST'].text()
-      case code   
+      case code
       when '01'
         name = '01 – Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))'
       when '06'
@@ -1220,21 +1221,21 @@ class Transaction::Xml < ActiveRecord::Base
          name = '99 - Outras Operações'
          if !xml.elements['pPIS'].nil?()
            taxe.percentage = tag.elements['pPIS'].text()
-           taxe.value = tag.elements['vPIS'].text()          
+           taxe.value = tag.elements['vPIS'].text()
          else
            taxe.percentage = tag.elements['vAliqProd'].text()
            taxe.value = tag.elements['vAliqProd'].text()
-           taxe.basis =  tag.elements['qBCProd'].text()           
-         end   
-        taxe.basis =  tag.elements['vBC'].text()      
+           taxe.basis =  tag.elements['qBCProd'].text()
+         end
+        taxe.basis =  tag.elements['vBC'].text()
     end
     if !taxe_value_id = parse_taxe(
-        code, 
-        name, 
-        taxe_group_id, 
-        taxe.percentage, 
-        taxe.basis, 
-        taxe.value, 
+        code,
+        name,
+        taxe_group_id,
+        taxe.percentage,
+        taxe.basis,
+        taxe.value,
         taxe.reduction)
       return false
     end
@@ -1246,8 +1247,8 @@ class Transaction::Xml < ActiveRecord::Base
 
   def parse_item_cofins(xml, taxe_group_id, transaction_goods_item_id)
     taxe = Transaction::TaxeEnum.new
-    taxe.percentage = 0.00 
-    taxe.basis = 0.00 
+    taxe.percentage = 0.00
+    taxe.basis = 0.00
     taxe.value = 0.00
     taxe.reduction = 0.00
     if !xml.elements['COFINSAliq'].nil?()
@@ -1272,14 +1273,14 @@ class Transaction::Xml < ActiveRecord::Base
     elsif !xml.elements['COFINSNT'].nil?()
       tag = xml.elements['COFINSNT']
       code = tag.elements['CST'].text()
-      case code   
+      case code
       when '01'
         name = '01 - Operação Tributável (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))'
       when '06'
         name = '06 - Operação Tributável (alíquota zero)'
       when '07'
         name = '07 - Operação Isenta da Contribuição'
-      when '08' 
+      when '08'
         name = '08 - Operação Sem Incidência da Contribuição'
       when '09'
         name = '09 - Operação com Suspensão da Contribuição'
@@ -1290,22 +1291,22 @@ class Transaction::Xml < ActiveRecord::Base
          name = '99 - Outras Operações'
          if !xml.elements['pCOFINS'].nil?()
            taxe.percentage = tag.elements['pCOFINS'].text()
-           taxe.value = tag.elements['vCOFINS'].text()          
+           taxe.value = tag.elements['vCOFINS'].text()
          elsif !tag.elements['vAliqProd'].nil?()
            taxe.percentage = tag.elements['vAliqProd'].text()
-           taxe.value =  tag.elements['qBCProd'].text()           
+           taxe.value =  tag.elements['qBCProd'].text()
          end
          if !tag.elements['vAliqProd'].nil?()
            taxe.basis =  tag.elements['vBC'].text()
          end
     end
     if !taxe_value_id = parse_taxe(
-        code, 
-        name, 
-        taxe_group_id, 
-        taxe.percentage, 
-        taxe.basis, 
-        taxe.value, 
+        code,
+        name,
+        taxe_group_id,
+        taxe.percentage,
+        taxe.basis,
+        taxe.value,
         taxe.reduction)
       return false
     end
@@ -1383,24 +1384,24 @@ class Transaction::Xml < ActiveRecord::Base
     end #final da iteração das parcelas
     return true
   end #parse_financier
-  
+
   def parse_icms_proprio_object(tag)
     taxe = Transaction::TaxeEnum.new
     taxe.basis = tag.elements['vBC'].text()
     taxe.value = tag.elements['vICMS'].text()
-    taxe.percentage = tag.elements['pICMS'].text() 
+    taxe.percentage = tag.elements['pICMS'].text()
     taxe.reduction = 0.00
     if !tag.elements['pRedBC'].nil?
       taxe.reduction = tag.elements['pRedBCST'].text()
     end
     return taxe
   end#parse_icms_proprio_object
-  
+
   def parse_icms_retido_object(tag)
     taxe = Transaction::TaxeEnum.new
     taxe.basis = tag.elements['vBCSTRet'].text()
     taxe.value = tag.elements['vICMSSTRet'].text()
-    taxe.percentage = 0.00 
+    taxe.percentage = 0.00
     taxe.reduction = 0.00
     return taxe
   end#parse_icms_retido_object
@@ -1412,10 +1413,10 @@ class Transaction::Xml < ActiveRecord::Base
     taxe.percentage = tag.elements['pICMSST'].text()
     if !tag.elements['pRedBCST'].nil?
       taxe.reduction = tag.elements['pRedBCST'].text()
-    end  
+    end
     return taxe
   end#parse_icms_st_object
-  
+
   def parse_icms_credito_object(tag)
     taxe = Transaction::TaxeEnum.new
     taxe.basis = 0.00
@@ -1424,11 +1425,11 @@ class Transaction::Xml < ActiveRecord::Base
     taxe.reduction = 0.00
     return taxe
   end#parse_icms_credito_object
-  
+
   def message=(message)
     @message = message
   end
-  
+
   def message
     @message
   end
@@ -1461,3 +1462,4 @@ class Transaction::TaxeEnum
     @reduction = reduction
   end
 end
+
