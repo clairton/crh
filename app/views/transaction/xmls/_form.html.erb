@@ -11,10 +11,10 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :xml %><br />
+    <%= f.label I18n.t(:xml) %><br />
     <%= f.file_field :xml %>
   </div>
   <div class="actions">
-    <%= f.submit("Importar") %>
+    <%= f.submit(I18n.t(:Import)) %>
   </div>
 <% end %>
