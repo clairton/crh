@@ -35,9 +35,6 @@ end
 		goods_additional_types
 		INNER JOIN goods_additional_values on goods_additional_types.id = goods_additional_values.goods_additional_type_id
 		INNER JOIN transaction_tots on transaction_tots.goods_additional_value_id=goods_additional_values.id
-	WHERE
-		transaction_tots.transaction_record_id = 1
-		OR transaction_tots.transaction_record_id IS NULL
 	GROUP BY
 		goods_additional_types.id,goods_additional_types.id
 	ORDER BY
