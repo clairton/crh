@@ -5,6 +5,7 @@ development:
   password: cafe
   port: 3306
   host: localhost
+  encoding: utf8
 
 test:
   adapter: mysql
@@ -13,6 +14,7 @@ test:
   password: cafe
   port: 3306
   host: localhost
+  encoding: utf8
 
 production:
   adapter: mysql
@@ -21,3 +23,5 @@ production:
   password: cafe
   port: 3306
   host: localhost
+  encoding: utf8
+
