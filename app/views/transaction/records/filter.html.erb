@@ -2,10 +2,11 @@
 <%= form_tag("/transaction/records/report", :method => "get") do %>
   	<div class="field">
 	  Emitidas Entre
-	  <%= select_date Date.today, :prefix => :start_date%>
+	  <%= select_date Date.today,:order => [:day , :month, :year], :prefix => :start_date%>
 	  E
-	  <%= select_date Date.today, :prefix => :end_date%>
+	  <%= select_date Date.today,:order => [:day , :month, :year], :prefix => :end_date%>
 	</div>
 </br>
   <%= submit_tag("Gerar") %>
 <% end %>
+
