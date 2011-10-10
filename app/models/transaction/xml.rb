@@ -110,7 +110,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_total.nil?()
       @additional_total = Goods::Additional::Type.create(
         :name => 'TOTAL',
-        :remark => 'Valor Total Produtos/Servicos'
+        :remark => 'Total Produtos/Servicos'
       )
       if !@additional_total.save()
         puts 'erro ao criar a instancia Valor Total Produtos/Servicos'
@@ -122,7 +122,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_financeiro.nil?()
       @additional_financeiro = Goods::Additional::Type.create(
         :name => 'FINANCEIRO',
-        :remark => 'Valor Total Financeiro'
+        :remark => 'Total Financeiro'
       )
       if !@additional_financeiro.save()
         puts 'erro ao criar a instancia Valor Total Financeiro'
@@ -134,7 +134,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_frete.nil?()
      @additional_frete = Goods::Additional::Type.create(
         :name => 'FRETE',
-        :remark => 'Valor Frete'
+        :remark => 'Frete'
       )
       if !@additional_frete.save()
         puts 'erro ao criar a instancia Valor Frete'
@@ -146,7 +146,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_despesa.nil?()
       @additional_despesa = Goods::Additional::Type.create(
         :name => 'DESPESAS',
-        :remark => 'Valor Outras Despesas'
+        :remark => 'Outras Despesas'
       )
       if !@additional_despesa.save()
         puts 'erro ao criar a instancia Valor Outras Despesas'
@@ -158,7 +158,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_seguro.nil?()
       @additional_seguro = Goods::Additional::Type.create(
         :name => 'SEGURO',
-        :remark => 'Valor Seguro'
+        :remark => 'Seguro'
       )
       if !@additional_seguro.save()
         puts 'erro ao criar a instancia Valor Seguro'
@@ -170,7 +170,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_desconto.nil?()
       @additional_desconto = Goods::Additional::Type.create(
         :name => 'DESCONTO',
-        :remark => 'Valor Desconto'
+        :remark => 'Desconto'
       )
       if !@additional_desconto.save()
         puts 'erro ao criar a instancia Valor Desconto'
