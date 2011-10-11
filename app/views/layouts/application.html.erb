@@ -17,11 +17,12 @@
 				<li><%= link_to "Grupos Impostos", taxe_groups_path %></li>
 				<li><%= link_to "Tipos Impostos", taxe_types_path %></li>
 				<li><%= link_to "Notas", transaction_records_path %></li>
+				<li><%= link_to "Relatório Notas", "#{transaction_records_path}/filter" %></li>
 				<li><%= link_to "Tipos Adicionais", goods_additional_types_path %></li>
 				<li><%= link_to "Importação Xml", transaction_xmls_path %></li>
 			</ul>
 		</td>
-		<td style="width:10px; border-left: 1px solid black;"></td>		
+		<td style="width:10px; border-left: 1px solid black;"></td>
 		<td style="vertical-align: top;">
 			<%= yield %>
 		</td>
@@ -29,3 +30,4 @@
 </table>
 </body>
 </html>
+
