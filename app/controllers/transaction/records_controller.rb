@@ -3,7 +3,6 @@ class Transaction::RecordsController < ApplicationController
   # GET /transaction/records.xml
   def index
     @transaction_records = Transaction::Record.all
-    #@transaction_records.tot
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @transaction_records }
@@ -26,18 +25,6 @@ class Transaction::RecordsController < ApplicationController
     respond_to do |format|
       format.html # filter.html.erb
       format.xml  { render :xml => @transaction_records }
-    end
-  end
-  
-  def report
-    start_date = Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
-    end_date = Date.civil(params[:end_date][:year].to_i, params[:end_date][:month].to_i, params[:end_date][:day].to_i)
-    @transaction_records = Transaction::Record.all(
-      :conditions => "transaction_records.creation_date BETWEEN '#{start_date}' AND '#{end_date}'"
-    )
-    respond_to do |format|
-      format.html # report.html.erb
-      format.xml  { render :xml => @transaction_record }
     end
   end
 
@@ -101,3 +88,4 @@ class Transaction::RecordsController < ApplicationController
     end
   end
 end
+

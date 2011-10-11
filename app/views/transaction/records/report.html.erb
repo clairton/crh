@@ -1,4 +1,9 @@
-<h1>Listando Registros de Transações</h1>
+<%
+  start_date = Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
+  end_date = Date.civil(params[:end_date][:year].to_i, params[:end_date][:month].to_i, params[:end_date][:day].to_i)
+%>
+
+<h1><%="Listando Registros de Transações de #{start_date} à #{end_date}"%></h1>
 <table width="100%">
   <tr>
   <td style="white-space: nowrap;border: 1px solid black;">Id</td>
@@ -54,6 +59,9 @@ end
 <%end%>
   </tr>
 <%
+  @transaction_records = Transaction::Record.all(
+    :conditions => "transaction_records.creation_date BETWEEN '#{start_date}' AND '#{end_date}'"
+  )
 	tot = 0
 	goods = 0
 	@transaction_records.each do |transaction_record| %>
