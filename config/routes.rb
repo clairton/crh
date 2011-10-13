@@ -1,6 +1,8 @@
 Crh::Application.routes.draw do
+  devise_for :users
+  devise_for :users, :path_names => { :sign_up => "register" }
   #tag root
-  root :controller => 'home', :action => 'index'
+  root :to => "home#index"
   
   namespace :participant do resources :types end
 
