@@ -1,4 +1,5 @@
 class Address::PlacesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /address/places
   # GET /address/places.xml
   def index

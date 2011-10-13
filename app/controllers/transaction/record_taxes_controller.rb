@@ -1,4 +1,5 @@
 class Transaction::RecordTaxesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/record_taxes
   # GET /transaction/record_taxes.xml
   def index

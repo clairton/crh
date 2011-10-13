@@ -1,4 +1,5 @@
 class Taxe::TypesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /taxe/types
   # GET /taxe/types.xml
   def index

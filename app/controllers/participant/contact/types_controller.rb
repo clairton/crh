@@ -1,4 +1,5 @@
 class Participant::Contact::TypesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /participant/contact/types
   # GET /participant/contact/types.xml
   def index

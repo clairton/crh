@@ -1,4 +1,5 @@
 class Transaction::Goods::AdditionalsController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/goods/additionals
   # GET /transaction/goods/additionals.xml
   def index

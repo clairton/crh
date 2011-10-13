@@ -1,4 +1,5 @@
 class Participant::PeopleController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /participant/people
   # GET /participant/people.xml
   def index

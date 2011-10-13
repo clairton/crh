@@ -2,7 +2,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   #internacionalização
-  before_filter :localizate
+  before_filter :localizate,:authenticate_user!#,:except => [:show, :index]
   
   #método responável pela internacionalização
   def localizate

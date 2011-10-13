@@ -1,4 +1,5 @@
 class Taxe::ValuesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /taxe/values
   # GET /taxe/values.xml
   def index

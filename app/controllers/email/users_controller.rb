@@ -1,4 +1,5 @@
 class Email::UsersController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /email/users
   # GET /email/users.xml
   def index

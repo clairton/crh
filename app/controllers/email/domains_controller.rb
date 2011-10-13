@@ -1,4 +1,5 @@
 class Email::DomainsController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /email/domains
   # GET /email/domains.xml
   def index

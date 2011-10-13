@@ -1,4 +1,5 @@
 class Transaction::FinanciersController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/financiers
   # GET /transaction/financiers.xml
   def index

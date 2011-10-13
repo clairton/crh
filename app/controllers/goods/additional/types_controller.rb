@@ -1,4 +1,5 @@
 class Goods::Additional::TypesController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /goods/additional/types
   # GET /goods/additional/types.xml
   def index

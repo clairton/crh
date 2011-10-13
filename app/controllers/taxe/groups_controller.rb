@@ -1,4 +1,5 @@
 class Taxe::GroupsController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /taxe/groups
   # GET /taxe/groups.xml
   def index

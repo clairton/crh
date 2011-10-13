@@ -1,4 +1,5 @@
 class Transaction::ParticipantsController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/participants
   # GET /transaction/participants.xml
   def index

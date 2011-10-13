@@ -1,4 +1,5 @@
 class Transaction::TotsController < ApplicationController
+  before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/tots
   # GET /transaction/tots.xml
   def index
