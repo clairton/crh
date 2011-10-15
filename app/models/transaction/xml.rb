@@ -520,9 +520,14 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_sender
 
   def parse_person(xml, tag_address = nil)
-    if !person = Participant::Person.find_by_code(xml.elements['CNPJ'].text())
+    if !xml.elements['CNPJ'].nil?
+      code = xml.elements['CNPJ'].text()
+    else
+      code = xml.elements['CPF'].text()
+    end
+    if !person = Participant::Person.find_by_code(code)
       person = Participant::Person.create(
-          :code => xml.elements['CNPJ'].text(),
+          :code => code,
           :first_name => xml.elements['xNome'].text()
       )
       if !person.save()
