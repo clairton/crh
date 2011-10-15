@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe"><infNFe Id="NFe31090807301671000131550010001000216008030809" versao="1.10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><ide><cUF>31</cUF><cNF>600803080</cNF><natOp>venda</natOp><indPag>0</indPag><mod>55</mod><serie>1</serie><nNF>100021</nNF><dEmi>2009-08-16</dEmi><dSaiEnt>2009-08-16</dSaiEnt><tpNF>1</tpNF><cMunFG>3106200</cMunFG><tpImp>1</tpImp><tpEmis>5</tpEmis><cDV>9</cDV><tpAmb>2</tpAmb><finNFe>1</finNFe><procEmi>3</procEmi><verProc>TESTE 1.4.0</verProc></ide><emit><CNPJ>07301671000131</CNPJ><xNome>Ideas@Work Informatica Ltda</xNome><xFant>Ideas@Work</xFant><enderEmit><xLgr>rua desembargador Amilcar de Castro</xLgr><nro>651</nro><xCpl>casa 2</xCpl><xBairro>Estoril</xBairro><cMun>3106200</cMun><xMun>Belo Horizonte</xMun><UF>MG</UF><CEP>30455650</CEP><cPais>1058</cPais><xPais>BRASIL</xPais></enderEmit><IE>0010887280005</IE></emit><dest><CPF>78046777668</CPF><xNome>Roberto Dias Duarte</xNome><enderDest><xLgr>rua des. amilcar de castro</xLgr><nro>651</nro><xCpl>casa 4</xCpl><xBairro>estoril</xBairro><cMun>3106200</cMun><xMun>Belo Horizonte</xMun><UF>MG</UF><CEP>30455650</CEP><cPais>1058</cPais><xPais>BRASIL</xPais><fone>3191952133</fone></enderDest><IE>ISENTO</IE></dest><det nItem="1"><prod><cProd>1</cProd><cEAN/><xProd>Livro Big Brother Fiscal</xProd><NCM>49011000</NCM><CFOP>5102</CFOP><uCom>UN</uCom><qCom>1.0000</qCom><vUnCom>40.0000</vUnCom><vProd>40.00</vProd><cEANTrib/><uTrib>UN</uTrib><qTrib>1.0000</qTrib><vUnTrib>40.0000</vUnTrib><vFrete>10.00</vFrete><vSeg>6.00</vSeg></prod><imposto><ICMS><ICMS00><orig>0</orig><CST>00</CST><modBC>3</modBC><vBC>40.00</vBC><pICMS>18.00</pICMS><vICMS>7.20</vICMS></ICMS00></ICMS><PIS><PISAliq><CST>01</CST><vBC>40.00</vBC><pPIS>0.65</pPIS><vPIS>0.26</vPIS></PISAliq></PIS><COFINS><COFINSAliq><CST>01</CST><vBC>40.00</vBC><pCOFINS>3.00</pCOFINS><vCOFINS>1.20</vCOFINS></COFINSAliq></COFINS></imposto></det><total><ICMSTot><vBC>40.00</vBC><vICMS>7.20</vICMS><vBCST>0.00</vBCST><vST>0.00</vST><vProd>40.00</vProd><vFrete>10.00</vFrete><vSeg>6.00</vSeg><vDesc>0.00</vDesc><vII>0.00</vII><vIPI>0.00</vIPI><vPIS>0.26</vPIS><vCOFINS>1.20</vCOFINS><vOutro>0.00</vOutro><vNF>56.00</vNF></ICMSTot></total><transp><modFrete>0</modFrete></transp></infNFe><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/><Reference URI="#NFe31090807301671000131550010001000216008030809"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><DigestValue>HBEVJd9ch/IVg3X7KoesCu0RUFw=</DigestValue></Reference></SignedInfo><SignatureValue>S4VAMvH43SmwzCz9vsBkYqnmu7GcH65HBG/eO3zzDx6FvAZGLwlQlbZiJ5rnBmIH7kW862AHmocx
+POGvAyK2pVUPe3qd8jvwoRJd+yS4Sp7Hax3PAWSZU+5fnwZwyJV0VhEwbqmJocVn6kIrhcfKD7JZ
+BxwdFwHP4xx6k36jNvg=</SignatureValue><KeyInfo><X509Data><X509Certificate>MIIFlzCCBH+gAwIBAgIQUfeuAKh+ndkPA4kXaYYlyTANBgkqhkiG9w0BAQUFADBqMQswCQYDVQQG
+EwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDEsMCoGA1UECxMjU2VjcmV0YXJpYSBkYSBSZWNlaXRh
+IEZlZGVyYWwgLSBTUkYxGDAWBgNVBAMTD0FDIFBST0RFTUdFIFNSRjAeFw0wODEwMDYwMDAwMDBa
+Fw0wOTEwMDYyMzU5NTlaMIG+MQswCQYDVQQGEwJCUjELMAkGA1UECBMCTUcxFzAVBgNVBAcUDkJl
+bG8gSG9yaXpvbnRlMRMwEQYDVQQKFApJQ1AtQnJhc2lsMSowKAYDVQQLFCFTZWNyZXRhcmlhIGRh
+IFJlY2VpdGEgRmVkZXJhbC1TUkYxEzARBgNVBAsUClNSRiBlLUNOUEoxMzAxBgNVBAMTKklERUFT
+IFdPUksgSU5GT1JNQVRJQ0EgTFREQTowNzMwMTY3MTAwMDEzMTCBnzANBgkqhkiG9w0BAQEFAAOB
+jQAwgYkCgYEAt0U8gx2UBfEvrvxr7wrdrfmN1raO4JheOS1v5i/RuqGOLBpBya8U9Y2/93MPsDix
+4zyu9EUKFQIKwDPEeTifm6iePeeplQKDdrLMjw3kdycb6QJvwKeF5yy4r6GNq4swNBPqDaAYmxB7
+brwUfxYA63w3u747CmZdHdVmP0dx/2cCAwEAAaOCAmYwggJiMIG6BgNVHREEgbIwga+gPQYFYEwB
+AwSgNAQyMDIwNjE5NzA3ODA0Njc3NzY2ODAwMDAwMDAwMDAwMDAwMDAwMDAxNDAzODI0Q05UTUeg
+HgYFYEwBAwKgFQQTUk9CRVJUTyBESUFTIERVQVJURaAZBgVgTAEDA6AQBA4wNzMwMTY3MTAwMDEz
+MaAXBgVgTAEDB6AOBAwwMDAwMDAwMDAwMDCBGnJvYmVydG9AaWRlYXNhdHdvcmsuY29tLmJyMAkG
+A1UdEwQCMAAwHwYDVR0jBBgwFoAU3Tvb7Y2XEUVDAUNNtBL9Du54mnAwDgYDVR0PAQH/BAQDAgXg
+MIG2BgNVHR8Ega4wgaswVKBSoFCGTmh0dHA6Ly9pY3AtYnJhc2lsLmNlcnRpc2lnbi5jb20uYnIv
+cmVwb3NpdG9yaW8vbGNyL0FDUFJPREVNR0VTUkYvTGF0ZXN0Q1JMLmNybDBToFGgT4ZNaHR0cDov
+L2ljcC1icmFzaWwub3V0cmFsY3IuY29tLmJyL3JlcG9zaXRvcmlvL2xjci9BQ1BST0RFTUdFU1JG
+L0xhdGVzdENSTC5jcmwwVQYDVR0gBE4wTDBKBgZgTAECARcwQDA+BggrBgEFBQcCARYyaHR0cDov
+L2ljcC1icmFzaWwuY2VydGlzaWduLmNvbS5ici9yZXBvc2l0b3Jpby9kcGMwHQYDVR0lBBYwFAYI
+KwYBBQUHAwQGCCsGAQUFBwMCMDgGCCsGAQUFBwEBBCwwKjAoBggrBgEFBQcwAYYcaHR0cDovL29j
+c3AuY2VydGlzaWduLmNvbS5icjANBgkqhkiG9w0BAQUFAAOCAQEAnuq9Jifud6Omy3vtM+qT5Mmy
+yiZ0yvjygCAC+8cnU4Cm/kaXu3LKOCI4qbE2rTmiauNQhIZ5hD4jZ8j7CT/dESoyfaKmu6JXNH4k
+dQE0Zqpxfg7kDpvw0Uhnzn0N1cxCCnA9sjgxkeeOzlOT/0y7JWMfV8D+6oGcdpZrtTsi5ljKqOrd
+i4zCvaVFOlY5Qnb6J+QJZ89FjnlL0OwGBPiMO0jQf3uMMaKlvcv79ImAvUPH4rnS0c/YJ3DeUv/h
+KniOMJtbJ8ePq1k19fIFjXNSxFCNwTPo1mEM/y9axOraLGzt+BNJv83fbRzrEFgSs5cmVyn/esg5
+EKj7WJnSTEGG6A==</X509Certificate></X509Data></KeyInfo></Signature></NFe>
