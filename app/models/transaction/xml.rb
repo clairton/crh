@@ -29,7 +29,17 @@ class Transaction::Xml < ActiveRecord::Base
   def parse(file)
     Transaction::Xml.transaction do
       xml = REXML::Document.new file
-      ide = xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['ide']
+      if !xml.elements['nfeProc'].nil?
+        @rootTag = xml.elements['nfeProc'].elements['NFe']
+        @tooNameTag = 'nfeProc/NFe/'
+      elsif !xml.elements['NFe'].nil?
+        @rootTag = xml.elements['NFe']
+        @tooNameTag = 'NFe/'
+      else
+        @erros = 'não é um arquivo valido'
+        return false      
+      end
+      ide = @rootTag.elements['infNFe'].elements['ide']
 
       if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
         puts 'ja existe uma nota ' + ide.elements['nNF'].text()
@@ -44,9 +54,9 @@ class Transaction::Xml < ActiveRecord::Base
           #natureza da operacao
           :name => ide.elements['natOp'].text(),
           #total dos produtos
-          :goods => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text(),
+          :goods => @rootTag.elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vProd'].text(),
           #valor do financeiro, total da operacao
-          :tot => xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text()
+          :tot => @rootTag.elements['infNFe'].elements['total'].elements['ICMSTot'].elements['vNF'].text()
       )
       if !record.save()
         @errors = record.errors
@@ -68,14 +78,14 @@ class Transaction::Xml < ActiveRecord::Base
         return false
       end
       if !parse_issuer(
-          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['emit'],
+          @rootTag.elements['infNFe'].elements['emit'],
           record.id
       )
         puts 'erro ao salvar emitente '
         return false
       end
       if !parse_sender(
-          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['dest'],
+          @rootTag.elements['infNFe'].elements['dest'],
           record.id
       )
         puts 'erro ao salvar destinatario '
@@ -83,7 +93,7 @@ class Transaction::Xml < ActiveRecord::Base
       end
 
       if !parse_tot(
-          xml.elements['nfeProc'].elements['NFe'].elements['infNFe'].elements['total'].elements['ICMSTot'],
+          @rootTag.elements['infNFe'].elements['total'].elements['ICMSTot'],
           record.id
         )
         puts 'erro ao salvar os totais'
@@ -146,7 +156,7 @@ class Transaction::Xml < ActiveRecord::Base
     if @additional_despesa.nil?()
       @additional_despesa = Goods::Additional::Type.create(
         :name => 'DESPESAS',
-        :remark => 'Outras Despesas'
+        :remark => ' Despesas'
       )
       if !@additional_despesa.save()
         puts 'erro ao criar a instancia Valor Outras Despesas'
@@ -667,7 +677,7 @@ class Transaction::Xml < ActiveRecord::Base
       end
     end
     #percorre os elementos det que os produtos e servicos
-    xml.elements.each('nfeProc/NFe/infNFe/det') do |det|
+    xml.elements.each(@tooNameTag+'infNFe/det') do |det|
       if !goods = Goods::Item.find_by_code(det.elements['prod'].elements['cProd'].text())
         #cria o produtos/servico
         goods = Goods::Item.create(
@@ -850,12 +860,14 @@ class Transaction::Xml < ActiveRecord::Base
         puts 'icms do item'
         return false
       end
-      if !parse_item_ipi(
-        det.elements['imposto'].elements['IPI'],
-        @group_ipi.id,
-        item.id)
-        puts 'ipi do item'
-        return false
+      if !det.elements['imposto'].elements['IPI'].nil?
+        if !parse_item_ipi(
+          det.elements['imposto'].elements['IPI'],
+          @group_ipi.id,
+          item.id)
+          puts 'ipi do item'
+          return false
+        end
       end
       if !parse_item_cofins(
           det.elements['imposto'].elements['COFINS'],
@@ -1357,7 +1369,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_taxe_value
 
   def parse_financier(xml, record)
-    xml.elements.each('nfeProc/NFe/infNFe/cobr/dup') do |dup|
+    xml.elements.each(@tooNameTag+'infNFe/cobr/dup') do |dup|
       note = Financier::Note.create(
           #valor
           :original_value => dup.elements['vDup'].text(),
