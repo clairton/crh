@@ -114,7 +114,7 @@ end
 				goods_additional_types.id"
 		)
 		@additionalValue.each do |additionalValue|%>
-			<%@additionalTot[additionalValue.id] =  @additionalTot[additionalValue.id] + additionalValue.value%>
+			<%@additionalDet[additionalValue.id] =  additionalValue.value%>
 		<%end%>
 		<%@additionalTot.each_index do |i|%>
 			<%if !@additionalCab[i].nil?%>
