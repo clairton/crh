@@ -1,4 +1,4 @@
-<h3><%="#{I18n.t :Listing} #{:transaction_xmls}"%></h3>
+<h3><%="#{I18n.t :Listing} #{I18n.t :transaction_xmls}"%></h3>
 <p id="notice"><%= notice %></p>
 <table>
   <tr>
@@ -19,9 +19,9 @@
     <td><%= transaction_xml.name %></td>
     <td><%= transaction_xml.active %></td>
     <td><%= transaction_xml.remark %></td>
-    <td><%= link_to I18n.t :Show, transaction_xml %></td>
+    <!--<td><%= link_to I18n.t :Show, transaction_xml %></td>
     <td><%= link_to I18n.t :Edit, edit_transaction_xml_path(transaction_xml) %></td>
-    <td><%= link_to I18n.t :Destroy, transaction_xml, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t :Destroy, transaction_xml, :confirm => 'Are you sure?', :method => :delete %></td>-->
   </tr>
 <% end %>
 </table>
