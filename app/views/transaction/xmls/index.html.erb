@@ -3,10 +3,8 @@
 <table>
   <tr>
     <th>Id</th>
-    <th>Transaction record</th>
-    <th>Name</th>
-    <th>Active</th>
-    <th>Remark</th>
+    <th>Nota</th>
+    <th>Natureza Operacao</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,11 +15,7 @@
     <td><%= transaction_xml.id %></td>
     <td><%= transaction_xml.transaction_record_id %></td>
     <td><%= transaction_xml.name %></td>
-    <td><%= transaction_xml.active %></td>
-    <td><%= transaction_xml.remark %></td>
-    <td><%= link_to I18n.t :Show, transaction_xml %></td>
-    <td><%= link_to I18n.t :Edit, edit_transaction_xml_path(transaction_xml) %></td>
-    <td><%= link_to I18n.t :Destroy, transaction_xml, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to(I18n.t(:Destroy), transaction_xml, :confirm => I18n.t(:are_you_sure?), :method => :delete) %></td>
   </tr>
 <% end %>
 </table>
