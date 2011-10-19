@@ -1,8 +1,8 @@
 class Transaction::Goods::Additional < ActiveRecord::Base
-  belongs_to :Item, :class_name => "Transaction::Goods::Item"
-  has_many :Value, :class_name => "Goods::Additional::Value"
+  belongs_to :goodsAdditionalValue, :class_name => "Goods::Additional::Value", :dependent => :destroy, :foreign_key => "goods_additional_value_id"
+  belongs_to :transactionItem, :class_name => "Transaction::Goods::Item",:foreign_key=>"transaction_goods_item_id" ,:dependent => :destroy
   validates_presence_of :transaction_goods_item_id, :goods_additional_value_id
-  validates_associated :Item, :class_name => "Transaction::Goods::Item"
-  validates_associated :Value, :class_name => "Goods::Item::Additional::Value"
+  validates_associated :transactionItem, :class_name => "Transaction::Goods::Item",:foreign_key=>"transaction_goods_item_id" ,:dependent => :destroy
+  validates_associated :goodsAdditionalValue, :class_name => "Goods::Additional::Value", :dependent => :destroy, :foreign_key => "goods_additional_value_id"
   validates_uniqueness_of :goods_additional_value_id
 end

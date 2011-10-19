@@ -1,9 +1,8 @@
 class Transaction::Goods::Taxe < ActiveRecord::Base
-  belongs_to :Value, :class_name => "Taxe::Value"
-  belongs_to :Item, :class_name => "Transaction::Goods::Item"
-  validates_presence_of :transaction_goods_item_id
-  validates_presence_of :taxe_value_id
-  validates_associated :Value, :class_name => "Taxe::Value"
-  validates_associated :Item, :class_name => "Transaction::Goods::Item"
+  belongs_to :goodsTaxeValue, :class_name => "Taxe::Value", :dependent => :destroy, :foreign_key => "taxe_value_id"
+  belongs_to :transactionItem, :class_name => "Transaction::Goods::Item",:foreign_key=>"transaction_goods_item_id" ,:dependent => :destroy
+  validates_presence_of :transaction_goods_item_id, :taxe_value_id
+  validates_associated :goodsTaxeValue, :class_name => "Taxe::Value", :dependent => :destroy, :foreign_key => "taxe_value_id"
+  validates_associated :transactionItem, :class_name => "Transaction::Goods::Item",:foreign_key=>"transaction_goods_item_id" ,:dependent => :destroy
   validates_uniqueness_of :taxe_value_id
 end
