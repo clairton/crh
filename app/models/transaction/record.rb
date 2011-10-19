@@ -1,5 +1,5 @@
 class Transaction::Record < ActiveRecord::Base
-  has_many :Participant, :class_name => "Transaction::Participant"
+  has_many :transactionParticipant, :class_name => "Transaction::Participant", :dependent => :destroy, :foreign_key => "transaction_record_id"
   has_many :Financier, :class_name => "Transaction::Financier"
   has_many :Taxe, :class_name => "Transaction::Taxe"
   has_many :Tot, :class_name => "Transaction::Tot"
