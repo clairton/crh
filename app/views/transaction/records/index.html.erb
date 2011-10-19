@@ -117,6 +117,9 @@ end
 		<%end%>
 <%tot = tot + transaction_record.tot%>
 <%goods = goods + transaction_record.goods%>
+    <td><%= link_to(I18n.t(:Show), transaction_record)%></td>
+    <td><%= link_to(I18n.t(:Edit), edit_transaction_record_path(transaction_record))%></td>
+    <td><%= link_to(I18n.t(:Destroy), transaction_record, :confirm => I18n.t(:are_you_sure?), :method => :delete)%></td>
 	</tr>
 <% end %>
 	<tr style="border-top: 1px solid black;">

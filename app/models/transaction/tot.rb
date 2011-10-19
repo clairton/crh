@@ -1,8 +1,8 @@
 class Transaction::Tot < ActiveRecord::Base
-  belongs_to :Record, :class_name => "Transaction::Record::Record"
-  has_many :Value, :class_name => "Goods::Additional::Value"
+  belongs_to :transactionRecord, :class_name => "Transaction::Record", :foreign_key => "transaction_record_id"
+  belongs_to :goodsAdditionalValue, :class_name => "Goods::Additional::Value", :foreign_key => "goods_additional_value_id", :dependent => :destroy
   validates_presence_of :transaction_record_id, :goods_additional_value_id
-  validates_associated :Record, :class_name => "Transaction::Record"
-  validates_associated :Value, :class_name => "Goods::Item::Additional::Value"
+  validates_associated :transactionRecord, :class_name => "Transaction::Record", :foreign_key => "transaction_record_id"
+  validates_associated :goodsAdditionalValue, :class_name => "Goods::Additional::Value", :foreign_key => "goods_additional_value_id", :dependent => :destroy
   validates_uniqueness_of :goods_additional_value_id
 end
