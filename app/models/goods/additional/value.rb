@@ -1,7 +1,7 @@
 class Goods::Additional::Value < ActiveRecord::Base
-  belongs_to :Type, :class_name => "Goods::Additional::Type"
-  belongs_to :Additional, :class_name => "Transaction::Goods::Additional"
-  belongs_to :Tot, :class_name => "Transaction::Tot"
+  belongs_to :goodsAdditionalType, :class_name => "Goods::Additional::Type",:foreign_key => "goods_additional_type_id"
+  has_one :transactionGoodsAdditional, :class_name => "Transaction::Goods::Additional",:foreign_key => "goods_additional_type_id"
+  has_one :transactionTot, :class_name => "Transaction::Tot", :foreign_key => "goods_additional_type_id"
   validates_presence_of :goods_additional_type_id
-  validates_associated :Type, :class_name => "Goods::Additional::Type"
+  validates_associated :goodsAdditionalType, :class_name => "Goods::Additional::Type",:foreign_key => "goods_additional_type_id"
 end
