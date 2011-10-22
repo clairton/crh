@@ -80,6 +80,7 @@
     :transaction_tot =>  "Valor Adicional da NFe",
     :Tot => "Totalizador",
     :are_you_sure? => "Tem certeza?",
+    :remark => "Observação",
     # formatos de data e hora
     :date => {
       :formats => {
