@@ -19,7 +19,7 @@
     <td><%= transaction_goods_taxis.remark %></td>
     <td><%= link_to I18n.t(:Show), transaction_goods_taxis %></td>
     <td><%= link_to I18n.t(:Edit), edit_transaction_goods_taxis_path(transaction_goods_taxis) %></td>
-    <td><%= link_to 'Destroy', transaction_goods_taxis, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), transaction_goods_taxis, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

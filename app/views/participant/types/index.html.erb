@@ -19,7 +19,7 @@
     <td><%= participant_type.remark %></td>
     <td><%= link_to I18n.t(:Show), participant_type %></td>
     <td><%= link_to I18n.t(:Edit), edit_participant_type_path(participant_type) %></td>
-    <td><%= link_to 'Destroy', participant_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), participant_type, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

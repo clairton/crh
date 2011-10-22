@@ -17,7 +17,7 @@
     <td><%= goods_additional_type.remark %></td>
     <td><%= link_to I18n.t(:Show), goods_additional_type %></td>
     <td><%= link_to I18n.t(:Edit), edit_goods_additional_type_path(goods_additional_type) %></td>
-    <td><%= link_to 'Destroy', goods_additional_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), goods_additional_type, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
