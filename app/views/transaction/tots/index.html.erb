@@ -11,7 +11,7 @@
   <tr>
     <td><%= link_to I18n.t :Show, transaction_tot %></td>
     <td><%= link_to I18n.t :Edit, edit_transaction_tot_path(transaction_tot) %></td>
-    <td><%= link_to I18n.t :Destroy, transaction_tot, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t :Destroy, transaction_tot, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

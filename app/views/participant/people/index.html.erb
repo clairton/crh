@@ -25,7 +25,7 @@
     <td><%= participant_person.active %></td>
     <td><%= link_to I18n.t(:Show), participant_person %></td>
     <td><%= link_to I18n.t(:Edit), edit_participant_person_path(participant_person) %></td>
-    <td><%= link_to I18n.t(:Destroy), participant_person, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), participant_person, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

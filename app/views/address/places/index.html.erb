@@ -11,7 +11,7 @@
   <tr>
     <td><%= link_to I18n.t(:Show), address_place %></td>
     <td><%= link_to I18n.t(:Edit), edit_address_place_path(address_place) %></td>
-    <td><%= link_to I18n.t(:Destroy), address_place, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), address_place, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

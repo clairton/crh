@@ -15,7 +15,7 @@
     <td><%= participant_contact_email.email_user_id %></td>
     <td><%= link_to I18n.t(:Show), participant_contact_email %></td>
     <td><%= link_to I18n.t(:Edit), edit_participant_contact_email_path(participant_contact_email) %></td>
-    <td><%= link_to I18n.t(:Destroy), participant_contact_email, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), participant_contact_email, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

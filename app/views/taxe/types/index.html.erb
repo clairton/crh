@@ -19,7 +19,7 @@
     <td><%= taxe_type.taxe_group_id %></td>
     <td><%= link_to I18n.t(:Show), taxe_type %></td>
     <td><%= link_to I18n.t(:Edit), edit_taxe_type_path(taxe_type) %></td>
-    <td><%= link_to I18n.t(:Destroy), taxe_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), taxe_type, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

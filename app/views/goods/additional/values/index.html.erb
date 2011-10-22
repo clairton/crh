@@ -19,7 +19,7 @@
     <td><%= goods_additional_value.remark %></td>
     <td><%= link_to I18n.t(:Show), goods_additional_value %></td>
     <td><%= link_to I18n.t(:Edit), edit_goods_additional_value_path(goods_additional_value) %></td>
-    <td><%= link_to I18n.t(:Destroy), goods_additional_value, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to I18n.t(:Destroy), goods_additional_value, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
