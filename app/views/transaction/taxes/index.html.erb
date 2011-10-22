@@ -9,7 +9,7 @@
 
 <% @transaction_taxes.each do |transaction_taxis| %>
   <tr>
-    <td><%= link_to 'Show', transaction_taxis %></td>
+    <td><%= link_to I18n.t(:Show), transaction_taxis %></td>
     <td><%= link_to 'Edit', edit_transaction_taxis_path(transaction_taxis) %></td>
     <td><%= link_to 'Destroy', transaction_taxis, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

@@ -9,7 +9,7 @@
 
 <% @address_places.each do |address_place| %>
   <tr>
-    <td><%= link_to 'Show', address_place %></td>
+    <td><%= link_to I18n.t(:Show), address_place %></td>
     <td><%= link_to 'Edit', edit_address_place_path(address_place) %></td>
     <td><%= link_to 'Destroy', address_place, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

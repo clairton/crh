@@ -15,7 +15,7 @@
     <td><%= email_domain.name %></td>
     <td><%= email_domain.remark %></td>
     <td><%= email_domain.active %></td>
-    <td><%= link_to 'Show', email_domain %></td>
+    <td><%= link_to I18n.t(:Show), email_domain %></td>
     <td><%= link_to 'Edit', edit_email_domain_path(email_domain) %></td>
     <td><%= link_to 'Destroy', email_domain, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

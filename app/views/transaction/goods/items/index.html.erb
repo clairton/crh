@@ -27,7 +27,7 @@
     <td><%= transaction_goods_item.full_price %></td>
     <td><%= transaction_goods_item.active %></td>
     <td><%= transaction_goods_item.remark %></td>
-    <td><%= link_to 'Show', transaction_goods_item %></td>
+    <td><%= link_to I18n.t(:Show), transaction_goods_item %></td>
     <td><%= link_to 'Edit', edit_transaction_goods_item_path(transaction_goods_item) %></td>
     <td><%= link_to 'Destroy', transaction_goods_item, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
