@@ -18,7 +18,7 @@
     <td><%= email_user.active %></td>
     <td><%= email_user.password %></td>
     <td><%= link_to I18n.t(:Show), email_user %></td>
-    <td><%= link_to 'Edit', edit_email_user_path(email_user) %></td>
+    <td><%= link_to I18n.t(:Edit), edit_email_user_path(email_user) %></td>
     <td><%= link_to 'Destroy', email_user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

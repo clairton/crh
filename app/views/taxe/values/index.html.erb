@@ -18,7 +18,7 @@
     <td><%= taxe_value.basis %></td>
     <td><%= taxe_value.value %></td>
     <td><%= link_to I18n.t(:Show), taxe_value %></td>
-    <td><%= link_to 'Edit', edit_taxe_value_path(taxe_value) %></td>
+    <td><%= link_to I18n.t(:Edit), edit_taxe_value_path(taxe_value) %></td>
     <td><%= link_to 'Destroy', taxe_value, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

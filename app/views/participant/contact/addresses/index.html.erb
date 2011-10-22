@@ -20,7 +20,7 @@
     <td><%= participant_contact_address.remark %></td>
     <td><%= participant_contact_address.active %></td>
     <td><%= link_to I18n.t(:Show), participant_contact_address %></td>
-    <td><%= link_to 'Edit', edit_participant_contact_address_path(participant_contact_address) %></td>
+    <td><%= link_to I18n.t(:Edit), edit_participant_contact_address_path(participant_contact_address) %></td>
     <td><%= link_to 'Destroy', participant_contact_address, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
