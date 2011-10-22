@@ -82,6 +82,8 @@
     :are_you_sure? => "Tem certeza?",
     :remark => "Observação",
     :active => "Ativo",
+    :name => "Nome",
+    :code => "Código",
     # formatos de data e hora
     :date => {
       :formats => {
