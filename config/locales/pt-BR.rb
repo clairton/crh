@@ -81,6 +81,7 @@
     :Tot => "Totalizador",
     :are_you_sure? => "Tem certeza?",
     :remark => "Observação",
+    :active => "Ativo",
     # formatos de data e hora
     :date => {
       :formats => {
