@@ -12,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label I18n.t :first_name %><br />
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label I18n.t :last_name %><br />
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :nickname %><br />
+    <%= f.label I18n.t :nickname %><br />
     <%= f.text_field :nickname %>
   </div>
   <div class="field">
-    <%= f.label :birthday %><br />
+    <%= f.label I18n.t(:birthday) %><br />
     <%= f.date_select :birthday %>
   </div>
   <div class="field">

@@ -2,11 +2,13 @@
 {
   :'pt-BR' => {
     :New => "Novo",
+    :new => "Novo",
     :Back => "Voltar",
     :Destroy => "Excluir",
     :Show => "Mostar",
     :Edit => "Editar",
     :Listing => "Listando",
+    :listing => "Listando",
     :Editing => "Editando",
     :Transaction => "Transação",
     :Import => "Importar",
@@ -84,6 +86,11 @@
     :active => "Ativo",
     :name => "Nome",
     :code => "Código",
+    :birthday => "Aniversário",
+    :nickname => "Apelido",
+    :last_name => "Último Nome",
+    :first_name => "Primeiro Nome",
+    :person => "Pessoa",
     # formatos de data e hora
     :date => {
       :formats => {

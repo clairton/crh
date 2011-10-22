@@ -1,11 +1,11 @@
-<h3>Listando Pessoas</h3>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:person)}"%></h3>
 
 <table>
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Nickname</th>
-    <th>Birthday</th>
+    <th><%=I18n.t(:first_name)%></th>
+    <th><%=I18n.t(:last_name)%></th>
+    <th><%=I18n.t(:nickname)%></th>
+    <th><%=I18n.t(:birthday)%></th>
     <th><%=I18n.t(:code)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th><%=I18n.t(:active)%></th>
@@ -32,4 +32,4 @@
 
 <br />
 
-<%= link_to 'New Person', new_participant_person_path %>
+<%= link_to "#{I18n.t(:new)} #{I18n.t(:person)}", new_participant_person_path %>
