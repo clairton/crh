@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Transaction::RecordTaxesControllerTest < ActionController::TestCase
+class Transaction::recordTaxesControllerTest < ActionController::TestCase
   setup do
     @transaction_record_taxis = transaction_record_taxes(:one)
   end
@@ -17,7 +17,7 @@ class Transaction::RecordTaxesControllerTest < ActionController::TestCase
   end
 
   test "should create transaction_record_taxis" do
-    assert_difference('Transaction::RecordTaxe.count') do
+    assert_difference('Transaction::recordTaxe.count') do
       post :create, :transaction_record_taxis => @transaction_record_taxis.attributes
     end
 
@@ -40,7 +40,7 @@ class Transaction::RecordTaxesControllerTest < ActionController::TestCase
   end
 
   test "should destroy transaction_record_taxis" do
-    assert_difference('Transaction::RecordTaxe.count', -1) do
+    assert_difference('Transaction::recordTaxe.count', -1) do
       delete :destroy, :id => @transaction_record_taxis.to_param
     end
 

@@ -17,9 +17,9 @@
     <td><%= transaction_participant.transaction_record %></td>
     <td><%= transaction_participant.active %></td>
     <td><%= transaction_participant.remark %></td>
-    <td><%= link_to I18n.t(:Show), transaction_participant %></td>
-    <td><%= link_to I18n.t(:Edit), edit_transaction_participant_path(transaction_participant) %></td>
-    <td><%= link_to I18n.t(:Destroy), transaction_participant, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), transaction_participant %></td>
+    <td><%= link_to I18n.t(:edit), edit_transaction_participant_path(transaction_participant) %></td>
+    <td><%= link_to I18n.t(:destroy), transaction_participant, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

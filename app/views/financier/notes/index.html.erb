@@ -19,9 +19,9 @@
     <td><%= financier_note.creation_date %></td>
     <td><%= financier_note.name %></td>
     <td><%= financier_note.number %></td>
-    <td><%= link_to I18n.t(:Show), financier_note %></td>
-    <td><%= link_to I18n.t(:Edit), edit_financier_note_path(financier_note) %></td>
-    <td><%= link_to I18n.t(:Destroy), financier_note, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), financier_note %></td>
+    <td><%= link_to I18n.t(:edit), edit_financier_note_path(financier_note) %></td>
+    <td><%= link_to I18n.t(:destroy), financier_note, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

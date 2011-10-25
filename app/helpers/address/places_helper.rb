@@ -1,2 +1,2 @@
-module Address::PlacesHelper
+module Address::placesHelper
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Participant::TypeTest < ActiveSupport::TestCase
+class Participant::typeTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

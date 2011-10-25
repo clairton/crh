@@ -1,9 +1,9 @@
-class Participant::Contact::TypesController < ApplicationController
+class Participant::Contact::typesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /participant/contact/types
   # GET /participant/contact/types.xml
   def index
-    @participant_contact_types = Participant::Contact::Type.all
+    @participant_contact_types = Participant::Contact::type.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Participant::Contact::TypesController < ApplicationController
   # GET /participant/contact/types/1
   # GET /participant/contact/types/1.xml
   def show
-    @participant_contact_type = Participant::Contact::Type.find(params[:id])
+    @participant_contact_type = Participant::Contact::type.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Participant::Contact::TypesController < ApplicationController
   # GET /participant/contact/types/new
   # GET /participant/contact/types/new.xml
   def new
-    @participant_contact_type = Participant::Contact::Type.new
+    @participant_contact_type = Participant::Contact::type.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Participant::Contact::TypesController < ApplicationController
 
   # GET /participant/contact/types/1/edit
   def edit
-    @participant_contact_type = Participant::Contact::Type.find(params[:id])
+    @participant_contact_type = Participant::Contact::type.find(params[:id])
   end
 
   # POST /participant/contact/types
   # POST /participant/contact/types.xml
   def create
-    @participant_contact_type = Participant::Contact::Type.new(params[:participant_contact_type])
+    @participant_contact_type = Participant::Contact::type.new(params[:participant_contact_type])
 
     respond_to do |format|
       if @participant_contact_type.save
@@ -57,7 +57,7 @@ class Participant::Contact::TypesController < ApplicationController
   # PUT /participant/contact/types/1
   # PUT /participant/contact/types/1.xml
   def update
-    @participant_contact_type = Participant::Contact::Type.find(params[:id])
+    @participant_contact_type = Participant::Contact::type.find(params[:id])
 
     respond_to do |format|
       if @participant_contact_type.update_attributes(params[:participant_contact_type])
@@ -73,7 +73,7 @@ class Participant::Contact::TypesController < ApplicationController
   # DELETE /participant/contact/types/1
   # DELETE /participant/contact/types/1.xml
   def destroy
-    @participant_contact_type = Participant::Contact::Type.find(params[:id])
+    @participant_contact_type = Participant::Contact::type.find(params[:id])
     @participant_contact_type.destroy
 
     respond_to do |format|

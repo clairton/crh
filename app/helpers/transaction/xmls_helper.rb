@@ -1,2 +1,2 @@
-module Transaction::XmlsHelper
+module Transaction::xmlsHelper
 end

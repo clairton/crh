@@ -1,9 +1,9 @@
-class Participant::Contact::AddressesController < ApplicationController
+class Participant::Contact::addressesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /participant/contact/addresses
   # GET /participant/contact/addresses.xml
   def index
-    @participant_contact_addresses = Participant::Contact::Address.all
+    @participant_contact_addresses = Participant::Contact::address.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Participant::Contact::AddressesController < ApplicationController
   # GET /participant/contact/addresses/1
   # GET /participant/contact/addresses/1.xml
   def show
-    @participant_contact_address = Participant::Contact::Address.find(params[:id])
+    @participant_contact_address = Participant::Contact::address.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Participant::Contact::AddressesController < ApplicationController
   # GET /participant/contact/addresses/new
   # GET /participant/contact/addresses/new.xml
   def new
-    @participant_contact_address = Participant::Contact::Address.new
+    @participant_contact_address = Participant::Contact::address.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Participant::Contact::AddressesController < ApplicationController
 
   # GET /participant/contact/addresses/1/edit
   def edit
-    @participant_contact_address = Participant::Contact::Address.find(params[:id])
+    @participant_contact_address = Participant::Contact::address.find(params[:id])
   end
 
   # POST /participant/contact/addresses
   # POST /participant/contact/addresses.xml
   def create
-    @participant_contact_address = Participant::Contact::Address.new(params[:participant_contact_address])
+    @participant_contact_address = Participant::Contact::address.new(params[:participant_contact_address])
 
     respond_to do |format|
       if @participant_contact_address.save
@@ -57,7 +57,7 @@ class Participant::Contact::AddressesController < ApplicationController
   # PUT /participant/contact/addresses/1
   # PUT /participant/contact/addresses/1.xml
   def update
-    @participant_contact_address = Participant::Contact::Address.find(params[:id])
+    @participant_contact_address = Participant::Contact::address.find(params[:id])
 
     respond_to do |format|
       if @participant_contact_address.update_attributes(params[:participant_contact_address])
@@ -73,7 +73,7 @@ class Participant::Contact::AddressesController < ApplicationController
   # DELETE /participant/contact/addresses/1
   # DELETE /participant/contact/addresses/1.xml
   def destroy
-    @participant_contact_address = Participant::Contact::Address.find(params[:id])
+    @participant_contact_address = Participant::Contact::address.find(params[:id])
     @participant_contact_address.destroy
 
     respond_to do |format|

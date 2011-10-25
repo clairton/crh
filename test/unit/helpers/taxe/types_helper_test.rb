@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Taxe::TypesHelperTest < ActionView::TestCase
+class Taxe::typesHelperTest < ActionView::TestCase
 end

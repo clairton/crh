@@ -1,2 +1,2 @@
-module Transaction::TotsHelper
+module Transaction::totsHelper
 end

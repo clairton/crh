@@ -15,9 +15,9 @@
     <td><%= participant_contact_type.name %></td>
     <td><%= participant_contact_type.active %></td>
     <td><%= participant_contact_type.remark %></td>
-    <td><%= link_to I18n.t(:Show), participant_contact_type %></td>
-    <td><%= link_to I18n.t(:Edit), edit_participant_contact_type_path(participant_contact_type) %></td>
-    <td><%= link_to I18n.t(:Destroy), participant_contact_type, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), participant_contact_type %></td>
+    <td><%= link_to I18n.t(:edit), edit_participant_contact_type_path(participant_contact_type) %></td>
+    <td><%= link_to I18n.t(:destroy), participant_contact_type, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

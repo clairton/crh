@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Transaction::XmlsControllerTest < ActionController::TestCase
+class Transaction::xmlsControllerTest < ActionController::TestCase
   setup do
     @transaction_xml = transaction_xmls(:one)
   end
@@ -17,7 +17,7 @@ class Transaction::XmlsControllerTest < ActionController::TestCase
   end
 
   test "should create transaction_xml" do
-    assert_difference('Transaction::Xml.count') do
+    assert_difference('Transaction::xml.count') do
       post :create, :transaction_xml => @transaction_xml.attributes
     end
 
@@ -40,7 +40,7 @@ class Transaction::XmlsControllerTest < ActionController::TestCase
   end
 
   test "should destroy transaction_xml" do
-    assert_difference('Transaction::Xml.count', -1) do
+    assert_difference('Transaction::xml.count', -1) do
       delete :destroy, :id => @transaction_xml.to_param
     end
 

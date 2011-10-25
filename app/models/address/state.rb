@@ -1,5 +1,5 @@
-class Address::State < Address::Place
+class Address::state < Address::place
   validates_presence_of :address_place_id
-  has_many :City, :class_name => "Address::City"
-  #validates_associated :Country, :class_name => "Address::Country"
+  has_many :city, :class_name => "Address::city"
+  #validates_associated :country, :class_name => "Address::country"
 end

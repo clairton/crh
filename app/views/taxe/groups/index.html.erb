@@ -15,9 +15,9 @@
     <td><%= taxe_group.name %></td>
     <td><%= taxe_group.remark %></td>
     <td><%= taxe_group.active %></td>
-    <td><%= link_to I18n.t(:Show), taxe_group %></td>
-    <td><%= link_to I18n.t(:Edit), edit_taxe_group_path(taxe_group) %></td>
-    <td><%= link_to I18n.t(:Destroy), taxe_group, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), taxe_group %></td>
+    <td><%= link_to I18n.t(:edit), edit_taxe_group_path(taxe_group) %></td>
+    <td><%= link_to I18n.t(:destroy), taxe_group, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -1,9 +1,9 @@
-class Goods::Additional::TypesController < ApplicationController
+class Goods::Additional::typesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /goods/additional/types
   # GET /goods/additional/types.xml
   def index
-    @goods_additional_types = Goods::Additional::Type.all
+    @goods_additional_types = Goods::Additional::type.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Goods::Additional::TypesController < ApplicationController
   # GET /goods/additional/types/1
   # GET /goods/additional/types/1.xml
   def show
-    @goods_additional_type = Goods::Additional::Type.find(params[:id])
+    @goods_additional_type = Goods::Additional::type.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Goods::Additional::TypesController < ApplicationController
   # GET /goods/additional/types/new
   # GET /goods/additional/types/new.xml
   def new
-    @goods_additional_type = Goods::Additional::Type.new
+    @goods_additional_type = Goods::Additional::type.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Goods::Additional::TypesController < ApplicationController
 
   # GET /goods/additional/types/1/edit
   def edit
-    @goods_additional_type = Goods::Additional::Type.find(params[:id])
+    @goods_additional_type = Goods::Additional::type.find(params[:id])
   end
 
   # POST /goods/additional/types
   # POST /goods/additional/types.xml
   def create
-    @goods_additional_type = Goods::Additional::Type.new(params[:goods_additional_type])
+    @goods_additional_type = Goods::Additional::type.new(params[:goods_additional_type])
 
     respond_to do |format|
       if @goods_additional_type.save
@@ -57,7 +57,7 @@ class Goods::Additional::TypesController < ApplicationController
   # PUT /goods/additional/types/1
   # PUT /goods/additional/types/1.xml
   def update
-    @goods_additional_type = Goods::Additional::Type.find(params[:id])
+    @goods_additional_type = Goods::Additional::type.find(params[:id])
 
     respond_to do |format|
       if @goods_additional_type.update_attributes(params[:goods_additional_type])
@@ -73,7 +73,7 @@ class Goods::Additional::TypesController < ApplicationController
   # DELETE /goods/additional/types/1
   # DELETE /goods/additional/types/1.xml
   def destroy
-    @goods_additional_type = Goods::Additional::Type.find(params[:id])
+    @goods_additional_type = Goods::Additional::type.find(params[:id])
     @goods_additional_type.destroy
 
     respond_to do |format|

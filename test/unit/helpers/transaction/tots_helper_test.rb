@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Transaction::TotsHelperTest < ActionView::TestCase
+class Transaction::totsHelperTest < ActionView::TestCase
 end

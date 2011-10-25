@@ -1,9 +1,9 @@
-class Address::PlacesController < ApplicationController
+class Address::placesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /address/places
   # GET /address/places.xml
   def index
-    @address_places = Address::Place.all
+    @address_places = Address::place.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Address::PlacesController < ApplicationController
   # GET /address/places/1
   # GET /address/places/1.xml
   def show
-    @address_place = Address::Place.find(params[:id])
+    @address_place = Address::place.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Address::PlacesController < ApplicationController
   # GET /address/places/new
   # GET /address/places/new.xml
   def new
-    @address_place = Address::Place.new
+    @address_place = Address::place.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Address::PlacesController < ApplicationController
 
   # GET /address/places/1/edit
   def edit
-    @address_place = Address::Place.find(params[:id])
+    @address_place = Address::place.find(params[:id])
   end
 
   # POST /address/places
   # POST /address/places.xml
   def create
-    @address_place = Address::Place.new(params[:address_place])
+    @address_place = Address::place.new(params[:address_place])
 
     respond_to do |format|
       if @address_place.save
@@ -57,7 +57,7 @@ class Address::PlacesController < ApplicationController
   # PUT /address/places/1
   # PUT /address/places/1.xml
   def update
-    @address_place = Address::Place.find(params[:id])
+    @address_place = Address::place.find(params[:id])
 
     respond_to do |format|
       if @address_place.update_attributes(params[:address_place])
@@ -73,7 +73,7 @@ class Address::PlacesController < ApplicationController
   # DELETE /address/places/1
   # DELETE /address/places/1.xml
   def destroy
-    @address_place = Address::Place.find(params[:id])
+    @address_place = Address::place.find(params[:id])
     @address_place.destroy
 
     respond_to do |format|

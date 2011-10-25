@@ -1,2 +1,2 @@
-module Taxe::TypesHelper
+module Taxe::typesHelper
 end

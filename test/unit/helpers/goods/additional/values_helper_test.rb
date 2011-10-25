@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Goods::Additional::ValuesHelperTest < ActionView::TestCase
+class Goods::Additional::valuesHelperTest < ActionView::TestCase
 end

@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Transaction::XmlsHelperTest < ActionView::TestCase
+class Transaction::xmlsHelperTest < ActionView::TestCase
 end

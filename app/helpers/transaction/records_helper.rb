@@ -1,2 +1,2 @@
-module Transaction::RecordsHelper
+module Transaction::recordsHelper
 end

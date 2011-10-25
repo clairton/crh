@@ -1,2 +1,2 @@
-class Participant::Delivery < Participant::Type
+class Participant::delivery < Participant::type
 end

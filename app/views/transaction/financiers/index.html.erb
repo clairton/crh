@@ -13,9 +13,9 @@
   <tr>
     <td><%= transaction_financier.financier_note_id %></td>
     <td><%= transaction_financier.transaction_record_id %></td>
-    <td><%= link_to I18n.t(:Show), transaction_financier %></td>
-    <td><%= link_to I18n.t(:Edit), edit_transaction_financier_path(transaction_financier) %></td>
-    <td><%= link_to I18n.t(:Destroy), transaction_financier, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), transaction_financier %></td>
+    <td><%= link_to I18n.t(:edit), edit_transaction_financier_path(transaction_financier) %></td>
+    <td><%= link_to I18n.t(:destroy), transaction_financier, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

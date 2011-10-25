@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Address::PlacesControllerTest < ActionController::TestCase
+class Address::placesControllerTest < ActionController::TestCase
   setup do
     @address_place = address_places(:one)
   end
@@ -17,7 +17,7 @@ class Address::PlacesControllerTest < ActionController::TestCase
   end
 
   test "should create address_place" do
-    assert_difference('Address::Place.count') do
+    assert_difference('Address::place.count') do
       post :create, :address_place => @address_place.attributes
     end
 
@@ -40,7 +40,7 @@ class Address::PlacesControllerTest < ActionController::TestCase
   end
 
   test "should destroy address_place" do
-    assert_difference('Address::Place.count', -1) do
+    assert_difference('Address::place.count', -1) do
       delete :destroy, :id => @address_place.to_param
     end
 

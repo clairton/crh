@@ -1,4 +1,4 @@
-<h3><%="#{I18n.t :Listing} #{I18n.t :transaction_tots}"%></h3>
+<h3><%="#{I18n.t :listing} #{I18n.t :transaction_tots}"%></h3>
 
 <table>
   <tr>
@@ -9,13 +9,13 @@
 
 <% @transaction_tots.each do |transaction_tot| %>
   <tr>
-    <td><%= link_to I18n.t :Show, transaction_tot %></td>
-    <td><%= link_to I18n.t :Edit, edit_transaction_tot_path(transaction_tot) %></td>
-    <td><%= link_to I18n.t :Destroy, transaction_tot, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t :show, transaction_tot %></td>
+    <td><%= link_to I18n.t :edit, edit_transaction_tot_path(transaction_tot) %></td>
+    <td><%= link_to I18n.t :destroy, transaction_tot, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to "#{I18n.t :New} #{I18n.t :Tot}", new_transaction_tot_path %>
+<%= link_to "#{I18n.t :new} #{I18n.t :tot}", new_transaction_tot_path %>

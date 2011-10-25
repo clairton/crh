@@ -1,9 +1,9 @@
-class Transaction::RecordTaxesController < ApplicationController
+class Transaction::recordTaxesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/record_taxes
   # GET /transaction/record_taxes.xml
   def index
-    @transaction_record_taxes = Transaction::RecordTaxe.all
+    @transaction_record_taxes = Transaction::recordTaxe.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Transaction::RecordTaxesController < ApplicationController
   # GET /transaction/record_taxes/1
   # GET /transaction/record_taxes/1.xml
   def show
-    @transaction_record_taxis = Transaction::RecordTaxe.find(params[:id])
+    @transaction_record_taxis = Transaction::recordTaxe.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Transaction::RecordTaxesController < ApplicationController
   # GET /transaction/record_taxes/new
   # GET /transaction/record_taxes/new.xml
   def new
-    @transaction_record_taxis = Transaction::RecordTaxe.new
+    @transaction_record_taxis = Transaction::recordTaxe.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Transaction::RecordTaxesController < ApplicationController
 
   # GET /transaction/record_taxes/1/edit
   def edit
-    @transaction_record_taxis = Transaction::RecordTaxe.find(params[:id])
+    @transaction_record_taxis = Transaction::recordTaxe.find(params[:id])
   end
 
   # POST /transaction/record_taxes
   # POST /transaction/record_taxes.xml
   def create
-    @transaction_record_taxis = Transaction::RecordTaxe.new(params[:transaction_record_taxis])
+    @transaction_record_taxis = Transaction::recordTaxe.new(params[:transaction_record_taxis])
 
     respond_to do |format|
       if @transaction_record_taxis.save
@@ -57,7 +57,7 @@ class Transaction::RecordTaxesController < ApplicationController
   # PUT /transaction/record_taxes/1
   # PUT /transaction/record_taxes/1.xml
   def update
-    @transaction_record_taxis = Transaction::RecordTaxe.find(params[:id])
+    @transaction_record_taxis = Transaction::recordTaxe.find(params[:id])
 
     respond_to do |format|
       if @transaction_record_taxis.update_attributes(params[:transaction_record_taxis])
@@ -73,7 +73,7 @@ class Transaction::RecordTaxesController < ApplicationController
   # DELETE /transaction/record_taxes/1
   # DELETE /transaction/record_taxes/1.xml
   def destroy
-    @transaction_record_taxis = Transaction::RecordTaxe.find(params[:id])
+    @transaction_record_taxis = Transaction::recordTaxe.find(params[:id])
     @transaction_record_taxis.destroy
 
     respond_to do |format|

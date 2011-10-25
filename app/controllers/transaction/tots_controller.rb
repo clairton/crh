@@ -1,9 +1,9 @@
-class Transaction::TotsController < ApplicationController
+class Transaction::totsController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/tots
   # GET /transaction/tots.xml
   def index
-    @transaction_tots = Transaction::Tot.all
+    @transaction_tots = Transaction::tot.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Transaction::TotsController < ApplicationController
   # GET /transaction/tots/1
   # GET /transaction/tots/1.xml
   def show
-    @transaction_tot = Transaction::Tot.find(params[:id])
+    @transaction_tot = Transaction::tot.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Transaction::TotsController < ApplicationController
   # GET /transaction/tots/new
   # GET /transaction/tots/new.xml
   def new
-    @transaction_tot = Transaction::Tot.new
+    @transaction_tot = Transaction::tot.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Transaction::TotsController < ApplicationController
 
   # GET /transaction/tots/1/edit
   def edit
-    @transaction_tot = Transaction::Tot.find(params[:id])
+    @transaction_tot = Transaction::tot.find(params[:id])
   end
 
   # POST /transaction/tots
   # POST /transaction/tots.xml
   def create
-    @transaction_tot = Transaction::Tot.new(params[:transaction_tot])
+    @transaction_tot = Transaction::tot.new(params[:transaction_tot])
 
     respond_to do |format|
       if @transaction_tot.save
@@ -57,7 +57,7 @@ class Transaction::TotsController < ApplicationController
   # PUT /transaction/tots/1
   # PUT /transaction/tots/1.xml
   def update
-    @transaction_tot = Transaction::Tot.find(params[:id])
+    @transaction_tot = Transaction::tot.find(params[:id])
 
     respond_to do |format|
       if @transaction_tot.update_attributes(params[:transaction_tot])
@@ -73,7 +73,7 @@ class Transaction::TotsController < ApplicationController
   # DELETE /transaction/tots/1
   # DELETE /transaction/tots/1.xml
   def destroy
-    @transaction_tot = Transaction::Tot.find(params[:id])
+    @transaction_tot = Transaction::tot.find(params[:id])
     @transaction_tot.destroy
 
     respond_to do |format|

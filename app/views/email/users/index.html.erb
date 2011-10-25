@@ -17,9 +17,9 @@
     <td><%= email_user.remark %></td>
     <td><%= email_user.active %></td>
     <td><%= email_user.password %></td>
-    <td><%= link_to I18n.t(:Show), email_user %></td>
-    <td><%= link_to I18n.t(:Edit), edit_email_user_path(email_user) %></td>
-    <td><%= link_to I18n.t(:Destroy), email_user, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), email_user %></td>
+    <td><%= link_to I18n.t(:edit), edit_email_user_path(email_user) %></td>
+    <td><%= link_to I18n.t(:destroy), email_user, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

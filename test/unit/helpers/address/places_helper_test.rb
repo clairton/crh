@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Address::PlacesHelperTest < ActionView::TestCase
+class Address::placesHelperTest < ActionView::TestCase
 end

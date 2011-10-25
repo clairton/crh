@@ -1,9 +1,9 @@
-class Transaction::XmlsController < ApplicationController
+class Transaction::xmlsController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /transaction/xmls
   # GET /transaction/xmls.xml
   def index
-    @transaction_xmls = Transaction::Xml.all
+    @transaction_xmls = Transaction::xml.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Transaction::XmlsController < ApplicationController
   # GET /transaction/xmls/1
   # GET /transaction/xmls/1.xml
   def show
-    @transaction_xml = Transaction::Xml.find(params[:id])
+    @transaction_xml = Transaction::xml.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Transaction::XmlsController < ApplicationController
   # GET /transaction/xmls/new
   # GET /transaction/xmls/new.xml
   def new
-    @transaction_xml = Transaction::Xml.new
+    @transaction_xml = Transaction::xml.new
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @transaction_xml }
@@ -34,13 +34,13 @@ class Transaction::XmlsController < ApplicationController
 
   # GET /transaction/xmls/1/edit
   def edit
-    @transaction_xml = Transaction::Xml.find(params[:id])
+    @transaction_xml = Transaction::xml.find(params[:id])
   end
 
   # POST /transaction/xmls
   # POST /transaction/xmls.xml
   def create
-    @transaction_xml = Transaction::Xml.new
+    @transaction_xml = Transaction::xml.new
     respond_to do |format|
       if @transaction_xml.parse(params[:transaction_xml][:xml].open)
         format.html { redirect_to(@transaction_xml, :notice => 'Importado com Sucesso!!!') }
@@ -55,8 +55,8 @@ class Transaction::XmlsController < ApplicationController
   # PUT /transaction/xmls/1
   # PUT /transaction/xmls/1.xml
   def update
-    Transaction::Xml.transaction do
-      @transaction_xml = Transaction::Xml.find(params[:id])
+    Transaction::xml.transaction do
+      @transaction_xml = Transaction::xml.find(params[:id])
       respond_to do |format|
         if @transaction_xml.parse(params[:transaction_xml][:xml].open) and @transaction_xml.update_attributes(params[:transaction_xml])
           format.html { redirect_to(@transaction_xml, :notice => 'Xml was successfully updated.') }
@@ -72,7 +72,7 @@ class Transaction::XmlsController < ApplicationController
   # DELETE /transaction/xmls/1
   # DELETE /transaction/xmls/1.xml
   def destroy
-    @transaction_xml = Transaction::Xml.find(params[:id])
+    @transaction_xml = Transaction::xml.find(params[:id])
     @transaction_xml.destroy
 
     respond_to do |format|

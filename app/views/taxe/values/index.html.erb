@@ -17,9 +17,9 @@
     <td><%= taxe_value.percentage %></td>
     <td><%= taxe_value.basis %></td>
     <td><%= taxe_value.value %></td>
-    <td><%= link_to I18n.t(:Show), taxe_value %></td>
-    <td><%= link_to I18n.t(:Edit), edit_taxe_value_path(taxe_value) %></td>
-    <td><%= link_to I18n.t(:Destroy), taxe_value, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
+    <td><%= link_to I18n.t(:show), taxe_value %></td>
+    <td><%= link_to I18n.t(:edit), edit_taxe_value_path(taxe_value) %></td>
+    <td><%= link_to I18n.t(:destroy), taxe_value, :confirm => I18n.t(:are_you_sure?), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

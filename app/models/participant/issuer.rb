@@ -1,2 +1,2 @@
-class Participant::Issuer < Participant::Type
+class Participant::issuer < Participant::type
 end

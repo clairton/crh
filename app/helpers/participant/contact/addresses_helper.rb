@@ -1,2 +1,2 @@
-module Participant::Contact::AddressesHelper
+module Participant::Contact::addressesHelper
 end
