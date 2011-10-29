@@ -3,16 +3,16 @@ Crh::Application.routes.draw do
   devise_for :users, :path_names => { :sign_up => "register" }
   #tag root
   root :to => "home#index"
-  
+
   namespace :participant do resources :types end
 
   namespace :transaction do resources :taxes end
 
   namespace :transaction do resources :tots end
 
-  match '/transaction/records/report' => Transaction::recordsController.action(:report)
-  match '/transaction/records/filter' => Transaction::recordsController.action(:filter)
-  
+  match '/transaction/records/report' => Transaction::RecordsController.action(:report)
+  match '/transaction/records/filter' => Transaction::RecordsController.action(:filter)
+
   namespace :transaction do resources :records end
 
   namespace :transaction do  namespace :goods do resources :additionals end end
@@ -114,3 +114,4 @@ Crh::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
 end
+

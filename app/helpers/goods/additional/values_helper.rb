@@ -1,2 +1,3 @@
-module Goods::Additional::valuesHelper
+module Goods::Additional::ValuesHelper
 end
+

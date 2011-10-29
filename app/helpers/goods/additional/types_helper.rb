@@ -1,2 +1,3 @@
-module Goods::Additional::typesHelper
+module Goods::Additional::TypesHelper
 end
+

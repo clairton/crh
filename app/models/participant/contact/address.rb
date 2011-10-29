@@ -1,4 +1,4 @@
-class Participant::Contact::address < ActiveRecord::Base
+class Participant::Contact::Address < ActiveRecord::Base
   belongs_to :street, :class_name => "Address::street"
   belongs_to :type, :class_name => "Participant::Contact::type"
   belongs_to :Person, :class_name => "Participant::Person"
@@ -6,3 +6,4 @@ class Participant::Contact::address < ActiveRecord::Base
   validates_presence_of :participant_contact_type_id
   validates_uniqueness_of :address_place_id
 end
+

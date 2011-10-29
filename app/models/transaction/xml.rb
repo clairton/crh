@@ -19,16 +19,16 @@ require 'participant/contact'
 require 'participant/contact/address'
 require 'participant/contact/email'
 require 'participant/contact/type'
-class Transaction::xml < ActiveRecord::Base
-  belongs_to :transactionRecord, :class_name => 'Transaction::record', :dependent => :destroy , :foreign_key => "transaction_record_id"
+class Transaction::Xml < ActiveRecord::Base
+  belongs_to :transactionRecord, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
   validates_uniqueness_of :transaction_record_id, :name
-  validates_associated :transactionRecord, :class_name => 'Transaction::record', :dependent => :destroy , :foreign_key => "transaction_record_id"
+  validates_associated :transactionRecord, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
   #has_attached_file :xml
 
   public
   def parse(file)
-    Transaction::xml.transaction do
+    Transaction::Xml.transaction do
       xml = REXML::Document.new file
       if !xml.elements['nfeProc'].nil?
         @rootTag = xml.elements['nfeProc'].elements['NFe']
@@ -38,16 +38,16 @@ class Transaction::xml < ActiveRecord::Base
         @tooNameTag = 'NFe/'
       else
         @erros = 'não é um arquivo valido'
-        return false      
+        return false
       end
       ide = @rootTag.elements['infNFe'].elements['ide']
 
-      if(record = Transaction::record.find_by_code(ide.elements['nNF'].text()))
+      if(record = Transaction::Record.find_by_code(ide.elements['nNF'].text()))
         puts 'ja existe uma nota ' + ide.elements['nNF'].text()
         return false
       end
       #corpo da nota
-      record = Transaction::record.create(
+      record = Transaction::Record.create(
           #data de emissao
           :creation_date => ide.elements['dEmi'].text(),
           #número da nota fiscal
@@ -68,7 +68,7 @@ class Transaction::xml < ActiveRecord::Base
       end
 
 
-      Transaction::xml.create(
+      Transaction::Xml.create(
         :transaction_record_id => record.id(),
         :content => file.read,
         :name => ide.elements['nNF'].text()
@@ -117,9 +117,9 @@ class Transaction::xml < ActiveRecord::Base
 
   private
   def parse_create_instances
-    @additional_total = Goods::Additional::type.find_by_name('TOTAL')
+    @additional_total = Goods::Additional::Type.find_by_name('TOTAL')
     if @additional_total.nil?()
-      @additional_total = Goods::Additional::type.create(
+      @additional_total = Goods::Additional::Type.create(
         :name => 'TOTAL',
         :remark => 'Total Produtos/Servicos'
       )
@@ -129,9 +129,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @additional_financeiro = Goods::Additional::type.find_by_name('FINANCEIRO')
+    @additional_financeiro = Goods::Additional::Type.find_by_name('FINANCEIRO')
     if @additional_financeiro.nil?()
-      @additional_financeiro = Goods::Additional::type.create(
+      @additional_financeiro = Goods::Additional::Type.create(
         :name => 'FINANCEIRO',
         :remark => 'Total Financeiro'
       )
@@ -141,9 +141,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @additional_frete = Goods::Additional::type.find_by_name('FRETE')
+    @additional_frete = Goods::Additional::Type.find_by_name('FRETE')
     if @additional_frete.nil?()
-     @additional_frete = Goods::Additional::type.create(
+     @additional_frete = Goods::Additional::Type.create(
         :name => 'FRETE',
         :remark => 'Frete'
       )
@@ -153,9 +153,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @additional_despesa = Goods::Additional::type.find_by_name('DESPESAS')
+    @additional_despesa = Goods::Additional::Type.find_by_name('DESPESAS')
     if @additional_despesa.nil?()
-      @additional_despesa = Goods::Additional::type.create(
+      @additional_despesa = Goods::Additional::Type.create(
         :name => 'DESPESAS',
         :remark => ' Despesas'
       )
@@ -165,9 +165,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @additional_seguro = Goods::Additional::type.find_by_name('SEGURO')
+    @additional_seguro = Goods::Additional::Type.find_by_name('SEGURO')
     if @additional_seguro.nil?()
-      @additional_seguro = Goods::Additional::type.create(
+      @additional_seguro = Goods::Additional::Type.create(
         :name => 'SEGURO',
         :remark => 'Seguro'
       )
@@ -177,9 +177,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @additional_desconto = Goods::Additional::type.find_by_name('DESCONTO')
+    @additional_desconto = Goods::Additional::Type.find_by_name('DESCONTO')
     if @additional_desconto.nil?()
-      @additional_desconto = Goods::Additional::type.create(
+      @additional_desconto = Goods::Additional::Type.create(
         :name => 'DESCONTO',
         :remark => 'Desconto'
       )
@@ -189,9 +189,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    @address_type = Participant::Contact::type.find_by_name('NFE')
+    @address_type = Participant::Contact::Type.find_by_name('NFE')
     if @address_type.nil?()
-      @address_type = Participant::Contact::type.create(
+      @address_type = Participant::Contact::Type.create(
         :name => 'NFE'
       )
       if !@address_type.save()
@@ -263,7 +263,7 @@ class Transaction::xml < ActiveRecord::Base
   end#parse_create_instances
 
   def parse_tot(xml, record_id)
-    additional = Goods::Additional::value.create(
+    additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_desconto.id,
       :value => xml.elements['vDesc'].text()
     )
@@ -272,7 +272,7 @@ class Transaction::xml < ActiveRecord::Base
       @errors = additional.errors
       return false
     end
-    tot = Transaction::tot.create(
+    tot = Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
     )
@@ -282,7 +282,7 @@ class Transaction::xml < ActiveRecord::Base
       return false
     end
 
-    additional = Goods::Additional::value.create(
+    additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_despesa.id,
       :value => xml.elements['vOutro'].text()
     )
@@ -291,7 +291,7 @@ class Transaction::xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    tot = Transaction::tot.create(
+    tot = Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
     )
@@ -301,7 +301,7 @@ class Transaction::xml < ActiveRecord::Base
       return false
     end
 
-    additional = Goods::Additional::value.create(
+    additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_seguro.id,
       :value => xml.elements['vSeg'].text()
     )
@@ -310,7 +310,7 @@ class Transaction::xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    tot = Transaction::tot.create(
+    tot = Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
     )
@@ -320,7 +320,7 @@ class Transaction::xml < ActiveRecord::Base
       return false
     end
 
-    additional = Goods::Additional::value.create(
+    additional = Goods::Additional::Value.create(
       :goods_additional_type_id => @additional_frete.id,
       :value => xml.elements['vFrete'].text()
     )
@@ -329,7 +329,7 @@ class Transaction::xml < ActiveRecord::Base
       @errors = tot.errors
       return false
     end
-    tot = Transaction::tot.create(
+    tot = Transaction::Tot.create(
       :goods_additional_value_id =>additional.id,
       :transaction_record_id => record_id
     )
@@ -450,8 +450,8 @@ class Transaction::xml < ActiveRecord::Base
     if !person_id = parse_person(xml, 'enderEmit')
       return false
     end
-    if !issuer = Participant::issuer.find_by_participant_person_id(person_id)
-      issuer = Participant::issuer.create(
+    if !issuer = Participant::Issuer.find_by_participant_person_id(person_id)
+      issuer = Participant::Issuer.create(
           :participant_person_id => person_id
       )
       if !issuer.save
@@ -474,7 +474,7 @@ class Transaction::xml < ActiveRecord::Base
 
   def parse_delivery(xml, record_id)
     if !person_id = parse_person(xml)
-    delivery = Participant::delivery.create(
+    delivery = Participant::Delivery.create(
         :participant_person_id => person_id
     )
       return false
@@ -498,8 +498,8 @@ class Transaction::xml < ActiveRecord::Base
     if !person_id = parse_person(xml, 'enderDest')
       return false
     end
-    if !sender = Participant::sender.find_by_participant_person_id(person_id)
-      sender = Participant::sender.create(
+    if !sender = Participant::Sender.find_by_participant_person_id(person_id)
+      sender = Participant::Sender.create(
           :participant_person_id => person_id
       )
       if !sender.save()
@@ -537,9 +537,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    if !tag_address.nil?() and !Participant::Contact::address.find_by_participant_contact_type_id(@address_type.id)
+    if !tag_address.nil?() and !Participant::Contact::Address.find_by_participant_contact_type_id(@address_type.id)
       address_id = parse_address(xml.elements[tag_address])
-      address = Participant::Contact::address.create(
+      address = Participant::Contact::Address.create(
           :participant_person_id => person.id,
           :address_place_id => address_id,
           :participant_contact_type_id => @address_type.id
@@ -554,15 +554,15 @@ class Transaction::xml < ActiveRecord::Base
   end#parse_person
 
   def parse_address(xml)
-    country = Address::country.find(
+    country = Address::Country.find(
         :first,
         :conditions => {
             :code => xml.elements['cPais'].text().upcase,
-            :type => "Address::country"
+            :type => "Address::Country"
         }
     )
     if country.nil?()
-      country = Address::country.create(
+      country = Address::Country.create(
           :code => xml.elements['cPais'].text().upcase,
           :name => xml.elements['xPais'].text().upcase
       )
@@ -571,7 +571,7 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    state = Address::state.find(
+    state = Address::State.find(
         :first,
         :conditions => {
             :code => xml.elements['cMun'].text()[0, 2],
@@ -579,7 +579,7 @@ class Transaction::xml < ActiveRecord::Base
         }
     )
     if state.nil?()
-      state = Address::state.create(
+      state = Address::State.create(
           #dois primeiros digitos do municipio e o codigo do estado
           :code => xml.elements['cMun'].text()[0, 2],
           :name => xml.elements['UF'].text().upcase,
@@ -592,7 +592,7 @@ class Transaction::xml < ActiveRecord::Base
       end
     end
 
-    city = Address::city.find(
+    city = Address::City.find(
         :first,
         :conditions => {
             :code => xml.elements['cMun'].text().upcase,
@@ -601,7 +601,7 @@ class Transaction::xml < ActiveRecord::Base
     )
 
     if city.nil?()
-      city = Address::city.create(
+      city = Address::City.create(
           :code => xml.elements['cMun'].text().upcase,
           :name => xml.elements['xMun'].text().upcase,
           :address_place_id => state.id
@@ -612,7 +612,7 @@ class Transaction::xml < ActiveRecord::Base
       end
     end
 
-    neighborhood = Address::neighborhood.find(
+    neighborhood = Address::Neighborhood.find(
         :first,
         :conditions =>{
             :code => xml.elements['CEP'].text().upcase,
@@ -622,7 +622,7 @@ class Transaction::xml < ActiveRecord::Base
     )
 
     if neighborhood.nil?()
-      neighborhood = Address::neighborhood.create(
+      neighborhood = Address::Neighborhood.create(
           :code => xml.elements['CEP'].text().upcase,
           :name => xml.elements['xBairro'].text().upcase,
           :address_place_id => city.id
@@ -633,7 +633,7 @@ class Transaction::xml < ActiveRecord::Base
       end
     end
 
-    street = Address::street.create(
+    street = Address::Street.create(
         :code => xml.elements['nro'].text().upcase,
         :name => xml.elements['xLgr'].text().upcase,
         :address_place_id => neighborhood.id
@@ -646,9 +646,9 @@ class Transaction::xml < ActiveRecord::Base
   end#parse_address
 
   def parse_item(xml, record_id)
-    additional_unitario_tributado = Goods::Additional::type.find_by_name('UNITARIO_TRIBUTADO')
+    additional_unitario_tributado = Goods::Additional::Type.find_by_name('UNITARIO_TRIBUTADO')
     if additional_unitario_tributado.nil?()
-      additional_unitario_tributado = Goods::Additional::type.create(
+      additional_unitario_tributado = Goods::Additional::Type.create(
         :name => 'UNITARIO_TRIBUTADO',
         :remark => 'Valor Unitario Tributado'
       )
@@ -658,9 +658,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    additional_unitario_comercializado = Goods::Additional::type.find_by_name('UNITARIO_COMERCIALIZADO')
+    additional_unitario_comercializado = Goods::Additional::Type.find_by_name('UNITARIO_COMERCIALIZADO')
     if additional_unitario_comercializado.nil?()
-      additional_unitario_comercializado = Goods::Additional::type.create(
+      additional_unitario_comercializado = Goods::Additional::Type.create(
         :name => 'UNITARIO_COMERCIALIZADO',
         :remark => 'Valor Unitario Comercializado'
       )
@@ -670,9 +670,9 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
     end
-    additional_quantidade_tributada = Goods::Additional::type.find_by_name('QUANTIDADE_TRIBUTADA')
+    additional_quantidade_tributada = Goods::Additional::Type.find_by_name('QUANTIDADE_TRIBUTADA')
     if additional_quantidade_tributada.nil?()
-      additional_quantidade_tributada = Goods::Additional::type.create(
+      additional_quantidade_tributada = Goods::Additional::Type.create(
         :name => 'QUANTIDADE_TRIBUTADA',
         :remark => 'Quantidade Tributada'
       )
@@ -720,7 +720,7 @@ class Transaction::xml < ActiveRecord::Base
         @errors = item.errors
         return false
       end
-      additional = Goods::Additional::value.create(
+      additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_quantidade_tributada.id,
         :value => det.elements['prod'].elements['qTrib'].text()
       )
@@ -738,7 +738,7 @@ class Transaction::xml < ActiveRecord::Base
         @errors = additional.errors
         return false
       end
-      additional = Goods::Additional::value.create(
+      additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_tributado.id,
         :value => det.elements['prod'].elements['vUnTrib'].text()
       )
@@ -756,7 +756,7 @@ class Transaction::xml < ActiveRecord::Base
         @errors = additional.errors
         return false
       end
-      additional = Goods::Additional::value.create(
+      additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_comercializado.id,
         :value => det.elements['prod'].elements['vUnCom'].text()
       )
@@ -775,7 +775,7 @@ class Transaction::xml < ActiveRecord::Base
         return false
       end
       if !det.elements['prod'].elements['vDesc'].nil?()
-        additional = Goods::Additional::value.create(
+        additional = Goods::Additional::Value.create(
           :goods_additional_type_id => @additional_desconto.id,
           :value => det.elements['prod'].elements['vDesc'].text()
         )
@@ -795,7 +795,7 @@ class Transaction::xml < ActiveRecord::Base
         end
       end
       if !det.elements['prod'].elements['vOutro'].nil?()
-        additional = Goods::Additional::value.create(
+        additional = Goods::Additional::Value.create(
           :goods_additional_type_id => @additional_despesa.id,
           :value => det.elements['prod'].elements['vOutro'].text()
         )
@@ -815,7 +815,7 @@ class Transaction::xml < ActiveRecord::Base
         end
       end
       if !det.elements['prod'].elements['vSeg'].nil?()
-        additional = Goods::Additional::value.create(
+        additional = Goods::Additional::Value.create(
           :goods_additional_type_id => @additional_seguro.id,
           :value => det.elements['prod'].elements['vSeg'].text()
         )
@@ -835,7 +835,7 @@ class Transaction::xml < ActiveRecord::Base
         end
       end
       if !det.elements['prod'].elements['vFrete'].nil?()
-        additional = Goods::Additional::value.create(
+        additional = Goods::Additional::Value.create(
           :goods_additional_type_id => @additional_frete.id,
           :value => det.elements['prod'].elements['vFrete'].text()
         )
@@ -1340,8 +1340,8 @@ class Transaction::xml < ActiveRecord::Base
   #end#parse_item_cofins
 
   def parse_taxe_type(code, name, taxe_group_id)
-    if !type = Taxe::type.find_by_code(code)
-      type = Taxe::type.create(
+    if !type = Taxe::Type.find_by_code(code)
+      type = Taxe::Type.create(
           :name => name,
           :code => code,
           :taxe_group_id => taxe_group_id
@@ -1359,7 +1359,7 @@ class Transaction::xml < ActiveRecord::Base
     if percentage.nil?
       percentage = 0.00
     end
-    taxe = Taxe::value.create(
+    taxe = Taxe::Value.create(
         :taxe_type_id => taxe_type_id,
         :percentage => percentage,
         :basis => basis,

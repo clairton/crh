@@ -1,2 +1,3 @@
-class Participant::sender < Participant::type
+class Participant::Sender < Participant::Type
 end
+

@@ -1,2 +1,3 @@
-module Participant::Contact::typesHelper
+module Participant::Contact::TypesHelper
 end
+

@@ -1,2 +1,3 @@
-module Taxe::valuesHelper
+module Taxe::ValuesHelper
 end
+

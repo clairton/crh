@@ -1,2 +1,3 @@
-module Transaction::recordTaxesHelper
+module Transaction::RecordTaxesHelper
 end
+

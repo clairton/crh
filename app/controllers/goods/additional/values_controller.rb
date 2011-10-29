@@ -1,9 +1,9 @@
-class Goods::Additional::valuesController < ApplicationController
+class Goods::Additional::ValuesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /goods/additional/values
   # GET /goods/additional/values.xml
   def index
-    @goods_additional_values = Goods::Additional::value.all
+    @goods_additional_values = Goods::Additional::Value.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Goods::Additional::valuesController < ApplicationController
   # GET /goods/additional/values/1
   # GET /goods/additional/values/1.xml
   def show
-    @goods_additional_value = Goods::Additional::value.find(params[:id])
+    @goods_additional_value = Goods::Additional::Value.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Goods::Additional::valuesController < ApplicationController
   # GET /goods/additional/values/new
   # GET /goods/additional/values/new.xml
   def new
-    @goods_additional_value = Goods::Additional::value.new
+    @goods_additional_value = Goods::Additional::Value.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Goods::Additional::valuesController < ApplicationController
 
   # GET /goods/additional/values/1/edit
   def edit
-    @goods_additional_value = Goods::Additional::value.find(params[:id])
+    @goods_additional_value = Goods::Additional::Value.find(params[:id])
   end
 
   # POST /goods/additional/values
   # POST /goods/additional/values.xml
   def create
-    @goods_additional_value = Goods::Additional::value.new(params[:goods_additional_value])
+    @goods_additional_value = Goods::Additional::Value.new(params[:goods_additional_value])
 
     respond_to do |format|
       if @goods_additional_value.save
@@ -57,7 +57,7 @@ class Goods::Additional::valuesController < ApplicationController
   # PUT /goods/additional/values/1
   # PUT /goods/additional/values/1.xml
   def update
-    @goods_additional_value = Goods::Additional::value.find(params[:id])
+    @goods_additional_value = Goods::Additional::Value.find(params[:id])
 
     respond_to do |format|
       if @goods_additional_value.update_attributes(params[:goods_additional_value])
@@ -73,7 +73,7 @@ class Goods::Additional::valuesController < ApplicationController
   # DELETE /goods/additional/values/1
   # DELETE /goods/additional/values/1.xml
   def destroy
-    @goods_additional_value = Goods::Additional::value.find(params[:id])
+    @goods_additional_value = Goods::Additional::Value.find(params[:id])
     @goods_additional_value.destroy
 
     respond_to do |format|
@@ -82,3 +82,4 @@ class Goods::Additional::valuesController < ApplicationController
     end
   end
 end
+

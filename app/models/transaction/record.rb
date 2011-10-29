@@ -1,4 +1,4 @@
-class Transaction::record < ActiveRecord::Base
+class Transaction::Record < ActiveRecord::Base
   has_many :transactionParticipant, :class_name => "Transaction::Participant", :dependent => :destroy, :foreign_key => "transaction_record_id"
   has_many :transactionFinancier, :class_name => "Transaction::Financier", :dependent => :destroy , :foreign_key => "transaction_record_id"
   has_many :transactionTaxe, :class_name => "Transaction::Taxe", :dependent => :destroy , :foreign_key => "transaction_record_id"
@@ -8,3 +8,4 @@ class Transaction::record < ActiveRecord::Base
   validates_presence_of :creation_date, :code, :name
   validates_uniqueness_of :code
 end
+

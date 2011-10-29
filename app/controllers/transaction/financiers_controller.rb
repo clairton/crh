@@ -82,3 +82,4 @@ class Transaction::FinanciersController < ApplicationController
     end
   end
 end
+
