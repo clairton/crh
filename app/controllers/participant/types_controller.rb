@@ -1,9 +1,9 @@
-class Participant::typesController < ApplicationController
+class Participant::TypesController < ApplicationController
   before_filter :authenticate_user!, :except =>[:some_action_without_auth]
   # GET /participant/types
   # GET /participant/types.xml
   def index
-    @participant_types = Participant::type.all
+    @participant_types = Participant::Type.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +14,7 @@ class Participant::typesController < ApplicationController
   # GET /participant/types/1
   # GET /participant/types/1.xml
   def show
-    @participant_type = Participant::type.find(params[:id])
+    @participant_type = Participant::Type.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +25,7 @@ class Participant::typesController < ApplicationController
   # GET /participant/types/new
   # GET /participant/types/new.xml
   def new
-    @participant_type = Participant::type.new
+    @participant_type = Participant::Type.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,13 +35,13 @@ class Participant::typesController < ApplicationController
 
   # GET /participant/types/1/edit
   def edit
-    @participant_type = Participant::type.find(params[:id])
+    @participant_type = Participant::Type.find(params[:id])
   end
 
   # POST /participant/types
   # POST /participant/types.xml
   def create
-    @participant_type = Participant::type.new(params[:participant_type])
+    @participant_type = Participant::Type.new(params[:participant_type])
 
     respond_to do |format|
       if @participant_type.save
@@ -57,7 +57,7 @@ class Participant::typesController < ApplicationController
   # PUT /participant/types/1
   # PUT /participant/types/1.xml
   def update
-    @participant_type = Participant::type.find(params[:id])
+    @participant_type = Participant::Type.find(params[:id])
 
     respond_to do |format|
       if @participant_type.update_attributes(params[:participant_type])
@@ -73,7 +73,7 @@ class Participant::typesController < ApplicationController
   # DELETE /participant/types/1
   # DELETE /participant/types/1.xml
   def destroy
-    @participant_type = Participant::type.find(params[:id])
+    @participant_type = Participant::Type.find(params[:id])
     @participant_type.destroy
 
     respond_to do |format|

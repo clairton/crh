@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Taxe::valuesControllerTest < ActionController::TestCase
+class Taxe::ValuesControllerTest < ActionController::TestCase
   setup do
     @taxe_value = taxe_values(:one)
   end
@@ -17,7 +17,7 @@ class Taxe::valuesControllerTest < ActionController::TestCase
   end
 
   test "should create taxe_value" do
-    assert_difference('Taxe::value.count') do
+    assert_difference('Taxe::Value.count') do
       post :create, :taxe_value => @taxe_value.attributes
     end
 
@@ -40,7 +40,7 @@ class Taxe::valuesControllerTest < ActionController::TestCase
   end
 
   test "should destroy taxe_value" do
-    assert_difference('Taxe::value.count', -1) do
+    assert_difference('Taxe::Value.count', -1) do
       delete :destroy, :id => @taxe_value.to_param
     end
 

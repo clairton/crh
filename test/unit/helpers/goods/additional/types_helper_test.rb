@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Goods::Additional::typesHelperTest < ActionView::TestCase
+class Goods::Additional::TypesHelperTest < ActionView::TestCase
 end

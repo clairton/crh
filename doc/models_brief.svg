@@ -44,18 +44,18 @@
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="2038,-713 1984,-713 1984,-677 2038,-677 2038,-713"/>
 <text text-anchor="middle" x="2011" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Email</text>
 </g>
-<!-- Transaction::tot -->
-<g id="node5" class="node"><title>Transaction::tot</title>
+<!-- Transaction::Tot -->
+<g id="node5" class="node"><title>Transaction::Tot</title>
 <ellipse fill="none" stroke="black" cx="885" cy="-167" rx="87.889" ry="18.3848"/>
-<text text-anchor="middle" x="885" y="-163.4" font-family="Times Roman,serif" font-size="14.00">Transaction::tot</text>
+<text text-anchor="middle" x="885" y="-163.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Tot</text>
 </g>
-<!-- Goods::Additional::value -->
-<g id="node33" class="node"><title>Goods::Additional::value</title>
+<!-- Goods::Additional::Value -->
+<g id="node33" class="node"><title>Goods::Additional::Value</title>
 <ellipse fill="none" stroke="black" cx="879" cy="-19" rx="130.815" ry="18.3848"/>
-<text text-anchor="middle" x="879" y="-15.4" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::value</text>
+<text text-anchor="middle" x="879" y="-15.4" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::Value</text>
 </g>
-<!-- Transaction::tot&#45;&gt;Goods::Additional::value -->
-<g id="edge4" class="edge"><title>Transaction::tot&#45;&gt;Goods::Additional::value</title>
+<!-- Transaction::Tot&#45;&gt;Goods::Additional::Value -->
+<g id="edge4" class="edge"><title>Transaction::Tot&#45;&gt;Goods::Additional::Value</title>
 <path fill="none" stroke="black" d="M883.906,-140.006C882.848,-113.917 881.251,-74.5269 880.169,-47.8341"/>
 <ellipse fill="none" stroke="black" cx="884.078" cy="-144.259" rx="4" ry="4"/>
 <polygon fill="black" stroke="black" points="880.159,-47.5839 884.25,-37.4098 879.956,-42.588 879.754,-37.5921 879.754,-37.5921 879.754,-37.5921 879.956,-42.588 875.257,-37.7744 880.159,-47.5839 880.159,-47.5839"/>
@@ -66,13 +66,13 @@
 <ellipse fill="none" stroke="black" cx="1279" cy="-223" rx="126.072" ry="18.3848"/>
 <text text-anchor="middle" x="1279" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Participant</text>
 </g>
-<!-- Transaction::record -->
-<g id="node12" class="node"><title>Transaction::record</title>
+<!-- Transaction::Record -->
+<g id="node12" class="node"><title>Transaction::Record</title>
 <ellipse fill="none" stroke="black" cx="819" cy="-315" rx="106.773" ry="18.3848"/>
-<text text-anchor="middle" x="819" y="-311.4" font-family="Times Roman,serif" font-size="14.00">Transaction::record</text>
+<text text-anchor="middle" x="819" y="-311.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Record</text>
 </g>
-<!-- Transaction::Participant&#45;&gt;Transaction::record -->
-<g id="edge6" class="edge"><title>Transaction::Participant&#45;&gt;Transaction::record</title>
+<!-- Transaction::Participant&#45;&gt;Transaction::Record -->
+<g id="edge6" class="edge"><title>Transaction::Participant&#45;&gt;Transaction::Record</title>
 <path fill="none" stroke="black" d="M1180.56,-237.036C1168.25,-238.737 1155.84,-240.427 1144,-242 1080.06,-250.495 1058.32,-232.448 1000,-260 989.483,-264.969 991.255,-272.511 981,-278 966.873,-285.562 934.502,-293.528 902.381,-300.124"/>
 <ellipse fill="none" stroke="black" cx="1184.66" cy="-236.467" rx="4.00001" ry="4.00001"/>
 <ellipse fill="black" stroke="black" cx="898.152" cy="-300.978" rx="4.00001" ry="4.00001"/>
@@ -83,8 +83,8 @@
 <ellipse fill="none" stroke="black" cx="659" cy="-111" rx="159.099" ry="18.3848"/>
 <text text-anchor="middle" x="659" y="-107.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Goods::Additional</text>
 </g>
-<!-- Transaction::Goods::Additional&#45;&gt;Goods::Additional::value -->
-<g id="edge8" class="edge"><title>Transaction::Goods::Additional&#45;&gt;Goods::Additional::value</title>
+<!-- Transaction::Goods::Additional&#45;&gt;Goods::Additional::Value -->
+<g id="edge8" class="edge"><title>Transaction::Goods::Additional&#45;&gt;Goods::Additional::Value</title>
 <path fill="none" stroke="black" d="M709.195,-90.0094C744.594,-75.206 791.866,-55.4377 827.544,-40.5181"/>
 <ellipse fill="none" stroke="black" cx="705.369" cy="-91.6091" rx="4.00002" ry="4.00002"/>
 <polygon fill="black" stroke="black" points="827.588,-40.4997 838.55,-40.7932 832.201,-38.5706 836.814,-36.6416 836.814,-36.6416 836.814,-36.6416 832.201,-38.5706 835.077,-32.49 827.588,-40.4997 827.588,-40.4997"/>
@@ -126,41 +126,41 @@
 <ellipse fill="black" stroke="black" cx="387" cy="-133.807" rx="4" ry="4"/>
 <text text-anchor="middle" x="403" y="-163.4" font-family="Times Roman,serif" font-size="14.00">Item</text>
 </g>
-<!-- Transaction::xml -->
-<g id="node10" class="node"><title>Transaction::xml</title>
+<!-- Transaction::Xml -->
+<g id="node10" class="node"><title>Transaction::Xml</title>
 <ellipse fill="none" stroke="black" cx="630" cy="-223" rx="92.1303" ry="18.3848"/>
-<text text-anchor="middle" x="630" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Transaction::xml</text>
+<text text-anchor="middle" x="630" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Xml</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::tot -->
-<g id="edge16" class="edge"><title>Transaction::record&#45;&gt;Transaction::tot</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Tot -->
+<g id="edge16" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Tot</title>
 <path fill="none" stroke="black" d="M875.828,-295.097C899.806,-283.552 925.301,-266.369 939,-242 947.276,-227.278 946.874,-218.941 939,-204 936.351,-198.973 932.676,-194.498 928.478,-190.552"/>
 <ellipse fill="none" stroke="black" cx="872.082" cy="-296.826" rx="4.00002" ry="4.00002"/>
 <polygon fill="black" stroke="black" points="928.213,-190.336 923.31,-180.527 924.339,-187.175 920.465,-184.014 920.465,-184.014 920.465,-184.014 924.339,-187.175 917.62,-187.5 928.213,-190.336 928.213,-190.336"/>
 <text text-anchor="middle" x="936" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Tot</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::Participant -->
-<g id="edge26" class="edge"><title>Transaction::record&#45;&gt;Transaction::Participant</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Participant -->
+<g id="edge26" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Participant</title>
 <path fill="none" stroke="black" d="M903.177,-300.611C913.874,-298.96 924.684,-297.377 935,-296 1012.06,-285.712 1034.13,-298.942 1109,-278 1127,-272.966 1129.5,-266.545 1147,-260 1165.22,-253.185 1185.27,-246.95 1204.12,-241.619"/>
 <ellipse fill="none" stroke="black" cx="898.981" cy="-301.267" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="1204.21,-241.593 1215.05,-243.251 1209.03,-240.254 1213.84,-238.915 1213.84,-238.915 1213.84,-238.915 1209.03,-240.254 1212.64,-234.579 1204.21,-241.593 1204.21,-241.593"/>
 <text text-anchor="middle" x="1184.5" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Participant</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::Goods::Item -->
-<g id="edge22" class="edge"><title>Transaction::record&#45;&gt;Transaction::Goods::Item</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Goods::Item -->
+<g id="edge22" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Goods::Item</title>
 <path fill="none" stroke="black" d="M743.438,-298.908C666.873,-282.603 548.751,-257.447 469.715,-240.615"/>
 <ellipse fill="none" stroke="black" cx="747.588" cy="-299.792" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="469.575,-240.586 460.732,-234.101 464.685,-239.544 459.794,-238.503 459.794,-238.503 459.794,-238.503 464.685,-239.544 458.857,-242.904 469.575,-240.586 469.575,-240.586"/>
 <text text-anchor="middle" x="658" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Item</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::xml -->
-<g id="edge20" class="edge"><title>Transaction::record&#45;&gt;Transaction::xml</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Xml -->
+<g id="edge20" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Xml</title>
 <path fill="none" stroke="black" d="M775.633,-293.89C744.778,-278.871 703.517,-258.786 672.792,-243.83"/>
 <ellipse fill="none" stroke="black" cx="779.409" cy="-295.728" rx="4.00002" ry="4.00002"/>
 <ellipse fill="black" stroke="black" cx="668.817" cy="-241.895" rx="4.00002" ry="4.00002"/>
 <text text-anchor="middle" x="756" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Xml</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::Financier -->
-<g id="edge18" class="edge"><title>Transaction::record&#45;&gt;Transaction::Financier</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Financier -->
+<g id="edge18" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Financier</title>
 <path fill="none" stroke="black" d="M719.917,-304.267C656.43,-297.22 572.299,-287.566 498,-278 385.353,-263.496 357.386,-258.403 245,-242 234.802,-240.512 224.146,-238.941 213.53,-237.367"/>
 <ellipse fill="none" stroke="black" cx="723.972" cy="-304.717" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="213.272,-237.329 204.042,-231.408 208.326,-236.594 203.381,-235.859 203.381,-235.859 203.381,-235.859 208.326,-236.594 202.719,-240.31 213.272,-237.329 213.272,-237.329"/>
@@ -171,8 +171,8 @@
 <ellipse fill="none" stroke="black" cx="835" cy="-223" rx="94.9596" ry="18.3848"/>
 <text text-anchor="middle" x="835" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Transaction::Taxe</text>
 </g>
-<!-- Transaction::record&#45;&gt;Transaction::Taxe -->
-<g id="edge24" class="edge"><title>Transaction::record&#45;&gt;Transaction::Taxe</title>
+<!-- Transaction::Record&#45;&gt;Transaction::Taxe -->
+<g id="edge24" class="edge"><title>Transaction::Record&#45;&gt;Transaction::Taxe</title>
 <path fill="none" stroke="black" d="M823.618,-288.447C825.616,-276.958 827.959,-263.485 829.998,-251.76"/>
 <ellipse fill="none" stroke="black" cx="822.923" cy="-292.442" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="830.053,-251.442 836.2,-242.361 830.91,-246.516 831.767,-241.59 831.767,-241.59 831.767,-241.59 830.91,-246.516 827.334,-240.819 830.053,-251.442 830.053,-251.442"/>
@@ -224,21 +224,21 @@
 <polygon fill="black" stroke="black" points="1847,-435.59 1851.5,-425.59 1847,-430.59 1847,-425.59 1847,-425.59 1847,-425.59 1847,-430.59 1842.5,-425.59 1847,-435.59 1847,-435.59"/>
 <text text-anchor="middle" x="1861" y="-449.4" font-family="Times Roman,serif" font-size="14.00">City</text>
 </g>
-<!-- Address::place -->
-<g id="node18" class="node"><title>Address::place</title>
+<!-- Address::Place -->
+<g id="node18" class="node"><title>Address::Place</title>
 <ellipse fill="none" stroke="black" cx="1884" cy="-695" rx="82.0244" ry="18.3848"/>
-<text text-anchor="middle" x="1884" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Address::place</text>
+<text text-anchor="middle" x="1884" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Address::Place</text>
 </g>
-<!-- Address::place&#45;&gt;Address::neighborhood -->
-<g id="edge30" class="edge"><title>Address::place&#45;&gt;Address::neighborhood</title>
+<!-- Address::Place&#45;&gt;Address::neighborhood -->
+<g id="edge30" class="edge"><title>Address::Place&#45;&gt;Address::neighborhood</title>
 <path fill="none" stroke="black" d="M1913.7,-677.543C1950.39,-654.931 2008,-615.515 2008,-591 2008,-591 2008,-591 2008,-407 2008,-371.013 1973.17,-346.701 1942.02,-332.152"/>
 </g>
-<!-- Address::place&#45;&gt;Address::city -->
-<g id="edge34" class="edge"><title>Address::place&#45;&gt;Address::city</title>
+<!-- Address::Place&#45;&gt;Address::city -->
+<g id="edge34" class="edge"><title>Address::Place&#45;&gt;Address::city</title>
 <path fill="none" stroke="black" d="M1852.65,-677.631C1832.48,-665.66 1806.34,-648.602 1786,-630 1747.97,-595.22 1759.89,-569.386 1756,-518 1754.73,-501.159 1748.69,-495.227 1756,-480 1767.92,-455.165 1792.85,-436.115 1813.61,-423.712"/>
 </g>
-<!-- Address::place&#45;&gt;Address::state -->
-<g id="edge38" class="edge"><title>Address::place&#45;&gt;Address::state</title>
+<!-- Address::Place&#45;&gt;Address::state -->
+<g id="edge38" class="edge"><title>Address::Place&#45;&gt;Address::state</title>
 <path fill="none" stroke="black" d="M1849.9,-678.08C1825.17,-663.726 1793.59,-640.588 1779,-610 1762.55,-575.529 1797.46,-538.196 1823.08,-516.802"/>
 </g>
 <!-- Address::country -->
@@ -246,12 +246,12 @@
 <ellipse fill="none" stroke="black" cx="1884" cy="-591" rx="96.1665" ry="18.3848"/>
 <text text-anchor="middle" x="1884" y="-587.4" font-family="Times Roman,serif" font-size="14.00">Address::country</text>
 </g>
-<!-- Address::place&#45;&gt;Address::country -->
-<g id="edge42" class="edge"><title>Address::place&#45;&gt;Address::country</title>
+<!-- Address::Place&#45;&gt;Address::country -->
+<g id="edge42" class="edge"><title>Address::Place&#45;&gt;Address::country</title>
 <path fill="none" stroke="black" d="M1884,-676.407C1884,-657.594 1884,-628.664 1884,-609.783"/>
 </g>
-<!-- Address::place&#45;&gt;Address::street -->
-<g id="edge46" class="edge"><title>Address::place&#45;&gt;Address::street</title>
+<!-- Address::Place&#45;&gt;Address::street -->
+<g id="edge46" class="edge"><title>Address::Place&#45;&gt;Address::street</title>
 <path fill="none" stroke="black" d="M1916.39,-677.975C1963.67,-652.61 2046,-606.249 2046,-591 2046,-591 2046,-591 2046,-315 2046,-303.058 2037.37,-301.918 2027,-296 1989.86,-274.808 1879.16,-249.992 1807.44,-235.435"/>
 </g>
 <!-- Address::country&#45;&gt;Address::state -->
@@ -288,25 +288,25 @@
 <ellipse fill="none" stroke="black" cx="1985" cy="-111" rx="140.922" ry="18.3848"/>
 <text text-anchor="middle" x="1985" y="-107.4" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::Email</text>
 </g>
-<!-- Participant::Contact::address -->
-<g id="node24" class="node"><title>Participant::Contact::address</title>
+<!-- Participant::Contact::Address -->
+<g id="node24" class="node"><title>Participant::Contact::Address</title>
 <ellipse fill="none" stroke="black" cx="2653" cy="-695" rx="152.942" ry="18.3848"/>
-<text text-anchor="middle" x="2653" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::address</text>
+<text text-anchor="middle" x="2653" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::Address</text>
 </g>
-<!-- Participant::Contact::type -->
-<g id="node25" class="node"><title>Participant::Contact::type</title>
+<!-- Participant::Contact::Type -->
+<g id="node25" class="node"><title>Participant::Contact::Type</title>
 <ellipse fill="none" stroke="black" cx="1985" cy="-223" rx="137.179" ry="18.3848"/>
-<text text-anchor="middle" x="1985" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::type</text>
+<text text-anchor="middle" x="1985" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::Type</text>
 </g>
-<!-- Participant::Contact::type&#45;&gt;Participant::Contact::Email -->
-<g id="edge50" class="edge"><title>Participant::Contact::type&#45;&gt;Participant::Contact::Email</title>
+<!-- Participant::Contact::Type&#45;&gt;Participant::Contact::Email -->
+<g id="edge50" class="edge"><title>Participant::Contact::Type&#45;&gt;Participant::Contact::Email</title>
 <path fill="none" stroke="black" d="M1985,-196.242C1985,-179.273 1985,-157.325 1985,-139.95"/>
 <ellipse fill="none" stroke="black" cx="1985" cy="-200.254" rx="4" ry="4"/>
 <polygon fill="black" stroke="black" points="1985,-139.807 1989.5,-129.807 1985,-134.807 1985,-129.807 1985,-129.807 1985,-129.807 1985,-134.807 1980.5,-129.807 1985,-139.807 1985,-139.807"/>
 <text text-anchor="middle" x="2004" y="-163.4" font-family="Times Roman,serif" font-size="14.00">Email</text>
 </g>
-<!-- Participant::Contact::type&#45;&gt;Participant::Contact::addres -->
-<g id="edge48" class="edge"><title>Participant::Contact::type&#45;&gt;Participant::Contact::addres</title>
+<!-- Participant::Contact::Type&#45;&gt;Participant::Contact::addres -->
+<g id="edge48" class="edge"><title>Participant::Contact::Type&#45;&gt;Participant::Contact::addres</title>
 <path fill="none" stroke="black" d="M1899.94,-205.627C1880.22,-200.377 1859.57,-193.866 1841,-186 1811.24,-173.394 1808.09,-162.072 1779,-148 1766.94,-142.168 1753.72,-136.7 1740.92,-131.85"/>
 <ellipse fill="none" stroke="black" cx="1903.87" cy="-206.647" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="1740.62,-131.739 1732.81,-124.045 1735.93,-130.002 1731.24,-128.265 1731.24,-128.265 1731.24,-128.265 1735.93,-130.002 1729.68,-132.485 1740.62,-131.739 1740.62,-131.739"/>
@@ -369,17 +369,17 @@
 <ellipse fill="black" stroke="black" cx="1561.11" cy="-243.874" rx="4.00002" ry="4.00002"/>
 <text text-anchor="middle" x="1624.5" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Person</text>
 </g>
-<!-- Participant::type -->
-<g id="node29" class="node"><title>Participant::type</title>
+<!-- Participant::Type -->
+<g id="node29" class="node"><title>Participant::Type</title>
 <ellipse fill="none" stroke="black" cx="1413" cy="-407" rx="92.1303" ry="18.3848"/>
-<text text-anchor="middle" x="1413" y="-403.4" font-family="Times Roman,serif" font-size="14.00">Participant::type</text>
+<text text-anchor="middle" x="1413" y="-403.4" font-family="Times Roman,serif" font-size="14.00">Participant::Type</text>
 </g>
-<!-- Participant::type&#45;&gt;Participant::delivery -->
-<g id="edge56" class="edge"><title>Participant::type&#45;&gt;Participant::delivery</title>
+<!-- Participant::Type&#45;&gt;Participant::delivery -->
+<g id="edge56" class="edge"><title>Participant::Type&#45;&gt;Participant::delivery</title>
 <path fill="none" stroke="black" d="M1413,-388.382C1413,-372.421 1413,-349.543 1413,-333.59"/>
 </g>
-<!-- Participant::type&#45;&gt;Participant::sender -->
-<g id="edge66" class="edge"><title>Participant::type&#45;&gt;Participant::sender</title>
+<!-- Participant::Type&#45;&gt;Participant::sender -->
+<g id="edge66" class="edge"><title>Participant::Type&#45;&gt;Participant::sender</title>
 <path fill="none" stroke="black" d="M1455.1,-390.446C1497.21,-373.891 1561.64,-348.559 1604.05,-331.888"/>
 </g>
 <!-- Participant::issuer -->
@@ -387,8 +387,8 @@
 <ellipse fill="none" stroke="black" cx="1185" cy="-315" rx="99.201" ry="18.3848"/>
 <text text-anchor="middle" x="1185" y="-311.4" font-family="Times Roman,serif" font-size="14.00">Participant::issuer</text>
 </g>
-<!-- Participant::type&#45;&gt;Participant::issuer -->
-<g id="edge72" class="edge"><title>Participant::type&#45;&gt;Participant::issuer</title>
+<!-- Participant::Type&#45;&gt;Participant::issuer -->
+<g id="edge72" class="edge"><title>Participant::Type&#45;&gt;Participant::issuer</title>
 <path fill="none" stroke="black" d="M1371.71,-390.339C1330.65,-373.77 1267.98,-348.483 1226.75,-331.847"/>
 </g>
 <!-- Participant::issuer&#45;&gt;Transaction::Participant -->
@@ -410,13 +410,13 @@
 <polygon fill="none" stroke="black" stroke-dasharray="1,5" points="2960,-713 2824,-713 2824,-677 2960,-677 2960,-713"/>
 <text text-anchor="middle" x="2892" y="-691.4" font-family="Times Roman,serif" font-size="14.00">Goods::Additional</text>
 </g>
-<!-- Goods::Additional::type -->
-<g id="node32" class="node"><title>Goods::Additional::type</title>
+<!-- Goods::Additional::Type -->
+<g id="node32" class="node"><title>Goods::Additional::Type</title>
 <ellipse fill="none" stroke="black" cx="2270" cy="-111" rx="125.865" ry="18.3848"/>
-<text text-anchor="middle" x="2270" y="-107.4" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::type</text>
+<text text-anchor="middle" x="2270" y="-107.4" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::Type</text>
 </g>
-<!-- Goods::Additional::type&#45;&gt;Goods::Additional::value -->
-<g id="edge74" class="edge"><title>Goods::Additional::type&#45;&gt;Goods::Additional::value</title>
+<!-- Goods::Additional::Type&#45;&gt;Goods::Additional::Value -->
+<g id="edge74" class="edge"><title>Goods::Additional::Type&#45;&gt;Goods::Additional::Value</title>
 <path fill="none" stroke="black" d="M2174.42,-96.5605C2161.2,-94.8519 2147.78,-93.2681 2135,-92 1729.95,-51.7933 1249.05,-31.4401 1017.36,-23.3416"/>
 <ellipse fill="none" stroke="black" cx="2178.65" cy="-97.1172" rx="4.00001" ry="4.00001"/>
 <polygon fill="black" stroke="black" points="1017.19,-23.3357 1007.35,-18.4912 1012.19,-23.1621 1007.2,-22.9885 1007.2,-22.9885 1007.2,-22.9885 1012.19,-23.1621 1007.04,-27.4858 1017.19,-23.3357 1017.19,-23.3357"/>
@@ -427,32 +427,32 @@
 <ellipse fill="none" stroke="black" cx="1006" cy="-407" rx="70.0036" ry="18.3848"/>
 <text text-anchor="middle" x="1006" y="-403.4" font-family="Times Roman,serif" font-size="14.00">Taxe::Group</text>
 </g>
-<!-- Taxe::type -->
-<g id="node36" class="node"><title>Taxe::type</title>
+<!-- Taxe::Type -->
+<g id="node36" class="node"><title>Taxe::Type</title>
 <ellipse fill="none" stroke="black" cx="1006" cy="-315" rx="62.2254" ry="18.3848"/>
-<text text-anchor="middle" x="1006" y="-311.4" font-family="Times Roman,serif" font-size="14.00">Taxe::type</text>
+<text text-anchor="middle" x="1006" y="-311.4" font-family="Times Roman,serif" font-size="14.00">Taxe::Type</text>
 </g>
-<!-- Taxe::Group&#45;&gt;Taxe::type -->
-<g id="edge76" class="edge"><title>Taxe::Group&#45;&gt;Taxe::type</title>
+<!-- Taxe::Group&#45;&gt;Taxe::Type -->
+<g id="edge76" class="edge"><title>Taxe::Group&#45;&gt;Taxe::Type</title>
 <path fill="none" stroke="black" d="M1006,-380.029C1006,-368.599 1006,-355.267 1006,-343.66"/>
 <ellipse fill="none" stroke="black" cx="1006" cy="-384.382" rx="4" ry="4"/>
 <polygon fill="black" stroke="black" points="1006,-343.59 1010.5,-333.59 1006,-338.59 1006,-333.59 1006,-333.59 1006,-333.59 1006,-338.59 1001.5,-333.59 1006,-343.59 1006,-343.59"/>
 <text text-anchor="middle" x="1022" y="-357.4" font-family="Times Roman,serif" font-size="14.00">Type</text>
 </g>
-<!-- Taxe::value -->
-<g id="node37" class="node"><title>Taxe::value</title>
+<!-- Taxe::Value -->
+<g id="node37" class="node"><title>Taxe::Value</title>
 <ellipse fill="none" stroke="black" cx="1068" cy="-223" rx="67.1751" ry="18.3848"/>
-<text text-anchor="middle" x="1068" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Taxe::value</text>
+<text text-anchor="middle" x="1068" y="-219.4" font-family="Times Roman,serif" font-size="14.00">Taxe::Value</text>
 </g>
-<!-- Taxe::type&#45;&gt;Taxe::value -->
-<g id="edge78" class="edge"><title>Taxe::type&#45;&gt;Taxe::value</title>
+<!-- Taxe::Type&#45;&gt;Taxe::Value -->
+<g id="edge78" class="edge"><title>Taxe::Type&#45;&gt;Taxe::Value</title>
 <path fill="none" stroke="black" d="M1038.05,-292.7C1042.88,-288.262 1047.43,-283.314 1051,-278 1056.34,-270.042 1060.07,-260.327 1062.64,-251.289"/>
 <ellipse fill="none" stroke="black" cx="1034.86" cy="-295.432" rx="4.00002" ry="4.00002"/>
 <polygon fill="black" stroke="black" points="1062.66,-251.206 1069.44,-242.589 1063.87,-246.354 1065.07,-241.502 1065.07,-241.502 1065.07,-241.502 1063.87,-246.354 1060.71,-240.415 1062.66,-251.206 1062.66,-251.206"/>
 <text text-anchor="middle" x="1082" y="-265.4" font-family="Times Roman,serif" font-size="14.00">Values</text>
 </g>
-<!-- Taxe::value&#45;&gt;Transaction::Goods::Taxe -->
-<g id="edge80" class="edge"><title>Taxe::value&#45;&gt;Transaction::Goods::Taxe</title>
+<!-- Taxe::Value&#45;&gt;Transaction::Goods::Taxe -->
+<g id="edge80" class="edge"><title>Taxe::Value&#45;&gt;Transaction::Goods::Taxe</title>
 <path fill="none" stroke="black" d="M1068,-196.242C1068,-178.632 1068,-155.661 1068,-138.003"/>
 <ellipse fill="none" stroke="black" cx="1068" cy="-200.254" rx="4" ry="4"/>
 <ellipse fill="black" stroke="black" cx="1068" cy="-133.807" rx="4" ry="4"/>

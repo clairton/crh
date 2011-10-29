@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Goods::Additional::valuesControllerTest < ActionController::TestCase
+class Goods::Additional::ValuesControllerTest < ActionController::TestCase
   setup do
     @goods_additional_value = goods_additional_values(:one)
   end
@@ -17,7 +17,7 @@ class Goods::Additional::valuesControllerTest < ActionController::TestCase
   end
 
   test "should create goods_additional_value" do
-    assert_difference('Goods::Additional::value.count') do
+    assert_difference('Goods::Additional::Value.count') do
       post :create, :goods_additional_value => @goods_additional_value.attributes
     end
 
@@ -40,7 +40,7 @@ class Goods::Additional::valuesControllerTest < ActionController::TestCase
   end
 
   test "should destroy goods_additional_value" do
-    assert_difference('Goods::Additional::value.count', -1) do
+    assert_difference('Goods::Additional::Value.count', -1) do
       delete :destroy, :id => @goods_additional_value.to_param
     end
 

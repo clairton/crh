@@ -27,7 +27,7 @@ end
 @additionalTot = Array.new
 @additionalDet = Array.new
 @additionalCab = Array.new
-@additional = Goods::Additional::type.find_by_sql(
+@additional = Goods::Additional::Type.find_by_sql(
 	"SELECT
 		goods_additional_types.id,
 		goods_additional_types.remark
@@ -66,7 +66,7 @@ end
 		<td style="border: 1px solid black; text-align: right"><%= transaction_record.goods %></td>
 <%
 
-		@taxeValue = Taxe::value.find_by_sql(
+		@taxeValue = Taxe::Value.find_by_sql(
 			"SELECT
 				taxe_groups.id,
 				COALESCE(taxe_values.value,0.00) AS value
@@ -92,7 +92,7 @@ end
 			<%end%>
 		<%end%>
 <%
-		@additionalValue = Goods::Additional::value.find_by_sql(
+		@additionalValue = Goods::Additional::Value.find_by_sql(
 			"SELECT
 				goods_additional_types.id,
 				COALESCE(goods_additional_values.value,0.00) AS value

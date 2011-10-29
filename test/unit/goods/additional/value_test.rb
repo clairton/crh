@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Goods::Additional::valueTest < ActiveSupport::TestCase
+class Goods::Additional::ValueTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

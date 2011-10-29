@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Participant::Contact::addressesControllerTest < ActionController::TestCase
+class Participant::Contact::AddressesControllerTest < ActionController::TestCase
   setup do
     @participant_contact_address = participant_contact_addresses(:one)
   end
@@ -17,7 +17,7 @@ class Participant::Contact::addressesControllerTest < ActionController::TestCase
   end
 
   test "should create participant_contact_address" do
-    assert_difference('Participant::Contact::address.count') do
+    assert_difference('Participant::Contact::Address.count') do
       post :create, :participant_contact_address => @participant_contact_address.attributes
     end
 
@@ -40,7 +40,7 @@ class Participant::Contact::addressesControllerTest < ActionController::TestCase
   end
 
   test "should destroy participant_contact_address" do
-    assert_difference('Participant::Contact::address.count', -1) do
+    assert_difference('Participant::Contact::Address.count', -1) do
       delete :destroy, :id => @participant_contact_address.to_param
     end
 

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Participant::Contact::addressTest < ActiveSupport::TestCase
+class Participant::Contact::AddressTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

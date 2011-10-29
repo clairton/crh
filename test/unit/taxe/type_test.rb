@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Taxe::typeTest < ActiveSupport::TestCase
+class Taxe::TypeTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

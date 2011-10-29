@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class Transaction::recordsHelperTest < ActionView::TestCase
+class Transaction::RecordsHelperTest < ActionView::TestCase
 end

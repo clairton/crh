@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Transaction::totTest < ActiveSupport::TestCase
+class Transaction::TotTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

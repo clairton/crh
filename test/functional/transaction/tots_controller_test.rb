@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Transaction::totsControllerTest < ActionController::TestCase
+class Transaction::TotsControllerTest < ActionController::TestCase
   setup do
     @transaction_tot = transaction_tots(:one)
   end
@@ -17,7 +17,7 @@ class Transaction::totsControllerTest < ActionController::TestCase
   end
 
   test "should create transaction_tot" do
-    assert_difference('Transaction::tot.count') do
+    assert_difference('Transaction::Tot.count') do
       post :create, :transaction_tot => @transaction_tot.attributes
     end
 
@@ -40,7 +40,7 @@ class Transaction::totsControllerTest < ActionController::TestCase
   end
 
   test "should destroy transaction_tot" do
-    assert_difference('Transaction::tot.count', -1) do
+    assert_difference('Transaction::Tot.count', -1) do
       delete :destroy, :id => @transaction_tot.to_param
     end
 

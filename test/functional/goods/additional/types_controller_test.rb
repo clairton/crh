@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Goods::Additional::typesControllerTest < ActionController::TestCase
+class Goods::Additional::TypesControllerTest < ActionController::TestCase
   setup do
     @goods_additional_type = goods_additional_types(:one)
   end
@@ -17,7 +17,7 @@ class Goods::Additional::typesControllerTest < ActionController::TestCase
   end
 
   test "should create goods_additional_type" do
-    assert_difference('Goods::Additional::type.count') do
+    assert_difference('Goods::Additional::Type.count') do
       post :create, :goods_additional_type => @goods_additional_type.attributes
     end
 
@@ -40,7 +40,7 @@ class Goods::Additional::typesControllerTest < ActionController::TestCase
   end
 
   test "should destroy goods_additional_type" do
-    assert_difference('Goods::Additional::type.count', -1) do
+    assert_difference('Goods::Additional::Type.count', -1) do
       delete :destroy, :id => @goods_additional_type.to_param
     end
 

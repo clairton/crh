@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Address::placeTest < ActiveSupport::TestCase
+class Address::PlaceTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

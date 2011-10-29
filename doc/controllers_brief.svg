@@ -22,15 +22,15 @@
 <ellipse fill="none" stroke="black" cx="860.5" cy="-769.5" rx="138.801" ry="18.3848"/>
 <text text-anchor="middle" x="860.5" y="-765.9" font-family="Times Roman,serif" font-size="14.00">Financier::NotesController</text>
 </g>
-<!-- Transaction::xmlsController -->
-<g id="node3" class="node"><title>Transaction::xmlsController</title>
+<!-- Transaction::XmlsController -->
+<g id="node3" class="node"><title>Transaction::XmlsController</title>
 <ellipse fill="none" stroke="black" cx="852.5" cy="-94.5" rx="145.872" ry="18.3848"/>
-<text text-anchor="middle" x="852.5" y="-90.9" font-family="Times Roman,serif" font-size="14.00">Transaction::xmlsController</text>
+<text text-anchor="middle" x="852.5" y="-90.9" font-family="Times Roman,serif" font-size="14.00">Transaction::XmlsController</text>
 </g>
-<!-- Transaction::totsController -->
-<g id="node4" class="node"><title>Transaction::totsController</title>
+<!-- Transaction::TotsController -->
+<g id="node4" class="node"><title>Transaction::TotsController</title>
 <ellipse fill="none" stroke="black" cx="203" cy="-199.5" rx="142.128" ry="18.3848"/>
-<text text-anchor="middle" x="203" y="-195.9" font-family="Times Roman,serif" font-size="14.00">Transaction::totsController</text>
+<text text-anchor="middle" x="203" y="-195.9" font-family="Times Roman,serif" font-size="14.00">Transaction::TotsController</text>
 </g>
 <!-- Transaction::Goods::AdditionalsController -->
 <g id="node5" class="node"><title>Transaction::Goods::AdditionalsController</title>
@@ -52,65 +52,65 @@
 <ellipse fill="none" stroke="black" cx="240" cy="-469.5" rx="149.2" ry="18.3848"/>
 <text text-anchor="middle" x="240" y="-465.9" font-family="Times Roman,serif" font-size="14.00">Transaction::TaxesController</text>
 </g>
-<!-- Transaction::recordsController -->
-<g id="node9" class="node"><title>Transaction::recordsController</title>
+<!-- Transaction::RecordsController -->
+<g id="node9" class="node"><title>Transaction::RecordsController</title>
 <ellipse fill="none" stroke="black" cx="446.5" cy="-694.5" rx="160.013" ry="18.3848"/>
-<text text-anchor="middle" x="446.5" y="-690.9" font-family="Times Roman,serif" font-size="14.00">Transaction::recordsController</text>
+<text text-anchor="middle" x="446.5" y="-690.9" font-family="Times Roman,serif" font-size="14.00">Transaction::RecordsController</text>
 </g>
 <!-- Transaction::ParticipantsController -->
 <g id="node10" class="node"><title>Transaction::ParticipantsController</title>
 <ellipse fill="none" stroke="black" cx="360.5" cy="-619.5" rx="179.105" ry="18.3848"/>
 <text text-anchor="middle" x="360.5" y="-615.9" font-family="Times Roman,serif" font-size="14.00">Transaction::ParticipantsController</text>
 </g>
-<!-- Transaction::recordTaxesController -->
-<g id="node11" class="node"><title>Transaction::recordTaxesController</title>
+<!-- Transaction::RecordTaxesController -->
+<g id="node11" class="node"><title>Transaction::RecordTaxesController</title>
 <ellipse fill="none" stroke="black" cx="797.5" cy="-394.5" rx="181.226" ry="18.3848"/>
-<text text-anchor="middle" x="797.5" y="-390.9" font-family="Times Roman,serif" font-size="14.00">Transaction::recordTaxesController</text>
+<text text-anchor="middle" x="797.5" y="-390.9" font-family="Times Roman,serif" font-size="14.00">Transaction::RecordTaxesController</text>
 </g>
 <!-- Transaction::FinanciersController -->
 <g id="node12" class="node"><title>Transaction::FinanciersController</title>
 <ellipse fill="none" stroke="black" cx="292" cy="-544.5" rx="171.12" ry="18.3848"/>
 <text text-anchor="middle" x="292" y="-540.9" font-family="Times Roman,serif" font-size="14.00">Transaction::FinanciersController</text>
 </g>
-<!-- Address::placesController -->
-<g id="node13" class="node"><title>Address::placesController</title>
+<!-- Address::PlacesController -->
+<g id="node13" class="node"><title>Address::PlacesController</title>
 <ellipse fill="none" stroke="black" cx="556" cy="-769.5" rx="135.057" ry="18.3848"/>
-<text text-anchor="middle" x="556" y="-765.9" font-family="Times Roman,serif" font-size="14.00">Address::placesController</text>
+<text text-anchor="middle" x="556" y="-765.9" font-family="Times Roman,serif" font-size="14.00">Address::PlacesController</text>
 </g>
-<!-- Participant::Contact::addressesController -->
-<g id="node14" class="node"><title>Participant::Contact::addressesController</title>
+<!-- Participant::Contact::AddressesController -->
+<g id="node14" class="node"><title>Participant::Contact::AddressesController</title>
 <ellipse fill="none" stroke="black" cx="634" cy="-469.5" rx="212.839" ry="18.3848"/>
-<text text-anchor="middle" x="634" y="-465.9" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::addressesController</text>
+<text text-anchor="middle" x="634" y="-465.9" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::AddressesController</text>
 </g>
-<!-- Participant::Contact::typesController -->
-<g id="node15" class="node"><title>Participant::Contact::typesController</title>
+<!-- Participant::Contact::TypesController -->
+<g id="node15" class="node"><title>Participant::Contact::TypesController</title>
 <ellipse fill="none" stroke="black" cx="687" cy="-544.5" rx="190.919" ry="18.3848"/>
-<text text-anchor="middle" x="687" y="-540.9" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::typesController</text>
+<text text-anchor="middle" x="687" y="-540.9" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::TypesController</text>
 </g>
 <!-- Participant::Contact::EmailsController -->
 <g id="node16" class="node"><title>Participant::Contact::EmailsController</title>
 <ellipse fill="none" stroke="black" cx="571" cy="-319.5" rx="195.161" ry="18.3848"/>
 <text text-anchor="middle" x="571" y="-315.9" font-family="Times Roman,serif" font-size="14.00">Participant::Contact::EmailsController</text>
 </g>
-<!-- Participant::typesController -->
-<g id="node17" class="node"><title>Participant::typesController</title>
+<!-- Participant::TypesController -->
+<g id="node17" class="node"><title>Participant::TypesController</title>
 <ellipse fill="none" stroke="black" cx="192.5" cy="-124.5" rx="145.872" ry="18.3848"/>
-<text text-anchor="middle" x="192.5" y="-120.9" font-family="Times Roman,serif" font-size="14.00">Participant::typesController</text>
+<text text-anchor="middle" x="192.5" y="-120.9" font-family="Times Roman,serif" font-size="14.00">Participant::TypesController</text>
 </g>
 <!-- Participant::PeopleController -->
 <g id="node18" class="node"><title>Participant::PeopleController</title>
 <ellipse fill="none" stroke="black" cx="527.5" cy="-94.5" rx="150.821" ry="18.3848"/>
 <text text-anchor="middle" x="527.5" y="-90.9" font-family="Times Roman,serif" font-size="14.00">Participant::PeopleController</text>
 </g>
-<!-- Goods::Additional::typesController -->
-<g id="node19" class="node"><title>Goods::Additional::typesController</title>
+<!-- Goods::Additional::TypesController -->
+<g id="node19" class="node"><title>Goods::Additional::TypesController</title>
 <ellipse fill="none" stroke="black" cx="555.5" cy="-169.5" rx="179.105" ry="18.3848"/>
-<text text-anchor="middle" x="555.5" y="-165.9" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::typesController</text>
+<text text-anchor="middle" x="555.5" y="-165.9" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::TypesController</text>
 </g>
-<!-- Goods::Additional::valuesController -->
-<g id="node20" class="node"><title>Goods::Additional::valuesController</title>
+<!-- Goods::Additional::ValuesController -->
+<g id="node20" class="node"><title>Goods::Additional::ValuesController</title>
 <ellipse fill="none" stroke="black" cx="830" cy="-694.5" rx="183.848" ry="18.3848"/>
-<text text-anchor="middle" x="830" y="-690.9" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::valuesController</text>
+<text text-anchor="middle" x="830" y="-690.9" font-family="Times Roman,serif" font-size="14.00">Goods::Additional::ValuesController</text>
 </g>
 <!-- Goods::ItemsController -->
 <g id="node21" class="node"><title>Goods::ItemsController</title>
@@ -122,15 +122,15 @@
 <ellipse fill="none" stroke="black" cx="124.5" cy="-49.5" rx="123.243" ry="18.3848"/>
 <text text-anchor="middle" x="124.5" y="-45.9" font-family="Times Roman,serif" font-size="14.00">Taxe::GroupsController</text>
 </g>
-<!-- Taxe::typesController -->
-<g id="node23" class="node"><title>Taxe::typesController</title>
+<!-- Taxe::TypesController -->
+<g id="node23" class="node"><title>Taxe::TypesController</title>
 <ellipse fill="none" stroke="black" cx="762" cy="-19.5" rx="115.966" ry="18.3848"/>
-<text text-anchor="middle" x="762" y="-15.9" font-family="Times Roman,serif" font-size="14.00">Taxe::typesController</text>
+<text text-anchor="middle" x="762" y="-15.9" font-family="Times Roman,serif" font-size="14.00">Taxe::TypesController</text>
 </g>
-<!-- Taxe::valuesController -->
-<g id="node24" class="node"><title>Taxe::valuesController</title>
+<!-- Taxe::ValuesController -->
+<g id="node24" class="node"><title>Taxe::ValuesController</title>
 <ellipse fill="none" stroke="black" cx="886" cy="-169.5" rx="120.208" ry="18.3848"/>
-<text text-anchor="middle" x="886" y="-165.9" font-family="Times Roman,serif" font-size="14.00">Taxe::valuesController</text>
+<text text-anchor="middle" x="886" y="-165.9" font-family="Times Roman,serif" font-size="14.00">Taxe::ValuesController</text>
 </g>
 <!-- Email::DomainsController -->
 <g id="node25" class="node"><title>Email::DomainsController</title>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Transaction::recordTaxeTest < ActiveSupport::TestCase
+class Transaction::RecordTaxeTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true
