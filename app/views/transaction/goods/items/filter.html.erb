@@ -1,0 +1,12 @@
+<h3>Filtro Participação Item Na Venda</h3>
+<%= form_tag("/transaction/goods/items/graph", :method => "get") do %>
+  	<div class="field">
+	  Emitidas Entre
+	  <%= select_date Date.today,:order => [:day , :month, :year], :prefix => :start_date%>
+	  E
+	  <%= select_date Date.today,:order => [:day , :month, :year], :prefix => :end_date%>
+	</div>
+</br>
+  <%= submit_tag("Gerar") %>
+<% end %>
+
