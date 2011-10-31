@@ -10,6 +10,20 @@ class Transaction::Goods::ItemsController < ApplicationController
       format.xml  { render :xml => @transaction_goods_items }
     end
   end
+  
+  def filter
+    respond_to do |format|
+      format.html # filter.html.erb
+      format.xml  { render :xml => @transaction_records }
+    end
+  end
+  
+  def graph
+    respond_to do |format|
+      format.html # graph.html.erb
+      format.xml  { render :xml => '' }
+    end
+  end
 
   # GET /transaction/goods/items/1
   # GET /transaction/goods/items/1.xml

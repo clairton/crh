@@ -18,8 +18,8 @@
 
 <% @transaction_goods_items.each do |transaction_goods_item| %>
   <tr>
-    <td><%= transaction_goods_item.goods_item %></td>
-    <td><%= transaction_goods_item.transaction_record %></td>
+    <td><%= transaction_goods_item.id %></td>
+    <td><%= transaction_goods_item.transaction_record_id  %></td>
     <td><%= transaction_goods_item.name %></td>
     <td><%= transaction_goods_item.measure %></td>
     <td><%= transaction_goods_item.quantity %></td>
