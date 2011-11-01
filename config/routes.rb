@@ -12,10 +12,11 @@ Crh::Application.routes.draw do
 
   match '/transaction/records/report' => Transaction::RecordsController.action(:report)
   match '/transaction/records/filter' => Transaction::RecordsController.action(:filter)
-  
+
   match '/transaction/goods/items/graph' => Transaction::Goods::ItemsController.action(:graph)
+  match '/transaction/goods/items/report' => Transaction::Goods::ItemsController.action(:report)
   match '/transaction/goods/items/filter' => Transaction::Goods::ItemsController.action(:filter)
-  
+
   namespace :transaction do resources :records end
 
   namespace :transaction do  namespace :goods do resources :additionals end end

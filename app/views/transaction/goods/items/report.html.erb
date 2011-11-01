@@ -1,0 +1,77 @@
+<%
+  start_date = Date.civil(params[:start_date][:year].to_i, params[:start_date][:month].to_i, params[:start_date][:day].to_i)
+  end_date = Date.civil(params[:end_date][:year].to_i, params[:end_date][:month].to_i, params[:end_date][:day].to_i)
+%>
+
+<h1><%="Valor e Percentual de Participação dos Itens de #{start_date} à #{end_date}"%></h1>
+<table width="100%">
+<%
+  @transaction_records = Transaction::Record.find_by_sql(
+	  "SELECT
+		  SUM(goods_additional_values.value) AS goods
+	  FROM
+  	  goods_items
+		  INNER JOIN transaction_goods_items ON transaction_goods_items.goods_item_id = goods_items.id
+		  INNER JOIN transaction_records ON transaction_records.id = transaction_goods_items.transaction_record_id
+		  INNER JOIN transaction_goods_additionals ON transaction_goods_additionals.transaction_goods_item_id = transaction_goods_items.id
+		  INNER JOIN goods_additional_values ON goods_additional_values.id = transaction_goods_additionals.goods_additional_value_id
+	  WHERE
+	    transaction_records.creation_date BETWEEN '#{start_date}' AND '#{end_date}'"
+  )
+  goods = 0
+  @transaction_records.each do |transaction_records|
+    goods = transaction_records.goods
+  end
+  sum_good = 0
+  sum_perc = 0
+  per = 0
+%>
+<tr>
+		<td colspan="100%"> Total Venda: <%= goods %></td>
+</tr>
+  <tr>
+  <td style="white-space: nowrap;border: 1px solid black;"><b>Código</b></td>
+  <td style="white-space: nowrap;border: 1px solid black;"><b>Nome</b></td>
+  <td style="white-space: nowrap;border: 1px solid black;"><b>Venda</b></td>
+  <td style="white-space: nowrap;border: 1px solid black;"><b>Percentual</b></td>
+</tr>
+<%
+  @transaction_goods_item = Transaction::Goods::Item.find_by_sql(
+	  "SELECT
+		  SUM(goods_additional_values.value) AS value,
+      goods_items.name,
+      goods_items.code
+	  FROM
+  	  goods_items
+		  INNER JOIN transaction_goods_items ON transaction_goods_items.goods_item_id = goods_items.id
+		  INNER JOIN transaction_records ON transaction_records.id = transaction_goods_items.transaction_record_id
+		  INNER JOIN transaction_goods_additionals ON transaction_goods_additionals.transaction_goods_item_id = transaction_goods_items.id
+		  INNER JOIN goods_additional_values ON goods_additional_values.id = transaction_goods_additionals.goods_additional_value_id
+	  WHERE
+	    transaction_records.creation_date BETWEEN '#{start_date}' AND '#{end_date}'
+	  GROUP BY
+      goods_items.name,
+      goods_items.code"
+  )
+	@transaction_goods_item.each do |transaction_goods_item| %>
+	  <%
+	    transaction_goods_item.value = transaction_goods_item.value.to_f
+	    perc = transaction_goods_item.value*100/goods
+      sum_good += transaction_goods_item.value.to_f
+      sum_perc += perc
+  	%>
+	  <tr>
+		<td style="white-space: nowrap;border: 1px solid black;"><%= transaction_goods_item.code %></td>
+		<td style="white-space: nowrap;border: 1px solid black;"><%= transaction_goods_item.name %></td>
+	  <td style="white-space: nowrap;border: 1px solid black; text-align: right"><%= format("%.2f",transaction_goods_item.value) %></td>
+	  <td style="white-space: nowrap;border: 1px solid black; text-align: right"><%= format("%.2f",perc) %></td>
+  	</tr>
+  <%end%>
+	  <tr>
+		<td style="white-space: nowrap;border: 1px solid black;"></td>
+		<td style="white-space: nowrap;border: 1px solid black; text-align: right"><b>Total</b></td>
+	  <td style="white-space: nowrap;border: 1px solid black; text-align: right"><%= format("%.2f",sum_good) %></td>
+	  <td style="white-space: nowrap;border: 1px solid black; text-align: right"><%= format("%.2f",sum_perc) %></td>
+  	</tr>
+</table>
+
