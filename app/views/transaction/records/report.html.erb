@@ -70,8 +70,8 @@ end
 		<td style="white-space: nowrap;border: 1px solid black;"><%= transaction_record.code %></td>
 		<td style="white-space: nowrap;border: 1px solid black;"><%= transaction_record.name %></td>
 	  <td style="white-space: nowrap;border: 1px solid black;"><%= transaction_record.creation_date %></td>
-		<td style="border: 1px solid black; text-align: right"><%= transaction_record.tot %></td>
-		<td style="border: 1px solid black; text-align: right"><%= transaction_record.goods %></td>
+		<td style="border: 1px solid black; text-align: right"><%= format("%.2f",transaction_record.tot) %></td>
+		<td style="border: 1px solid black; text-align: right"><%= format("%.2f",transaction_record.goods) %></td>
 <%
 
 		@taxeValue = Taxe::Value.find_by_sql(
@@ -94,7 +94,7 @@ end
 
 		@taxeCab.each_index do |i|%>
 			<%if !@taxeCab[i].nil?%>
-				<td style="white-space: nowrap;border: 1px solid black;"><%= @taxeDet[i] %></td>
+				<td style="border: 1px solid black; text-align: right"><%= format("%.2f",@taxeDet[i]) %></td>
 				<%@taxeTot[i] = @taxeTot[i] + @taxeDet[i]%>
 				<%@taxeDet[i]  = 0.00%>
 			<%end%>
@@ -118,7 +118,7 @@ end
 		<%end%>
 		<%@additionalTot.each_index do |i|%>
 			<%if !@additionalCab[i].nil?%>
-				<td style="border: 1px solid black; text-align: right;"><%= @additionalDet[i] %></td>
+				<td style="border: 1px solid black; text-align: right;"><%= format("%.2f",@additionalDet[i]) %></td>
 				<%@additionalTot[i] = @additionalTot[i] + @additionalDet[i]%>
 				<%@additionalDet[i]  = 0.00%>
 			<%end%>
@@ -129,16 +129,16 @@ end
 <% end %>
 	<tr style="border-top: 1px solid black;">
 		<td colspan="4" style="border: 1px solid black;text-align: right;"><b>Totais</b></td>
-		<td style="border: 1px solid black; text-align: right;"><b><%=tot %></b></td>
-		<td style="border: 1px solid black; text-align: right;"><b><%=goods %></b></td>
+		<td style="border: 1px solid black; text-align: right;"><b><%=format("%.2f",tot) %></b></td>
+		<td style="border: 1px solid black; text-align: right;"><b><%=format("%.2f",goods) %></b></td>
 <%@taxeTot.each do |taxeTot|%>
 	<%if !taxeTot.nil?%>
-		<td style="border: 1px solid black; text-align: right;"><b><%= taxeTot %></b></td>
+		<td style="border: 1px solid black; text-align: right;"><b><%= format("%.2f",taxeTot) %></b></td>
 	<%end%>
 <%end%>
 <%@additionalTot.each do |additionalTot|%>
 	<%if !additionalTot.nil?%>
-		<td style="border: 1px solid black; text-align: right;"><b><%= additionalTot %></b></td>
+		<td style="border: 1px solid black; text-align: right;"><b><%= format("%.2f",additionalTot) %></b></td>
 	<%end%>
 <%end%>
   	</tr>
