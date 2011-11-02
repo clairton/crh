@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :person_id %><br />
-    <%= f.text_field :person_id %>
+    <%= f.label I18n.t :participant_person %><br />
+    <%= f.text_field :participant_person_id %>
   </div>
   <div class="field">
-    <%= f.label :place_id %><br />
-    <%= f.text_field :place_id %>
+    <%= f.label I18n.t :address_place %><br />
+    <%= f.text_field :address_place_id %>
   </div>
   <div class="field">
-    <%= f.label :type_id %><br />
-    <%= f.text_field :type_id %>
+    <%= f.label I18n.t :participant_contact_type %><br />
+    <%= f.text_field :participant_contact_type_id %>
   </div>
   <div class="field">
     <%= f.label I18n.t(:remark) %><br />

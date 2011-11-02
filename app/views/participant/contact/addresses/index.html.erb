@@ -1,10 +1,10 @@
-<h1>Listing participant_contact_addresses</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:participant_contact_address)}"%></h3>
 
 <table>
   <tr>
-    <th>Person</th>
-    <th>Place</th>
-    <th>Type</th>
+    <th><%=I18n.t(:participant_person)%></th>
+    <th><%=I18n.t(:place)%></th>
+    <th><%=I18n.t(:type)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th><%=I18n.t(:active)%></th>
     <th></th>
@@ -14,9 +14,9 @@
 
 <% @participant_contact_addresses.each do |participant_contact_address| %>
   <tr>
-    <td><%= participant_contact_address.person_id %></td>
-    <td><%= participant_contact_address.place_id %></td>
-    <td><%= participant_contact_address.type_id %></td>
+    <td><%= participant_contact_address.participant_person_id %></td>
+    <td><%= participant_contact_address.address_place_id %></td>
+    <td><%= participant_contact_address.participant_contact_type_id %></td>
     <td><%= participant_contact_address.remark %></td>
     <td><%= participant_contact_address.active %></td>
     <td><%= link_to I18n.t(:show), participant_contact_address %></td>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Address', new_participant_contact_address_path %>
+<%= link_to I18n.t(:new), new_participant_contact_address_path %>

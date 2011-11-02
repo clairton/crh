@@ -1,9 +1,9 @@
-<h1>Listing participant_types</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:participant_types)}"%></h3>
 
 <table>
   <tr>
-    <th>Participant person</th>
-    <th>Type</th>
+    <th><%=I18n.t(:participant_person)%></th>
+    <th><%=I18n.t(:type)%></th>
     <th><%=I18n.t(:active)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th></th>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Type', new_participant_type_path %>
+<%= link_to I18n.t(:new), new_participant_type_path %>

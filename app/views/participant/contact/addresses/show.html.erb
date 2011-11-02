@@ -1,18 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Person:</b>
-  <%= @participant_contact_address.person_id %>
+  <b><%=I18n.t(:participant_person)%>:</b>
+  <%= @participant_contact_address.participant_person_id %>
 </p>
 
 <p>
-  <b>Place:</b>
-  <%= @participant_contact_address.place_id %>
+  <b><%=I18n.t(:address_place)%>:</b>
+  <%= @participant_contact_address.address_place_id %>
 </p>
 
 <p>
-  <b>Type:</b>
-  <%= @participant_contact_address.type_id %>
+  <b><%=I18n.t(:participant_contact_type)%>:</b>
+  <%= @participant_contact_address.participant_contact_type_id %>
 </p>
 
 <p>
