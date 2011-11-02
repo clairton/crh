@@ -49,6 +49,7 @@
     :transaction_financiers => "Faturas da NFe",
     :transaction_financier => "Fatura da NFe",
     :transaction_goods_items => "Itens da NFe",
+    :goods_item => "item",
     :transaction_goods_item => "Item da NFe",
     :transaction_xmls =>  "XML's NFe",
     :transaction_xml =>  "XML NFe",
