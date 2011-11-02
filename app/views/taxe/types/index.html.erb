@@ -1,11 +1,11 @@
-<h1>Listing taxe_types</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:taxe_type)}"%></h3>
 
 <table>
   <tr>
     <th><%=I18n.t(:name)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th><%=I18n.t(:active)%></th>
-    <th>Taxe group</th>
+    <th><%=I18n.t(:taxe_group)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Type', new_taxe_type_path %>
+<%= link_to I18n.t(:new), new_taxe_type_path %>

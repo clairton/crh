@@ -1,22 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Taxe type:</b>
+  <b><%= I18n.t(:taxe_type)%>:</b>
   <%= @taxe_value.taxe_type_id %>
 </p>
 
 <p>
-  <b>Percentage:</b>
+  <b><%= I18n.t(:percentage)%>:</b>
   <%= @taxe_value.percentage %>
 </p>
 
 <p>
-  <b>Basis:</b>
+  <b><%= I18n.t(:basis)%>:</b>
   <%= @taxe_value.basis %>
 </p>
 
 <p>
-  <b>Value:</b>
+  <b><%= I18n.t(:value)%>:</b>
   <%= @taxe_value.value %>
 </p>
 

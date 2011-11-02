@@ -1,11 +1,10 @@
-<h1>Listing taxe_values</h1>
-
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:taxe_value)}"%></h3>
 <table>
   <tr>
-    <th>Taxe type</th>
-    <th>Percentage</th>
-    <th>Basis</th>
-    <th>Value</th>
+    <th><%= I18n.t(:taxe_type)%></th>
+    <th><%= I18n.t(:percentage)%></th>
+    <th><%= I18n.t(:basis)%></th>
+    <th><%= I18n.t(:value)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -24,6 +23,6 @@
 <% end %>
 </table>
 
-<br />
+<br/>
 
-<%= link_to 'New Value', new_taxe_value_path %>
+<%= link_to I18n.t(:new), new_taxe_value_path %>
