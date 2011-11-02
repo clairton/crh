@@ -1,5 +1,4 @@
-<h1>Listing goods_additional_types</h1>
-
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:goods_additional_type)}"%></h3>
 <table>
   <tr>
     <th><%=I18n.t(:name)%></th>
@@ -24,4 +23,4 @@
 
 <br />
 
-<%= link_to 'New Type', new_goods_additional_type_path %>
+<%= link_to I18n.t(:new), new_goods_additional_type_path %>

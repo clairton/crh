@@ -1,9 +1,9 @@
-<h1>Listing goods_additional_values</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:goods_additional_value)}"%></h3>
 
 <table>
   <tr>
-    <th>Value</th>
-    <th>References</th>
+    <th><%=I18n.t(:value)%></th>
+    <th><%=I18n.t(:goods_additional_type)%></th>
     <th><%=I18n.t(:active)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th></th>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Value', new_goods_additional_value_path %>
+<%= link_to I18n.t(:new), new_goods_additional_value_path %>
