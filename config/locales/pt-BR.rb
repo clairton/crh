@@ -90,6 +90,8 @@
     :last_name => "Último Nome",
     :first_name => "Primeiro Nome",
     :person => "Pessoa",
+    :percentage  =>"Percentual",
+    :basis => "Base Cálculo",
     # formatos de data e hora
     :date => {
       :formats => {
