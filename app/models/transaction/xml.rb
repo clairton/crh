@@ -32,10 +32,10 @@ class Transaction::Xml < ActiveRecord::Base
       xml = REXML::Document.new file
       if !xml.elements['nfeProc'].nil?
         @rootTag = xml.elements['nfeProc'].elements['NFe']
-        @tooNameTag = 'nfeProc/NFe/'
+        @rootTagName = 'nfeProc/NFe/'
       elsif !xml.elements['NFe'].nil?
         @rootTag = xml.elements['NFe']
-        @tooNameTag = 'NFe/'
+        @rootTagName = 'NFe/'
       else
         @erros = 'não é um arquivo valido'
         return false
@@ -683,7 +683,7 @@ class Transaction::Xml < ActiveRecord::Base
       end
     end
     #percorre os elementos det que os produtos e servicos
-    xml.elements.each(@tooNameTag+'infNFe/det') do |det|
+    xml.elements.each(@rootTagName+'infNFe/det') do |det|
       if !goods = Goods::Item.find_by_code(det.elements['prod'].elements['cProd'].text())
         #cria o produtos/servico
         goods = Goods::Item.create(
@@ -1375,7 +1375,7 @@ class Transaction::Xml < ActiveRecord::Base
   end#parse_taxe_value
 
   def parse_financier(xml, record)
-    xml.elements.each(@tooNameTag+'infNFe/cobr/dup') do |dup|
+    xml.elements.each(@rootTagName+'infNFe/cobr/dup') do |dup|
       note = Financier::Note.create(
           #valor
           :original_value => dup.elements['vDup'].text(),
