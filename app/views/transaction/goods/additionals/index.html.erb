@@ -1,9 +1,9 @@
-<h1>Listing transaction_goods_additionals</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:transaction_goods_additional)}"%></h3>
 
 <table>
   <tr>
-    <th>Transaction goods item</th>
-    <th>Goods additional</th>
+    <th><%=I18n.t(:transaction_goods_item)%></th>
+    <th><%=I18n.t(:goods_additional_value)%></th>
     <th><%=I18n.t(:active)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th></th>
@@ -14,7 +14,7 @@
 <% @transaction_goods_additionals.each do |transaction_goods_additional| %>
   <tr>
     <td><%= transaction_goods_additional.transaction_goods_item_id %></td>
-    <td><%= transaction_goods_additional.goods_additional_id %></td>
+    <td><%= transaction_goods_additional.goods_additional_value_id %></td>
     <td><%= transaction_goods_additional.active %></td>
     <td><%= transaction_goods_additional.remark %></td>
     <td><%= link_to I18n.t(:show), transaction_goods_additional %></td>
@@ -26,4 +26,4 @@
 
 <br />
 
-<%= link_to 'New Additional', new_transaction_goods_additional_path %>
+<%= link_to I18n.t(:new), new_transaction_goods_additional_path %>

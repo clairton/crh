@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Taxe value:</b>
-  <%= @transaction_goods_taxis.taxe_value %>
+  <b><%=I18n.t(:taxe_value)%>:</b>
+  <%= @transaction_goods_taxis.taxe_value_id %>
 </p>
 
 <p>
-  <b>Transaction goods item:</b>
-  <%= @transaction_goods_taxis.transaction_goods_item %>
+  <b><%=I18n.t(:transaction_goods_item)%>:</b>
+  <%= @transaction_goods_taxis.transaction_goods_item_id %>
 </p>
 
 <p>

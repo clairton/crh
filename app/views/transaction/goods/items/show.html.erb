@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Goods item:</b>
+  <b><%=I18n.t(:goods_item):</b>
   <%= @transaction_goods_item.goods_item %>
 </p>
 
 <p>
-  <b>Transaction record:</b>
+  <b><%=I18n.t(:transaction_record)%>:</b>
   <%= @transaction_goods_item.transaction_record %>
 </p>
 
@@ -16,22 +16,22 @@
 </p>
 
 <p>
-  <b>Measure:</b>
+  <b><%=I18n.t(:measure)%>:</b>
   <%= @transaction_goods_item.measure %>
 </p>
 
 <p>
-  <b>Quantity:</b>
+  <b><%=I18n.t(:quantity)%>:</b>
   <%= @transaction_goods_item.quantity %>
 </p>
 
 <p>
-  <b>Unit price:</b>
+  <b><%=I18n.t(:unit_price)%>:</b>
   <%= @transaction_goods_item.unit_price %>
 </p>
 
 <p>
-  <b>Full price:</b>
+  <b><%=I18n.t(:full_price)%>:</b>
   <%= @transaction_goods_item.full_price %>
 </p>
 

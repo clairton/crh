@@ -1,14 +1,13 @@
-<h1>Listing transaction_goods_items</h1>
-
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:transaction_goods_item)}"%></h3>
 <table>
   <tr>
-    <th>Goods item</th>
-    <th>Transaction record</th>
+    <th><%=I18n.t(:goods_item)%></th>
+    <th><%=I18n.t(:transaction_record)%></th>
     <th><%=I18n.t(:name)%></th>
-    <th>Measure</th>
-    <th>Quantity</th>
-    <th>Unit price</th>
-    <th>Full price</th>
+    <th><%=I18n.t(:measure)%></th>
+    <th><%=I18n.t(:quantity)%></th>
+    <th><%=I18n.t(:unit_price)%></th>
+    <th><%=I18n.t(:full_price)%></th>
     <th><%=I18n.t(:active)%></th>
     <th><%=I18n.t(:remark)%></th>
     <th></th>
@@ -36,4 +35,4 @@
 
 <br />
 
-<%= link_to 'New Item', new_transaction_goods_item_path %>
+<%= link_to I18n.t(:new), new_transaction_goods_item_path %>

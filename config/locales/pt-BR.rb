@@ -92,6 +92,10 @@
     :person => "Pessoa",
     :percentage  =>"Percentual",
     :basis => "Base Cálculo",
+    :unit_price => "Valor Unitários",
+    :full_price => "Valor Total",
+    :quantity => "Quantidade",
+    :measure => "Medida",
     # formatos de data e hora
     :date => {
       :formats => {

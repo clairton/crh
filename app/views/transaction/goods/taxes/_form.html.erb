@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :taxe_value %><br />
-    <%= f.text_field :taxe_value %>
+    <%= f.label I18n.t(:taxe_value) %><br />
+    <%= f.text_field :taxe_value_id %>
   </div>
   <div class="field">
-    <%= f.label :transaction_goods_item %><br />
-    <%= f.text_field :transaction_goods_item %>
+    <%= f.label I18n.t(:transaction_goods_item) %><br />
+    <%= f.text_field :transaction_goods_item_id %>
   </div>
   <div class="field">
     <%= f.label I18n.t(:active) %><br />

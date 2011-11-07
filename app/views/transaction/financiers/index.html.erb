@@ -1,9 +1,9 @@
-<h1>Listing transaction_financiers</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:transaction_financier)}"%></h3>
 
 <table>
   <tr>
-    <th>Financier note</th>
-    <th>Transaction record</th>
+    <th><%=I18n.t(:financier_note)%></th>
+    <th><%=I18n.t(:transaction_record)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Financier', new_transaction_financier_path %>
+<%= link_to I18n.t(:new), new_transaction_financier_path %>

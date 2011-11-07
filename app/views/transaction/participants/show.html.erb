@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Participant participant:</b>
-  <%= @transaction_participant.participant %>
+  <b><%=I18n.t :participant_type%>:</b>
+  <%= @transaction_participant.participant_type_id %>
 </p>
 
 <p>
-  <b>Transaction record:</b>
-  <%= @transaction_participant.transaction_record %>
+  <b><%=I18n.t :transaction_record%>:</b>
+  <%= @transaction_participant.transaction_record_id %>
 </p>
 
 <p>
