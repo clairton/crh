@@ -96,6 +96,7 @@
     :full_price => "Valor Total",
     :quantity => "Quantidade",
     :measure => "Medida",
+    :id => "Idetificador",
     # formatos de data e hora
     :date => {
       :formats => {
