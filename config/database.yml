@@ -17,11 +17,11 @@ test:
   encoding: utf8
 
 production:
-  adapter: mysql
+  adapter: postgres
   database: crh_production
-  user: root
+  user: postgres
   password: cafe
-  port: 3306
+  port: 5433
   host: localhost
   encoding: utf8
 
