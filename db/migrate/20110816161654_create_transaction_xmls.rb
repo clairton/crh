@@ -3,7 +3,7 @@ class CreateTransactionXmls < ActiveRecord::Migration
     create_table :transaction_xmls do |t|
       t.integer :transaction_record_id, :null => false
       t.text :content, :null => false
-      t.text :name, :limit =>  200#, :null => false
+      t.string :name, :limit =>  200#, :null => false
       t.boolean :active, :null => false, :default => true
       t.text :remark
 
