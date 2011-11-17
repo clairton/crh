@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -63,9 +62,9 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
   end
 
   create_table "goods_additional_values", :force => true do |t|
-    t.decimal  "value",                    :precision => 10, :scale => 0,                   :null => false
-    t.integer  "goods_additional_type_id",                                                  :null => false
-    t.boolean  "active",                                                  :default => true, :null => false
+    t.decimal  "value",                    :precision => 131089, :scale => 0,                   :null => false
+    t.integer  "goods_additional_type_id",                                                      :null => false
+    t.boolean  "active",                                                      :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -178,12 +177,12 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
   create_table "transaction_goods_items", :force => true do |t|
     t.integer  "goods_item_id"
     t.integer  "transaction_record_id"
-    t.string   "name",                  :limit => 200,                                                  :null => false
-    t.string   "measure",               :limit => 6,                                                    :null => false
-    t.decimal  "quantity",                             :precision => 10, :scale => 0,                   :null => false
-    t.decimal  "unit_price",                           :precision => 10, :scale => 4,                   :null => false
-    t.decimal  "full_price",                           :precision => 10, :scale => 2,                   :null => false
-    t.boolean  "active",                                                              :default => true, :null => false
+    t.string   "name",                  :limit => 200,                                                      :null => false
+    t.string   "measure",               :limit => 6,                                                        :null => false
+    t.decimal  "quantity",                             :precision => 131089, :scale => 0,                   :null => false
+    t.decimal  "unit_price",                           :precision => 10,     :scale => 4,                   :null => false
+    t.decimal  "full_price",                           :precision => 10,     :scale => 2,                   :null => false
+    t.boolean  "active",                                                                  :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -238,10 +237,10 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
   end
 
   create_table "transaction_xmls", :force => true do |t|
-    t.integer  "transaction_record_id",                   :null => false
-    t.text     "content",                                 :null => false
-    t.text     "name"
-    t.boolean  "active",                :default => true, :null => false
+    t.integer  "transaction_record_id",                                  :null => false
+    t.text     "content",                                                :null => false
+    t.string   "name",                  :limit => 200
+    t.boolean  "active",                               :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
