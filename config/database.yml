@@ -1,19 +1,19 @@
 development:
-  adapter: jdbcmysql
+  adapter: mysql
   database: crh_development
-  username: root
+  user: root
   password: cafe
   port: 3306
-  hostname: localhost
+  host: localhost
   encoding: utf8
 
 test:
-  adapter: jdbcmysql
+  adapter: mysql
   database: crh_test
-  username: root
+  user: root
   password: cafe
   port: 3306
-  hostname: localhost
+  host: localhost
   encoding: utf8
 
 production:
