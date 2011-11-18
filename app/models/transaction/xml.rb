@@ -738,6 +738,7 @@ class Transaction::Xml < ActiveRecord::Base
         @errors = additional.errors
         return false
       end
+      return true
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_tributado.id,
         :value => det.elements['prod'].elements['vUnTrib'].text()
