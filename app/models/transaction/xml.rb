@@ -30,6 +30,9 @@ class Transaction::Xml < ActiveRecord::Base
   def parse(file)
     Transaction::Xml.transaction do
       xml = REXML::Document.new file
+      
+      string = File.open(file.path, 'rb') { |file| file.read }
+      
       if !xml.elements['nfeProc'].nil?
         @rootTag = xml.elements['nfeProc'].elements['NFe']
         @rootTagName = 'nfeProc/NFe/'
@@ -70,7 +73,7 @@ class Transaction::Xml < ActiveRecord::Base
 
       Transaction::Xml.create(
         :transaction_record_id => record.id(),
-        :content => file.read,
+        :content => string,
         :name => ide.elements['nNF'].text()
       ).save
 
@@ -738,7 +741,6 @@ class Transaction::Xml < ActiveRecord::Base
         @errors = additional.errors
         return false
       end
-      return true
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_tributado.id,
         :value => det.elements['prod'].elements['vUnTrib'].text()
