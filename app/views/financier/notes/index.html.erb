@@ -1,12 +1,12 @@
-<h1>Listing financier_notes</h1>
+<h3><%="#{I18n.t(:listing)} #{I18n.t(:financier_note)}"%></h3>
 
 <table>
   <tr>
-    <th>Original value</th>
-    <th>Expiration date</th>
-    <th>Creation date</th>
+    <th><%=I18n.t(:original_value)%></th>
+    <th><%=I18n.t(:expiration_date)%></th>
+    <th><%=I18n.t(:creation_date)%></th>
     <th><%=I18n.t(:name)%></th>
-    <th>Number</th>
+    <th><%=I18n.t(:numberr)%></th>
     <th></th>
     <th></th>
     <th></th>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New Note', new_financier_note_path %>
+<%= link_to I18n.t(:new), new_financier_note_path %>

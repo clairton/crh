@@ -97,6 +97,10 @@
     :quantity => "Quantidade",
     :measure => "Medida",
     :id => "Idetificador",
+    :original_value => "Valor Original",
+    :expiration_date => "Data de Vencimento",
+    :creation_date => "Data de Emissao",
+    :numberr => "Numero",
     # formatos de data e hora
     :date => {
       :formats => {

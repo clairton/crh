@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :original_value %><br />
+    <%= f.label I18n.t(:original_value) %><br />
     <%= f.text_field :original_value %>
   </div>
   <div class="field">
-    <%= f.label :expiration_date %><br />
+    <%= f.label I18n.t(:expiration_date) %><br />
     <%= f.date_select :expiration_date %>
   </div>
   <div class="field">
-    <%= f.label :creation_date %><br />
+    <%= f.label I18n.t(:creation_date) %><br />
     <%= f.date_select :creation_date %>
   </div>
   <div class="field">
@@ -28,7 +28,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :number %><br />
+    <%= f.label I18n.t(:numberr) %><br />
     <%= f.text_field :number %>
   </div>
   <div class="actions">
