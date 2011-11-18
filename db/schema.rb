@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
   end
 
   create_table "financier_notes", :force => true do |t|
-    t.decimal  "original_value",                :precision => 10, :scale => 2, :null => false
+    t.decimal  "original_value",                :precision => 15, :scale => 6, :null => false
     t.date     "expiration_date",                                              :null => false
     t.date     "creation_date",                                                :null => false
     t.string   "name",            :limit => 20,                                :null => false
@@ -62,9 +62,9 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
   end
 
   create_table "goods_additional_values", :force => true do |t|
-    t.decimal  "value",                    :precision => 131089, :scale => 0,                   :null => false
-    t.integer  "goods_additional_type_id",                                                      :null => false
-    t.boolean  "active",                                                      :default => true, :null => false
+    t.decimal  "value",                    :precision => 15, :scale => 6,                   :null => false
+    t.integer  "goods_additional_type_id",                                                  :null => false
+    t.boolean  "active",                                                  :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
     t.integer  "taxe_type_id",                                                 :null => false
     t.decimal  "percentage",   :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.decimal  "basis",        :precision => 10, :scale => 2, :default => 0.0, :null => false
-    t.decimal  "value",        :precision => 10, :scale => 2,                  :null => false
+    t.decimal  "value",        :precision => 15, :scale => 6,                  :null => false
     t.decimal  "reduction",    :precision => 10, :scale => 2,                  :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -210,8 +210,8 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
     t.date     "creation_date",                                                  :null => false
     t.integer  "code",                                                           :null => false
     t.string   "name",                                                           :null => false
-    t.decimal  "tot",           :precision => 10, :scale => 4,                   :null => false
-    t.decimal  "goods",         :precision => 10, :scale => 4,                   :null => false
+    t.decimal  "tot",           :precision => 15, :scale => 6,                   :null => false
+    t.decimal  "goods",         :precision => 15, :scale => 6,                   :null => false
     t.text     "remark"
     t.boolean  "active",                                       :default => true, :null => false
     t.datetime "created_at"

@@ -1380,7 +1380,7 @@ class Transaction::Xml < ActiveRecord::Base
           #valor
           :original_value => dup.elements['vDup'].text(),
           #name
-          :name => record.code,
+          :name => record.code.to_s,
           #data de vencimento
           :expiration_date => dup.elements['dVenc'].text(),
           #data de emissao
