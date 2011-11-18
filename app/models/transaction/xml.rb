@@ -22,7 +22,7 @@ require 'participant/contact/type'
 class Transaction::Xml < ActiveRecord::Base
   belongs_to :transaction_record, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
   validates_uniqueness_of :transaction_record_id, :name
-  validates_associated :transaction_record, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
+  validates_associated :transaction_record, :class_name => 'Transaction::Record', :foreign_key => "transaction_record_id"
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
   #has_attached_file :xml
 
