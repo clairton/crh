@@ -1,3 +1,4 @@
+#encoding: utf-8
 # crh - ERP
 # Copyright (C) 2011-2011  Clairton Rodrigo Heinzen
 #
@@ -15,7 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-#encoding: utf-8
 
 class Transaction::Participant < ActiveRecord::Base
   belongs_to :participant_type, :class_name => "Participant::Type", :foreign_key => "participant_type_id"
