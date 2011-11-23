@@ -1,3 +1,22 @@
+# encoding: utf-8
+<%
+# crh - ERP
+# Copyright (C) 2011-2011  Clairton Rodrigo Heinzen
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,20 +26,20 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+<p><%= flash[:notice] %></p>
+<p><%= flash[:alert] %></p>
 <div id="user_nav">
   <% if user_signed_in? %>
     Signed in as <%= current_user.email %>. Not you?
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-  <% else %>
+  <%# else %>
     <%#= link_to "Sign up", new_user_registration_path %><!-- or --><%= link_to "sign in", new_user_session_path %>
   <% end %>
 </div>
 <table style="vertical-align: top;">
 	<tr>
 		<td style="vertical-align: top; width: 15%">
-			<h1>Menu</h1>
+			<h2>Menu</h2>
 			<ul>
 				<li><%= link_to "Itens", goods_items_path %></li>
 				<li><%= link_to "Pessoas", participant_people_path %></li>
@@ -42,4 +61,3 @@
 </table>
 </body>
 </html>
-

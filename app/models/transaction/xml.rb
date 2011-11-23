@@ -1,4 +1,22 @@
-#encoding: utf-8
+# encoding: utf-8
+
+# crh - ERP
+# Copyright (C) 2011-2011  Clairton Rodrigo Heinzen
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 require 'rexml/document'
 require 'goods/item'
 require 'financier/note'
@@ -22,7 +40,7 @@ require 'participant/contact/type'
 class Transaction::Xml < ActiveRecord::Base
   belongs_to :transaction_record, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
   validates_uniqueness_of :transaction_record_id, :name
-  validates_associated :transaction_record, :class_name => 'Transaction::Record', :dependent => :destroy , :foreign_key => "transaction_record_id"
+  validates_associated :transaction_record, :class_name => 'Transaction::Record', :foreign_key => "transaction_record_id"
   #validates_presence_of :content, :message => 'Deve Informar Um arquivo Xml'
   #has_attached_file :xml
 
@@ -30,6 +48,9 @@ class Transaction::Xml < ActiveRecord::Base
   def parse(file)
     Transaction::Xml.transaction do
       xml = REXML::Document.new file
+      
+      string = File.open(file.path, 'rb') { |file| file.read }
+      
       if !xml.elements['nfeProc'].nil?
         @rootTag = xml.elements['nfeProc'].elements['NFe']
         @rootTagName = 'nfeProc/NFe/'
@@ -70,7 +91,7 @@ class Transaction::Xml < ActiveRecord::Base
 
       Transaction::Xml.create(
         :transaction_record_id => record.id(),
-        :content => file.read,
+        :content => string,
         :name => ide.elements['nNF'].text()
       ).save
 
@@ -738,7 +759,6 @@ class Transaction::Xml < ActiveRecord::Base
         @errors = additional.errors
         return false
       end
-      return true
       additional = Goods::Additional::Value.create(
         :goods_additional_type_id => additional_unitario_tributado.id,
         :value => det.elements['prod'].elements['vUnTrib'].text()
