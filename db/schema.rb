@@ -179,9 +179,9 @@ ActiveRecord::Schema.define(:version => 20111012233254) do
     t.integer  "transaction_record_id"
     t.string   "name",                  :limit => 200,                                                  :null => false
     t.string   "measure",               :limit => 6,                                                    :null => false
-    t.decimal  "quantity",                             :precision => 10, :scale => 4,                   :null => false
-    t.decimal  "unit_price",                           :precision => 10, :scale => 4,                   :null => false
-    t.decimal  "full_price",                           :precision => 10, :scale => 2,                   :null => false
+    t.decimal  "quantity",                             :precision => 15, :scale => 6,                   :null => false
+    t.decimal  "unit_price",                           :precision => 15, :scale => 6,                   :null => false
+    t.decimal  "full_price",                           :precision => 15, :scale => 6,                   :null => false
     t.boolean  "active",                                                              :default => true, :null => false
     t.text     "remark"
     t.datetime "created_at"
