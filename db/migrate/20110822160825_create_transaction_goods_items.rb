@@ -5,9 +5,9 @@ class CreateTransactionGoodsItems < ActiveRecord::Migration
       t.references :transaction_record
       t.string :name, :null => false, :limit => 200
       t.string :measure, :null => false, :limit => 6
-      t.decimal :quantity, :null => false, :precision => 10, :scale => 4
-      t.decimal :unit_price, :null => false, :precision => 10, :scale => 4
-      t.decimal :full_price, :null => false, :precision => 10, :scale => 2
+      t.decimal :quantity, :null => false, :precision => 15, :scale => 6
+      t.decimal :unit_price, :null => false, :precision => 15, :scale => 6
+      t.decimal :full_price, :null => false, :precision => 15, :scale => 6
       t.boolean :active, :null => false, :default => true
       t.text :remark
 
