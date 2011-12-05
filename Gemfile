@@ -5,15 +5,16 @@ gem 'rails','3.1.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'devise'
 if defined?(JRUBY_VERSION)
   gem 'activerecord-jdbc-adapter'
   gem 'activerecord-jdbcmysql-adapter'
+  gem 'activerecord-jdbcsqlite3-adapter'
   gem 'activerecord-jdbcpostgresql-adapter'
   gem 'jruby-openssl'
 else
   gem 'mysql2'
+  gem 'sqlite3'
 end
 
 gem 'jquery-rails'
